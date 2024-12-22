@@ -22,12 +22,14 @@ const { journey } = Astro.props;
 
     a {
         display: block;
-
+        user-select: none;
+        
         background: rgba(255, 255, 255, 0.5);
         backdrop-filter: blur(0.5rem);
         transition: background-color 0.3s;
         border-radius: 1rem;
         padding: 1rem 1.5rem;
+        text-decoration: none;
     }
 
     a:hover {
@@ -51,6 +53,10 @@ const { journey } = Astro.props;
 
         a:visited {
             color: #c7c7c7;
+        }
+        
+        a:hover {
+            background: #292929;
         }
     }
 
