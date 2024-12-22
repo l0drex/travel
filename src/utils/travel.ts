@@ -1,9 +1,9 @@
-import { degToRad } from "three/src/math/MathUtils";
-import { Camera, MathUtils, Vector2, Vector3 } from "three";
+import { MathUtils, Vector3 } from "three";
 import type {
   GeoJSON,
   Position,
 } from "geojson";
+import {degToRad} from "three/src/math/MathUtils";
 
 export type JourneyType = "bike" | "hiking";
 
@@ -13,10 +13,6 @@ export interface Journey {
   type: JourneyType;
   date: Date;
   location: [number, number];
-}
-
-export interface JourneyScreen extends Journey {
-  screenSpace: Vector2;
 }
 
 export function getPoints(geoJson: GeoJSON): Position[] {
@@ -48,7 +44,6 @@ export function reduceSize(array: never[], targetLength: number) {
   const relation = Math.round(array.length / targetLength);
   const filtered = array.filter((_, i) => i % relation === 0);
 
-  // console.assert(filtered.length === targetLength, filtered.length, targetLength);
   return filtered;
 }
 
@@ -92,28 +87,12 @@ export function positionAtCoordinate(
   return vec;
 }
 
-export function worldToScreen(
-  worldPos: Vector3,
-  camera: Camera,
-  width: number,
-  height: number,
-): Vector2 {
-  const screenPos = new Vector3();
-  screenPos.copy(worldPos);
-
-  screenPos.project(camera);
-  screenPos.x = ((screenPos.x + 1) * width) / 2;
-  screenPos.y = (-(screenPos.y - 1) * height) / 2;
-
-  return new Vector2(screenPos.x, screenPos.y);
-}
-
 export const travelLight = [255, 246, 208, 255];
 //export const travelDark = [39, 38, 71, 255];
 export const travelDark = [0, 0, 0, 255];
 //export const earthColor = [232, 151, 111, 255];
-export const earthDarkColor = [255, 255, 255, 255];
-export const earthLightColor = [0, 0, 0, 255];
+export const earthDarkColor = [18, 18, 18, 255];
+export const earthLightColor = [238, 229, 196, 255];
 
 export function arrayToColor(array: number[]) {
   return `rgb(${array.join(", ")})`;

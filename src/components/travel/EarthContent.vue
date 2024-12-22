@@ -1,23 +1,22 @@
 <script setup lang="ts">
-import { computed, type ShallowRef, shallowRef } from "vue";
-import { DataTexture, RGBAFormat, ShaderMaterial, Spherical, TextureLoader, type Vector2, Vector3 } from "three";
-import { type TresInstance, useTresContext } from "@tresjs/core";
-import { OrbitControls } from "@tresjs/cientos";
+import {shallowRef} from "vue";
 import {
-  earthDarkColor,
-  earthLightColor,
-  type Journey,
-  type JourneyScreen,
-  travelDark,
-  travelLight
-} from "@utils/travel.ts";
+  DataTexture, Euler,
+  Quaternion,
+  RGBAFormat,
+  ShaderMaterial,
+  Spherical,
+  TextureLoader,
+  Vector3
+} from "three";
+import {type TresInstance, useLoop} from "@tresjs/core";
+import {earthDarkColor, earthLightColor, type Journey, travelDark, travelLight} from "@utils/travel.ts";
 import color from "@assets/travel/2k_earth_bw.jpg";
 import JourneyPoint from "./JourneyPoint.vue";
-import { usePreferredDark } from "@vueuse/core";
+import {usePreferredDark} from "@vueuse/core";
+import {toRadians} from "chart.js/helpers";
 
-const emit = defineEmits<{
-  (e: 'journeySelected', journey: JourneyScreen): void
-}>();
+const {onBeforeRender} = useLoop();
 
 // the earth
 
@@ -32,8 +31,8 @@ function getEarthMaterial() {
   ])
   const gradientTexture = new DataTexture(gradientData, 2, 1, RGBAFormat);
   gradientTexture.needsUpdate = true;
-
-  const earthMaterial = new ShaderMaterial({
+  
+  return new ShaderMaterial({
     uniforms: {
       bwTexture: {value: earthTexture},
       gradientTexture: {value: gradientTexture}
@@ -57,8 +56,6 @@ function getEarthMaterial() {
                 }
             `
   });
-
-  return earthMaterial;
 }
 
 const earthRadius = .5;
@@ -67,57 +64,55 @@ const earthMaterial = getEarthMaterial();
 
 // camera setup
 
-const initialCameraPos = new Vector3();
-initialCameraPos.setFromSphericalCoords(2, .6 * Math.PI / 2, .5 * Math.PI);
-
-const {camera} = useTresContext();
-const currentCameraPos = computed(() => {
-  // convert to spherical
-  const p = new Spherical();
-  p.setFromVector3(camera.value?.position ?? initialCameraPos);
-  return p;
-})
+const cameraPosSpherical = new Spherical(1.1, .6 * Math.PI / 2, .5 * Math.PI);
+const cameraPos = new Vector3().setFromSpherical(cameraPosSpherical);
 
 
 // light that follows the camera position
 
 const lightPos = new Vector3();
-lightPos.setFromSphericalCoords(currentCameraPos.value.radius, currentCameraPos.value.phi, currentCameraPos.value.theta - .25 * Math.PI);
+lightPos.setFromSphericalCoords(cameraPosSpherical.radius, cameraPosSpherical.phi, cameraPosSpherical.theta - .25 * Math.PI);
 
-const light: ShallowRef<TresInstance | null> = shallowRef(null);
+// rotate earth
 
-function onChange() {
-  if (light.value == null) return;
-  light.value.position.setFromSphericalCoords(currentCameraPos.value.radius, currentCameraPos.value.phi, currentCameraPos.value.theta - .25 * Math.PI);
-}
+const earthRef = shallowRef<TresInstance | null>(null);
+
+onBeforeRender(({ delta, elapsed }) => {
+  if (earthRef.value == null) {
+    return;
+  }
+  
+  const axialTilt = new Quaternion().setFromEuler(new Euler(
+      toRadians(23), 0, 0));
+  const day = new Quaternion().setFromEuler(new Euler(
+      0, toRadians(elapsed * 5), 0));
+  const year = new Quaternion().setFromEuler(new Euler(
+      0, toRadians(elapsed), 0));
+    
+  const rotation = new Quaternion();
+  rotation.multiply(year);
+  rotation.multiply(axialTilt);
+  rotation.multiply(day);
+  
+  earthRef.value.rotation.setFromQuaternion(rotation);
+});
 
 const {journeys} = defineProps<{
   journeys: Journey[]
 }>();
-
-function emitClick(v: Vector2, j: Journey) {
-  const js: JourneyScreen = {
-    ...j,
-    screenSpace: v
-  }
-
-  emit('journeySelected', js);
-}
 </script>
 
 <template>
-  <TresPerspectiveCamera
-      :position="initialCameraPos"
-      :look-at="[0, 0, 0]"
-  />
-  <TresMesh :material="earthMaterial">
-    <TresSphereGeometry :args="[earthRadius, 64, 64]"/>
-  </TresMesh>
+  <TresPerspectiveCamera :position="cameraPos" :look-at="[0, 0, 0]"/>
+  <TresDirectionalLight :intensity="5" :position="lightPos" :look-at="[0, 0, 0]"/>
+  
+  <TresGroup ref="earthRef">
+    <TresMesh :material="earthMaterial">
+      <TresSphereGeometry :args="[earthRadius, 64, 64]"/>
+    </TresMesh>
 
-  <JourneyPoint v-for="j in journeys" :location="j.location" @click="v => emitClick(v, j)"/>
-
-  <TresDirectionalLight :intensity="5" :position="lightPos" ref="light" :look-at="[0, 0, 0]"/>
-  <OrbitControls @change="onChange"/>
+    <JourneyPoint v-for="j in journeys" :location="j.location"/>
+  </TresGroup>
 </template>
 
 <style scoped>
