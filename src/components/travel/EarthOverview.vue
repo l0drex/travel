@@ -3,8 +3,11 @@ import WebGL from "three/examples/jsm/capabilities/WebGL";
 import { TresCanvas } from '@tresjs/core';
 import { type Journey } from "@utils/travel.ts";
 import EarthContent from "./EarthContent.vue";
+import {usePreferredReducedMotion} from "@vueuse/core";
 
-const webglSupported: boolean = WebGL.isWebGL2Available();
+const reducedMotion = usePreferredReducedMotion();
+const enableAnimatedEarth: boolean = WebGL.isWebGL2Available() 
+    && reducedMotion.value != "reduce";
 
 const {journeys} = defineProps<{
   journeys: Journey[]
@@ -13,7 +16,7 @@ const {journeys} = defineProps<{
 
 <template>
   <div id="container">
-    <TresCanvas v-if="webglSupported" id="canvas">
+    <TresCanvas v-if="enableAnimatedEarth" id="canvas">
       <EarthContent :journeys="journeys"/>
     </TresCanvas>
 
