@@ -52,13 +52,11 @@ const backgroundLightString = arrayToColor(travelLight);
     backgroundDark={backgroundDarkString}
     title="/travel"
 >
-    <h1>Discover my Adventures!</h1>
-
-    <EarthOverview client:only="vue" journeys={journeys}>
+    <EarthOverview client:only="vue" journeys={journeys} slot="background">
         <svg
-            id="earth"
-            viewBox="0 0 100 100"
-            xmlns="http://www.w3.org/2000/svg"
+                id="earth"
+                viewBox="0 0 100 100"
+                xmlns="http://www.w3.org/2000/svg"
         >
             <defs>
                 <linearGradient id="earthGradient">
@@ -77,7 +75,9 @@ const backgroundLightString = arrayToColor(travelLight);
             <circle cx="50" cy="50" r="50" fill="url(#earthGradient)"></circle>
         </svg>
     </EarthOverview>
-
+    
+    <h1>Discover my Adventures!</h1>
+    
     <div id="blog-container">
         <ul id="blogs">
             {journeys.map((j) => <BlogListEntry journey={j} />)}
