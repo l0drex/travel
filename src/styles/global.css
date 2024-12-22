@@ -14,7 +14,7 @@ html {
 }
 
 *::selection {
-    background-color: var(--color);
+    background-color: red;
     color: var(--background);
 }
 
@@ -25,8 +25,7 @@ html {
     }
 
     *::selection {
-        background-color: var(--colorDark);
-        color: var(--backgroundDark);
+        color: var(--colorDark);
     }
 }
 
