@@ -1,0 +1,45 @@
+---
+import { dateFormatter } from "../utils/general";
+import JourneyType from "@components/TypeIcon.astro";
+
+const { frontmatter } = Astro.props;
+
+const date = dateFormatter(frontmatter.date ?? new Date());
+---
+
+<section>
+    <h1>{frontmatter.title}</h1>
+    <div id="subtitle">
+        {(<JourneyType type={frontmatter.type} />)}
+        {frontmatter.type && date && "·"}
+        {date}
+    </div>
+</section>
+
+<div id="container">
+    <slot name="details" />
+
+    <article class="content">
+        <slot />
+    </article>
+
+    <slot name="references" />
+</div>
+
+<style>
+    #subtitle {
+        text-align: center;
+        margin: 0 0 2rem;
+        font-size: 1.5rem;
+    }
+
+    @media (min-width: 376px) {
+        #subtitle {
+            font-size: 2rem;
+        }
+    }
+
+    article {
+        margin: 0 auto;
+    }
+</style>

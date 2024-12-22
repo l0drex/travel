@@ -1,0 +1,42 @@
+---
+import { getCollection, getEntry, type CollectionEntry } from "astro:content";
+import MarkdownPostLayout from "@layouts/BlogPost.astro";
+import Layout from "@layouts/Layout.astro";
+import TrackView from "@components/travel/TrackView.vue";
+import { arrayToColor, travelDark, travelLight } from "@utils/travel";
+
+export async function getStaticPaths() {
+    const posts = await getCollection("travel");
+
+    return posts.map((entry) => ({
+        params: { slug: entry.slug },
+        props: { entry },
+    }));
+}
+
+interface Props {
+    entry: CollectionEntry<"travel">;
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const geoJson = (await getEntry("gpx", entry.data.gpx)) as CollectionEntry<"gpx">;
+---
+
+<Layout
+        title={entry.data.title}
+        background={arrayToColor(travelLight)}
+        backgroundDark={arrayToColor(travelDark)}
+>
+    <MarkdownPostLayout frontmatter={entry.data}>
+        <Content />
+        <TrackView
+                client:only="vue"
+                id="trackView"
+                slot="details"
+                title={entry.data.title}
+                geoJson={geoJson.data.data}
+        />
+    </MarkdownPostLayout>
+</Layout>

@@ -1,0 +1,166 @@
+:root {
+    --color: black;
+    --background: white;
+    --colorDark: white;
+    --backgroundDark: black;
+    --shadow: rgba(0, 0, 0, 0.33) 0 0.25rem 0.5rem;
+}
+
+html {
+    font-family: Lato, system-ui, sans-serif;
+    margin: 0;
+    color: var(--color);
+    background-color: var(--background);
+}
+
+*::selection {
+    background-color: var(--color);
+    color: var(--background);
+}
+
+@media (prefers-color-scheme: dark) {
+    html {
+        color: var(--colorDark);
+        background-color: var(--backgroundDark);
+    }
+
+    *::selection {
+        background-color: var(--colorDark);
+        color: var(--backgroundDark);
+    }
+}
+
+h1,
+h2,
+h3 {
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
+    margin-top: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+:not(article) > h1 {
+    text-align: center;
+    font-weight: 1000;
+    font-size: 2.5rem;
+    margin-top: 0;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 376px) {
+    :not(article) > h1 {
+        font-size: 3.5rem;
+    }
+}
+
+.content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+article h1 {
+    margin-bottom: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+pre {
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+}
+
+p img {
+    object-fit: contain;
+    max-width: min-content;
+    max-height: min-content;
+    width: 100%;
+    height: fit-content;
+
+    display: block;
+    margin: 1rem auto;
+
+    box-shadow: var(--shadow);
+    border-radius: 0.5rem;
+}
+
+article > * {
+    line-height: 1.3rem;
+    margin: 0.5rem;
+}
+
+a {
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+blockquote {
+    border-left: var(--color) solid 2px;
+    padding-left: 0.5rem;
+    font-family: cursive, serif;
+}
+
+@media (prefers-color-scheme: dark) {
+    blockquote {
+        border-color: var(--colorDark);
+    }
+}
+
+button,
+.button {
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 1000px;
+    background: var(--background);
+    box-shadow: var(--shadow);
+    user-select: none;
+
+    display: inline-flex;
+    gap: 0.25rem;
+    align-items: center;
+
+    text-decoration: none;
+
+    transition: all 0.1s;
+}
+
+button:hover:not(:active),
+.button:hover:not(:active) {
+    box-shadow: rgba(0, 0, 0, 0.3) 0 0.5rem 1rem;
+    scale: 1.01;
+    text-decoration: none;
+}
+
+button:active,
+.button:active {
+    background: var(--color);
+    color: var(--background);
+    text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    button,
+    .button {
+        color: var(--colorDark);
+        background: var(--backgroundDark);
+    }
+
+    button:active,
+    .button:active {
+        background: var(--colorDark);
+        color: var(--backgroundDark);
+    }
+}
+
+.button a,
+a.button {
+    text-decoration: none;
+}
+
+/* fix for astro-iconify */
+svg[astro-icon] {
+    height: 1.25em;
+    fill: none;
+    stroke: var(--colorDark);
+}

@@ -1,0 +1,68 @@
+---
+import { dateFormatter } from "../../utils/general";
+import { Icon } from "astro-icon/components";
+import { type JourneyType } from "@utils/travel";
+import JourneyIcon from "@components/TypeIcon.astro";
+
+const { journey } = Astro.props;
+---
+
+<li>
+    <a href={journey.url}>
+        <h2>{journey.title} <Icon name="mdi:chevron-right" /></h2>
+        <p>
+            <JourneyIcon type={journey.type} /> · {dateFormatter(journey.date)}
+        </p>
+    </a>
+</li>
+
+<style>
+    li {
+        list-style: none;
+    }
+
+    a {
+        display: block;
+
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(0.5rem);
+        transition: background-color 0.3s;
+        border-radius: 1rem;
+        padding: 1rem 1.5rem;
+    }
+
+    a:hover {
+        background: white;
+        color: black;
+    }
+
+    a:active {
+        background: red;
+        color: white;
+    }
+
+    a:visited {
+        color: #565656;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        a {
+            background: rgba(44, 44, 44, 0.5);
+        }
+
+        a:visited {
+            color: #c7c7c7;
+        }
+    }
+
+    h2 {
+        font-weight: bold;
+        font-size: 1.25rem;
+        display: inline-flex;
+        margin: 0 0 0.5rem;
+    }
+
+    p {
+        margin: 0;
+    }
+</style>
