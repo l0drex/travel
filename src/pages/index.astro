@@ -54,7 +54,7 @@ const backgroundLightString = arrayToColor(travelLight);
 >
     <EarthOverview client:only="vue" journeys={journeys} slot="background">
         <svg
-                id="earth"
+                class=""
                 viewBox="0 0 100 100"
                 xmlns="http://www.w3.org/2000/svg"
         >
@@ -76,20 +76,15 @@ const backgroundLightString = arrayToColor(travelLight);
         </svg>
     </EarthOverview>
     
-    <h1>Discover my Adventures!</h1>
+    <h1 class="text-5xl font-extrabold mb-20 mt-20 text-center mx-5 sm:text-6xl
+    text-red-600">Discover my Adventures!</h1>
     
-    <div id="blog-container">
-        <ul id="blogs">
-            {journeys.map((j) => <BlogListEntry journey={j} />)}
-        </ul>
-    </div>
+    <ul id="blogs" class="flex flex-col gap-3">
+        {journeys.map((j) => <BlogListEntry journey={j} />)}
+    </ul>
 </Layout>
 
 <style define:vars={{ earthDarkString, earthLightString }}>
-    h1 {
-        color: red;
-    }
-
     #earth {
         margin: 0 auto;
         display: block;
@@ -101,17 +96,5 @@ const backgroundLightString = arrayToColor(travelLight);
         circle {
             fill: url(#earthGradientDark);
         }
-    }
-
-    #blogs {
-        display: flex;
-        flex-direction: column;
-
-        padding: 0.5rem;
-        margin: 0 auto;
-        gap: 0.5rem;
-        box-sizing: border-box;
-
-        width: max-content;
     }
 </style>

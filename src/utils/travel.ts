@@ -87,12 +87,10 @@ export function positionAtCoordinate(
   return vec;
 }
 
-export const travelLight = [255, 246, 208, 255];
-//export const travelDark = [39, 38, 71, 255];
-export const travelDark = [0, 0, 0, 255];
-//export const earthColor = [232, 151, 111, 255];
-export const earthDarkColor = [18, 18, 18, 255];
-export const earthLightColor = [238, 229, 196, 255];
+export const travelLight = [255, 237, 212, 255];
+export const travelDark = [11, 9, 8, 255];
+export const earthDarkColor = [27, 24, 22, 255];
+export const earthLightColor = [254, 214, 170, 255];
 
 export function arrayToColor(array: number[]) {
   return `rgb(${array.join(", ")})`;

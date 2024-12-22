@@ -13,6 +13,6 @@ const dotLook = positionAtCoordinate(location[0], location[1], 1);
 <template>
   <TresMesh :position="dotPos" :look-at="dotLook">
     <TresCircleGeometry :args="[.01, 32]" />
-    <TresMeshBasicMaterial color="red" />
+    <TresMeshStandardMaterial color="#450a0a" />
   </TresMesh>
 </template>

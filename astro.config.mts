@@ -6,9 +6,11 @@ import gpx from "./src/astro-gpx/index.ts";
 
 import icon from "astro-icon";
 
+import tailwind from "@astrojs/tailwind";
+
 // https://astro.build/config
 export default defineConfig({  
     site: "https://l0drex.github.io/",
     integrations: [vue({
         ...templateCompilerOptions
-    }), gpx(), icon()]});
+    }), gpx(), icon(), tailwind()]});

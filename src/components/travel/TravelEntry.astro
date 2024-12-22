@@ -7,67 +7,20 @@ const { journey } = Astro.props;
 ---
 
 <li>
-    <a href={journey.url}>
-        <h2>{journey.title} <Icon name="mdi:chevron-right" /></h2>
-        <p>
-            <JourneyIcon type={journey.type} /> · {dateFormatter(journey.date)}
-        </p>
+    <a href={journey.url} class="block 
+    bg-orange-100 bg-opacity-50 backdrop-filter backdrop-blur-md transition-colors duration-300
+    dark:bg-stone-700 dark:bg-opacity-50
+    hover:bg-orange-50 hover:text-orange-950 active:bg-orange-600 active:text-orange-50 visited:text-stone-500
+    dark:visited:text-stone-300 dark:hover:bg-stone-700
+     rounded-2xl px-6 py-4 
+    decoration-none select-none">
+        <h2 class="font-bold text-xl inline-flex mr-2 items-baseline">
+            {journey.title} <Icon name="mdi:chevron-right" />
+        </h2>
+        <div class="flex gap-2">
+            <JourneyIcon type={journey.type} />
+            <div>·</div>
+            {dateFormatter(journey.date)}
+        </div>
     </a>
 </li>
-
-<style>
-    li {
-        list-style: none;
-    }
-
-    a {
-        display: block;
-        user-select: none;
-        
-        background: rgba(255, 255, 255, 0.5);
-        backdrop-filter: blur(0.5rem);
-        transition: background-color 0.3s;
-        border-radius: 1rem;
-        padding: 1rem 1.5rem;
-        text-decoration: none;
-    }
-
-    a:hover {
-        background: white;
-        color: black;
-    }
-
-    a:active {
-        background: red;
-        color: white;
-    }
-
-    a:visited {
-        color: #565656;
-    }
-
-    @media (prefers-color-scheme: dark) {
-        a {
-            background: rgba(44, 44, 44, 0.5);
-        }
-
-        a:visited {
-            color: #c7c7c7;
-        }
-        
-        a:hover {
-            background: #292929;
-        }
-    }
-
-    h2 {
-        font-weight: bold;
-        font-size: 1.25rem;
-        display: inline-flex;
-        margin: 0 0 0.5rem;
-    }
-
-    p {
-        margin: 0;
-    }
-</style>

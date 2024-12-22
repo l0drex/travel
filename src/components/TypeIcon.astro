@@ -9,7 +9,7 @@ interface Props {
 const { type } = Astro.props;
 ---
 
-<span>
+<span class="inline-flex gap-1 items-center">
     {type === "bike" && <Icon name="mdi:bike" />}
     {type === "hiking" && <Icon name="mdi:hiking" />}
     {type}

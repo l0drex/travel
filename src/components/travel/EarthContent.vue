@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import {shallowRef} from "vue";
 import {
-  DataTexture, Euler,
+  Color,
+  DataTexture, Euler, MeshBasicMaterial, MeshLambertMaterial, MeshPhongMaterial,
   Quaternion,
   RGBAFormat,
   ShaderMaterial,
   Spherical,
-  TextureLoader,
+  TextureLoader, UniformsLib,
   Vector3
 } from "three";
 import {type TresInstance, useLoop} from "@tresjs/core";
@@ -15,6 +16,7 @@ import color from "@assets/travel/2k_earth_bw.jpg";
 import JourneyPoint from "./JourneyPoint.vue";
 import {usePreferredDark} from "@vueuse/core";
 import {toRadians} from "chart.js/helpers";
+import {diffuseColor} from "three/src/nodes/core/PropertyNode";
 
 const {onBeforeRender} = useLoop();
 
@@ -32,29 +34,36 @@ function getEarthMaterial() {
   const gradientTexture = new DataTexture(gradientData, 2, 1, RGBAFormat);
   gradientTexture.needsUpdate = true;
   
-  return new ShaderMaterial({
-    uniforms: {
-      bwTexture: {value: earthTexture},
-      gradientTexture: {value: gradientTexture}
-    },
-    vertexShader: `
-                varying vec2 vUv;
-                void main() {
-                    vUv = uv;
-                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-                }
-            `,
-    fragmentShader: `
-                uniform sampler2D bwTexture;
-                uniform sampler2D gradientTexture;
-                varying vec2 vUv;
-                void main() {
-                    vec4 bwColor = texture2D(bwTexture, vUv);
-                    float intensity = bwColor.r; // assuming the texture is grayscale
-                    vec4 gradientColor = texture2D(gradientTexture, vec2(intensity, 0.5));
-                    gl_FragColor = gradientColor;
-                }
-            `
+  // we patch the existing lambert material for our use case
+  // we use the bw earth texture to map to foreground and background color
+  // and set the lighting color to the alpha
+  return new MeshLambertMaterial({
+    map: earthTexture,
+    onBeforeCompile: (shader) => {
+      shader.uniforms = ({
+        ...shader.uniforms,
+        gradientTexture: {value: gradientTexture}
+      })
+      
+      // language=Glsl
+      shader.fragmentShader = shader.fragmentShader.replace("#include <common>", `
+        uniform sampler2D gradientTexture;
+        #include <common>
+      `)
+      
+      // language=Glsl
+      const fragmentShader = `
+        #include <dithering_fragment>
+
+        vec4 bwColor = texture2D(map, vMapUv);
+        float intensity = bwColor.r;  // assuming the texture is grayscale
+        vec4 gradientColor = texture2D(gradientTexture, vec2(intensity, 0.5));
+        gradientColor.a = reflectedLight.directDiffuse.r * intensity;
+        gl_FragColor = gradientColor;
+      `
+      shader.fragmentShader = shader.fragmentShader.replace("#include <map_fragment>", "");
+      shader.fragmentShader = shader.fragmentShader.replace("#include <dithering_fragment>", fragmentShader);
+    }
   });
 }
 
@@ -71,7 +80,7 @@ const cameraPos = new Vector3().setFromSpherical(cameraPosSpherical);
 // light that follows the camera position
 
 const lightPos = new Vector3();
-lightPos.setFromSphericalCoords(cameraPosSpherical.radius, cameraPosSpherical.phi, cameraPosSpherical.theta - .25 * Math.PI);
+lightPos.setFromSphericalCoords(cameraPosSpherical.radius, cameraPosSpherical.phi, cameraPosSpherical.theta - .33 * Math.PI);
 
 // rotate earth
 
