@@ -34,7 +34,7 @@ export function getPoints(geoJson: GeoJSON): Position[] {
   }
 }
 
-export function reduceSize(array: never[], targetLength: number) {
+export function reduceSize(array: any[], targetLength: number) {
   if (targetLength < 0) return array;
 
   if (array.length === targetLength) {
