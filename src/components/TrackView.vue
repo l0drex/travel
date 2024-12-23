@@ -71,23 +71,21 @@ const data = ref({
 </script>
 
 <template>
-  <div class="content">
-    <div id="map-container">
-      <l-map v-model:zoom="zoom" :center="[49.000, 13.000]">
-        <l-tile-layer
-            :url="styles.toner"
-            layer-type="base"
-            name="OpenStreetMap"
-            attribution="<a href='https://www.openstreetmap.de'>OpenStreetMap</a>"
-        ></l-tile-layer>
-        <l-geo-json :geojson="geoJson" :options-style="geoStyler"
-                    :options="{ pointToLayer: pointToLayout }"></l-geo-json>
-      </l-map>
-    </div>
-
-    <LineChart :chart-data="data" :options="{ borderColor: accentColor, backgroundColor: accentColor, pointRadius: 0 }"
-               :height="200"/>
+  <div id="map-container">
+    <l-map v-model:zoom="zoom" :center="[49.000, 13.000]">
+      <l-tile-layer
+          :url="styles.toner"
+          layer-type="base"
+          name="OpenStreetMap"
+          attribution="<a href='https://www.openstreetmap.de'>OpenStreetMap</a>"
+      ></l-tile-layer>
+      <l-geo-json :geojson="geoJson" :options-style="geoStyler"
+                  :options="{ pointToLayer: pointToLayout }"></l-geo-json>
+    </l-map>
   </div>
+
+  <LineChart :chart-data="data" :options="{ borderColor: accentColor, backgroundColor: accentColor, pointRadius: 0 }"
+             :height="200"/>
 </template>
 
 <style scoped>
@@ -96,15 +94,4 @@ const data = ref({
   height: 450px;
   position: relative;
 }
-
-#map-container > :first-child {
-  mix-blend-mode: multiply;
-}
-
-@media (prefers-color-scheme: dark) {
-  #map-container > :first-child {
-    mix-blend-mode: plus-lighter;
-  }
-}
-
 </style>

@@ -33,7 +33,6 @@ const geoJson = (await getEntry("gpx", entry.data.gpx)) as CollectionEntry<"gpx"
         <Content />
         <TrackView
                 client:only="vue"
-                id="trackView"
                 slot="details"
                 title={entry.data.title}
                 geoJson={geoJson.data.data}
