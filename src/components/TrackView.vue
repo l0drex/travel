@@ -17,7 +17,7 @@ const {geoJson, title} = defineProps<{
   title: string
 }>();
 
-const accentColor = "red";
+const accentColor = "#dc2626";
 
 const points = getPoints(geoJson);
 const elevation = getElevation(points);
@@ -35,7 +35,7 @@ function getLabels() {
 }
 
 let index = -1;
-const colors = ["red", "blue"];
+const colors = ["#dc2626", "#f97316"];
 const geoStyler: StyleFunction = (feature) => {
   index++;
   let color = colors[index % 2];
