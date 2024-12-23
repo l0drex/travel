@@ -12,7 +12,6 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
     site: "https://l0drex.github.io",
     base: "/travel",
-    site: "https://l0drex.github.io/",
     integrations: [vue({
         ...templateCompilerOptions
     }), gpx(), icon(), tailwind()]}
