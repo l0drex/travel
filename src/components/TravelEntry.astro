@@ -8,11 +8,12 @@ const { journey } = Astro.props;
 
 <li>
     <a href={journey.url} class="block 
-    bg-orange-100 bg-opacity-50 backdrop-filter backdrop-blur-md transition-colors duration-300
-    dark:bg-stone-700 dark:bg-opacity-50
-    hover:bg-orange-50 hover:text-orange-950 active:bg-orange-600 active:text-orange-50 visited:text-stone-500
-    dark:visited:text-stone-300 dark:hover:bg-stone-700
-     rounded-2xl px-6 py-4 
+    backdrop-filter backdrop-blur-md transition-colors duration-300
+    bg-orange-100 bg-opacity-50 dark:bg-stone-700 dark:bg-opacity-50
+    hover:bg-orange-50 hover:text-orange-950 dark:hover:bg-stone-700 dark:hover:text-orange-200
+    active:bg-orange-600 active:text-orange-50
+    visited:text-stone-500 dark:visited:text-stone-300
+    rounded-2xl px-6 py-4 
     decoration-none select-none">
         <h2 class="font-bold text-xl inline-flex mr-2 items-baseline">
             {journey.title} <Icon name="mdi:chevron-right" />
