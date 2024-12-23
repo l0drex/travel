@@ -1,20 +1,16 @@
-# Astro Starter Kit: Basics
+# Travel Blog
 
-```sh
-npm create astro@latest -- --template basics
-```
+This is the Astro project of my little travel blog.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+You can easily use this for yourself. Just replace the markdown files in `src/content/posts` - that's it!
+If you want, you can add and link a GPX file of your travel journey in the `gpx` folder.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+Finally, run the dev command below to preview the website in the browser, or another command to deploy it.
+You can also deploy the site on github pages.
 
 ## 🚀 Project Structure
 
-Inside of your Astro project, you'll see the following folders and files:
+Inside this project, you'll see the following folders and files:
 
 ```text
 /
@@ -34,15 +30,15 @@ To learn more about the folder structure of an Astro project, refer to [our guid
 
 All commands are run from the root of the project, from a terminal:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+| Command                    | Action                                           |
+|:---------------------------| :----------------------------------------------- |
+| `yarn install`             | Installs dependencies                            |
+| `yarn run dev`             | Starts local dev server at `localhost:4321`      |
+| `yarn run build`           | Build your production site to `./dist/`          |
+| `yarn run preview`         | Preview your build locally, before deploying     |
+| `yarn run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `yarn run astro -- --help` | Get help using the Astro CLI                     |
 
 ## 👀 Want to learn more?
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Checkout [the Astro documentation](https://docs.astro.build).
