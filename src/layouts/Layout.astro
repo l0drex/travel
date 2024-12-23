@@ -8,29 +8,7 @@ interface Props {
   backgroundDark?: string;
 }
 
-let {title, background, backgroundDark} = Astro.props;
-
-if (background != null && backgroundDark == null) {
-    backgroundDark = background;
-}
-
-background ??= "white";
-backgroundDark ??= "black";
-
-function getColor(backgroundColor: string) {
-    const rgb = new Color(backgroundColor);
-    const hsl = {
-        h: 0,
-        s: 0,
-        l: 0
-    };
-    rgb.getHSL(hsl);
-
-    return hsl.l < .49 ? "white" : "black";
-}
-
-const color = getColor(background);
-const colorDark = getColor(backgroundDark)
+let {title} = Astro.props;
 
 ---
 
@@ -46,8 +24,8 @@ selection:bg-red-600 selection:text-orange-50
     <meta name="viewport" content="width=device-width"/>
     <link rel="icon" type="image/svg+xml" href="/favicon.ico"/>
     <meta name="generator" content={Astro.generator}/>
-    <meta name="theme-color" content={background} media="(prefers-color-scheme: light)"/>
-    <meta name="theme-color" content={backgroundDark} media="(prefers-color-scheme: dark)"/>
+    <meta name="theme-color" content="#FFEDD4" media="(prefers-color-scheme: light)"/>
+    <meta name="theme-color" content="#0B0908" media="(prefers-color-scheme: dark)"/>
     <title>{title}</title>
 </head>
 
@@ -68,6 +46,3 @@ selection:bg-red-600 selection:text-orange-50
 
 </body>
 </html>
-
-<style is:global define:vars={{background, backgroundDark, color, colorDark}}>
-</style>

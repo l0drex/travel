@@ -14,7 +14,7 @@ Die Fahrt ging wunderbar. Der Radweg ging schön geteert und flach an der Elbe l
 Es ging aus der Dresdener Altstadt raus vorbei an Meißen, an vielen Feldern und Wiesen vorbei.
 Gegen nachmittag brach die dichte Wolkendecke auf und der blaue Himmel traute sich hervor.
 
-![](@assets/travel/bielefeld/elbe.jpg)
+![](@assets/bielefeld/elbe.jpg)
 
 An einer Stelle wurde der Radweg durch eine Baustelle versperrt, aber eine Einwohnerin leitete mich freundlicherweise durch.
 Sie erzählte mir, dass es vor Ort schon mehrfach große Stürme und Überschwemmungen gab,
@@ -28,7 +28,7 @@ Am nächsten Tag wurde ich von der schönen Altstadt in Torgau überrascht. Dort
 und fuhr anschließend im Dauerregen weiter an der Elbe, wie den Tag zuvor an zahlreichen Wiesen und Feldern vorbei.
 Die alten Elbkurven sind heute Seen mit zahlreichen Vögeln, und im Regenschutz der Bäume beobachtete ich diese.
 
-![](@assets/travel/bielefeld/reiher.jpg)
+![](@assets/bielefeld/reiher.jpg)
 
 Auf der Fähre in Elster traf ich einen anderen Radler, der mit seinem Wohnwagen irgendwo anhält und dann von dort aus kleinere Radtouren macht.
 
@@ -39,7 +39,7 @@ und der [D-Route 3](https://www.radroutenplaner-deutschland.de/veraDNetz_DE.asp)
 
 Auf einem abgelegenen Waldweg stellte ich dann das Zelt im grünen Licht der Abendsonne auf, umgeben von Vögeln und Mücken.
 
-![](@assets/travel/bielefeld/blätterdach.jpg)
+![](@assets/bielefeld/blätterdach.jpg)
 
 # Pizza an der Goitzsche
 
@@ -62,7 +62,7 @@ Es ging durch viele Felder und an der Saale sowie kleineren Flüssen durch Köth
 Auf dem Weg wurde mir nochmal Wasser angeboten, was immer sehr hilfreich ist.
 In Staßfurt erwartete mich der erste Anstieg seit Beginn der Tour, und auf dem Höhepunkt hatte ich den ersten Blick in den Harz.
 
-![](@assets/travel/bielefeld/harzblick.jpg)
+![](@assets/bielefeld/harzblick.jpg)
 
 Der Abstieg ging leider auf grobem Schotter weiter, viel Geschwindigkeit konnte man also nicht aufbauen.
 
@@ -74,7 +74,7 @@ Der schlimmste Anstieg war dabei in Ballenstedt, wo mich eine Allee zu einem hoc
 Das hatte sich jedoch gelohnt, denn der Weg danach war herrlich. Es ging gerade auf einem geteerten Radweg am Hang entlang,
 mit Blick auf den Sonnenuntergang über dem Gebirge.
 
-![](@assets/travel/bielefeld/sonnenuntergang.jpg)
+![](@assets/bielefeld/sonnenuntergang.jpg)
 
 Am Ziel bin ich dann total erschöpft ins Zelt gefallen. In der Nacht haben mich zwei Vögel wachgehalten, die sich durchweg unterhielten.
 
@@ -87,19 +87,19 @@ Anstrengende Anstiege wurden belohnt durch spaßige Abfahrten. In Gernrode gab e
 Abends sollte dann doch der Regen kommen, und so packte ich meinen Schlafsack in einer Schutzhütte kurz vor Goslar aus.
 Der Weg dahin führte jedoch erst ins Tal, dann wieder ins Gebirge.
 
-![](@assets/travel/bielefeld/goslar.jpg)
+![](@assets/bielefeld/goslar.jpg)
 
 # Triefend nass durchs Weserbergland
 
 Der Regen ging die ganze Nacht durch, und hörte am nächsten Tag auch nicht auf.
 
-![](@assets/travel/bielefeld/harz_regen.jpg)
+![](@assets/bielefeld/harz_regen.jpg)
 
 Im Harz schützten die Bäume mich noch ein wenig, aber im Weser Bergland gab es mehr Felder und Wiesen.
 Der Weg führte mich durch Bad Gandersheim und an die Leine. Das Weser Bergland ist scheinbar ein beliebtes Jagdgebiet,
 denn es gab hier viele Jägerstände und nachts konnte man die Hirsche hören.
 
-![](@assets/travel/bielefeld/weser_bergland.jpg)
+![](@assets/bielefeld/weser_bergland.jpg)
 
 # Über die Weser weiter durchs Land
 
@@ -109,7 +109,7 @@ um in den Harz zu fahren. Er plante eine längere Tour, und wollte entlang der W
 Der flache Weser-Radweg zwischen Holzminden und Höxter war eine willkommene Abwechslung zum auf und ab in den Bergen.
 Durch den Regen tags zuvor war meine Kette total trocken und verdreckt, was die Fahrt nicht vereinfacht hat.
 
-![](@assets/travel/bielefeld/weser_bergland_sonnenuntergang.jpg)
+![](@assets/bielefeld/weser_bergland_sonnenuntergang.jpg)
 
 # An Herrmann vorbei zu Opa
 

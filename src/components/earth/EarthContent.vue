@@ -1,22 +1,21 @@
 <script setup lang="ts">
 import {shallowRef} from "vue";
 import {
-  Color,
-  DataTexture, Euler, MeshBasicMaterial, MeshLambertMaterial, MeshPhongMaterial,
+  DataTexture,
+  Euler,
+  MeshLambertMaterial,
   Quaternion,
   RGBAFormat,
-  ShaderMaterial,
   Spherical,
-  TextureLoader, UniformsLib,
+  TextureLoader,
   Vector3
 } from "three";
 import {type TresInstance, useLoop} from "@tresjs/core";
 import {earthDarkColor, earthLightColor, type Journey, travelDark, travelLight} from "@utils/travel.ts";
-import color from "@assets/travel/2k_earth_bw.jpg";
+import color from "@assets/earth/2k_earth_bw.jpg";
 import JourneyPoint from "./JourneyPoint.vue";
 import {usePreferredDark} from "@vueuse/core";
 import {toRadians} from "chart.js/helpers";
-import {diffuseColor} from "three/src/nodes/core/PropertyNode";
 
 const {onBeforeRender} = useLoop();
 

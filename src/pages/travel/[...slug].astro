@@ -2,11 +2,11 @@
 import { getCollection, getEntry, type CollectionEntry } from "astro:content";
 import MarkdownPostLayout from "@layouts/BlogPost.astro";
 import Layout from "@layouts/Layout.astro";
-import TrackView from "@components/travel/TrackView.vue";
+import TrackView from "@components/TrackView.vue";
 import { arrayToColor, travelDark, travelLight } from "@utils/travel";
 
 export async function getStaticPaths() {
-    const posts = await getCollection("travel");
+    const posts = await getCollection("posts");
 
     return posts.map((entry) => ({
         params: { slug: entry.slug },
@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 }
 
 interface Props {
-    entry: CollectionEntry<"travel">;
+    entry: CollectionEntry<"posts">;
 }
 
 const { entry } = Astro.props;

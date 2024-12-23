@@ -16,6 +16,6 @@ const gpxCollection = defineCollection({
 })
 
 export const collections = {
-  'travel' : blogCollection,
+  'posts' : blogCollection,
   'gpx': gpxCollection
 }

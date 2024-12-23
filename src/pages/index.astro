@@ -2,8 +2,8 @@
 import { getCollection, getEntry } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import Layout from "@layouts/Layout.astro";
-import EarthOverview from "@components/travel/EarthOverview.vue";
-import BlogListEntry from "@components/travel/TravelEntry.astro";
+import EarthOverview from "@components/earth/EarthOverview.vue";
+import BlogListEntry from "@components/TravelEntry.astro";
 import {
     getPoints,
     type Journey,
@@ -14,7 +14,7 @@ import {
     travelLight, type JourneyType,
 } from "@utils/travel";
 
-const posts: CollectionEntry<"travel">[] = await getCollection("travel");
+const posts: CollectionEntry<"posts">[] = await getCollection("posts");
 
 async function getJourneys() {
     const journeys: Journey[] = [];
