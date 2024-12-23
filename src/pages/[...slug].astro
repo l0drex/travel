@@ -37,5 +37,11 @@ const geoJson = (await getEntry("gpx", entry.data.gpx)) as CollectionEntry<"gpx"
                 title={entry.data.title}
                 geoJson={geoJson.data.data}
         />
+        <div slot="links">
+            <a href={import.meta.env.BASE_URL} class="block px-2 py-1 
+            border-2 border-orange-800 dark:border-orange-200 rounded-lg mt-5 mb-10
+            hover:bg-orange-900 hover:text-orange-100 hover:dark:bg-orange-200 hover:dark:text-orange-900
+            ">Zurück zur Übersicht</a>
+        </div>
     </MarkdownPostLayout>
 </Layout>

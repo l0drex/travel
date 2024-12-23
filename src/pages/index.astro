@@ -29,7 +29,7 @@ async function getJourneys() {
 
         journeys.push({
             title: p.data.title,
-            url: `/travel/${p.slug}`,
+            url: `${import.meta.env.BASE_URL}/${p.slug}`,
             type: p.data.type as JourneyType,
             date: p.data.date,
             location: loc,
