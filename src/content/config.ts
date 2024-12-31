@@ -5,7 +5,8 @@ const blogCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.date(),
-    type: z.string(),
+    // sync with utils/travel/journeyTypes
+    type: z.literal('bike').or(z.literal('hiking')),
     gpx: z.string(), //reference('gpx')
   })
 })

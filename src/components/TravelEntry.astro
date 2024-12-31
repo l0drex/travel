@@ -2,6 +2,7 @@
 import { dateFormatter } from "@utils/general";
 import { Icon } from "astro-icon/components";
 import JourneyIcon from "@components/TypeIcon.astro";
+import {journeyTypes} from "@utils/travel";
 
 const { journey } = Astro.props;
 ---
@@ -19,7 +20,7 @@ const { journey } = Astro.props;
             {journey.title} <Icon name="mdi:chevron-right" />
         </h2>
         <div class="flex gap-2">
-            <JourneyIcon type={journey.type} />
+            <JourneyIcon type={journeyTypes[journey.type]} />
             <div>·</div>
             {dateFormatter(journey.date)}
         </div>

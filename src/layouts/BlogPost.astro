@@ -1,6 +1,7 @@
 ---
 import { dateFormatter } from "../utils/general";
 import JourneyType from "@components/TypeIcon.astro";
+import {journeyTypes} from "../utils/travel";
 
 const { frontmatter } = Astro.props;
 
@@ -10,7 +11,7 @@ const date = dateFormatter(frontmatter.date ?? new Date());
 <section>
     <h1 class="font-bold text-4xl sm:text-5xl mb-4 text-center">{frontmatter.title}</h1>
     <div class="text-center text-2xl sm:text-3xl mb-8 flex align-baseline gap-2 justify-center">
-        {(<JourneyType type={frontmatter.type} />)}
+        {(<JourneyType type={journeyTypes[frontmatter.type]} />)}
         <span>·</span>
         {date}
     </div>

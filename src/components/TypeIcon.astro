@@ -1,16 +1,15 @@
 ---
 import { Icon } from "astro-icon/components";
-import { type JourneyType } from "@utils/travel";
+import {type JourneyType} from "@utils/travel";
 
 interface Props {
-    type: JourneyType | ProjectType;
+    type: JourneyType;
 }
 
 const { type } = Astro.props;
 ---
 
 <span class="inline-flex gap-1 items-center">
-    {type === "bike" && <Icon name="mdi:bike" />}
-    {type === "hiking" && <Icon name="mdi:hiking" />}
-    {type}
+    <Icon name={type.icon} />
+    {type.name.de}
 </span>
