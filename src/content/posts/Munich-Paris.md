@@ -3,6 +3,7 @@ title: München - Paris
 date: 2024-07-12
 type: bike
 gpx: münchen-paris
+image: paris/zoellner.jpg
 ---
 
 # Anreise

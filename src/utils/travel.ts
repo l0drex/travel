@@ -34,6 +34,7 @@ export interface Journey {
   type: JourneyType;
   date: Date;
   location: [number, number];
+  image?: string;
 }
 
 export function getPoints(geoJson: GeoJSON): Position[] {

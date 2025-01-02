@@ -3,8 +3,17 @@ import { dateFormatter } from "@utils/general";
 import { Icon } from "astro-icon/components";
 import JourneyIcon from "@components/TypeIcon.astro";
 import {journeyTypes} from "@utils/travel";
+import { Image } from 'astro:assets';
 
 const { journey } = Astro.props;
+
+let imagePath = journey.image;
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/**/*.{jpeg,jpg,png,gif}');
+const hasImage = imagePath != null && imagePath.length > 0;
+imagePath = "/src/assets/" + imagePath;
+if (hasImage && !images[imagePath]) {
+    throw new Error(`"${imagePath}" does not exist in glob: "src/assets/**/*.{jpeg,jpg,png,gif}"`);
+}
 ---
 
 <li>
@@ -14,15 +23,20 @@ const { journey } = Astro.props;
     hover:bg-orange-50 hover:text-orange-950 dark:hover:bg-stone-700 dark:hover:text-orange-200
     active:bg-red-700 active:text-orange-50
     visited:text-stone-500 dark:visited:text-stone-300
-    rounded-2xl px-6 py-4 
-    decoration-none select-none">
-        <h2 class="font-bold text-xl inline-flex mr-2 items-baseline">
-            {journey.title} <Icon name="mdi:chevron-right" />
-        </h2>
-        <div class="flex gap-2">
-            <JourneyIcon type={journeyTypes[journey.type]} />
-            <div>·</div>
-            {dateFormatter(journey.date)}
+    rounded-2xl px-4 py-3 
+    decoration-none select-none
+    flex items-center gap-4
+    ">
+        {hasImage && <Image src={images[imagePath]()} alt="" width={64} height={64} class="rounded-xl object-cover w-16 h-16"/>}
+        <div>
+            <h2 class="font-bold text-xl inline-flex mr-2 items-baseline">
+                {journey.title} <Icon name="mdi:chevron-right" />
+            </h2>
+            <div class="flex gap-2">
+                <JourneyIcon type={journeyTypes[journey.type]} />
+                <div>·</div>
+                {dateFormatter(journey.date)}
+            </div>
         </div>
     </a>
 </li>

@@ -3,6 +3,7 @@ title: Dresden - Prag
 date: 2024-04-25
 type: bike
 gpx: dresden-prag
+image: prague/boehmische-schweiz.jpg
 ---
 
 # Dresden, Sächsische Schweiz und Böhmische Schweiz
@@ -23,7 +24,7 @@ Zum Mittagessen gab es kurze Zeit später eine leckere Pizza.
 
 An der tschechischen Grenze wurden anschließend ein paar Aufnahmen gemacht, dann ging es ins wunderschöne Tschechien.
 
-![Blick vom Elbtal in die Böhmische Schweiz. Ein Felsen ragt aus dem Wald am Talhang hervor.](@assets/prague/boehmische-schweiz.JPG)
+![Blick vom Elbtal in die Böhmische Schweiz. Ein Felsen ragt aus dem Wald am Talhang hervor.](@assets/prague/boehmische-schweiz.jpg)
 
 Abends erreichten wir _Ústí nad Labem_ (deutsch: _Aussig_), wo wir unser Zelt an einem kostenlosen Campingplatz mit See übernachten wollten.
 Um uns das zu verdienen, mussten wir uns jedoch zunächst durchs verregnete Stadtchaos quälen.

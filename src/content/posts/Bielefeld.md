@@ -3,6 +3,7 @@ title: Dresden - Bielefeld
 date: 2024-04-25
 type: bike
 gpx: dresden-bielefeld
+image: bielefeld/sonnenuntergang.jpg
 ---
 
 # Bei Sturm nach Torgau
