@@ -27,7 +27,7 @@ if (hasImage && !images[imagePath]) {
     decoration-none select-none
     flex items-center gap-4
     ">
-        {hasImage && <Image src={images[imagePath]()} alt="" width={64} height={64} class="rounded-xl object-cover w-16 h-16"/>}
+        {hasImage && <Image src={images[imagePath]()} alt="" width={64} height={64} class="rounded-xl object-cover w-16 h-16" loading="eager"/>}
         <div>
             <h2 class="font-bold text-xl inline-flex mr-2 items-baseline">
                 {journey.title} <Icon name="mdi:chevron-right" />
