@@ -12,9 +12,8 @@ import type { Feature, GeoJSON } from "geojson";
 globalThis.L = L;
 Chart.register(...registerables);
 
-const {geoJson, title} = defineProps<{
-  geoJson: GeoJSON,
-  title: string
+const {geoJson} = defineProps<{
+  geoJson: GeoJSON
 }>();
 
 const accentColor = "#dc2626";
