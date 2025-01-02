@@ -1,6 +1,6 @@
 ---
 title: Dresden - Prag
-date: 2024-04-25
+date: 2024-05-03
 type: bike
 gpx: dresden-prag
 image: prague/boehmische-schweiz.jpg

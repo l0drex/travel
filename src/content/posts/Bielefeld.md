@@ -1,6 +1,6 @@
 ---
 title: Dresden - Bielefeld
-date: 2024-04-25
+date: 2024-05-17
 type: bike
 gpx: dresden-bielefeld
 image: bielefeld/sonnenuntergang.jpg

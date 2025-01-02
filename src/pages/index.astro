@@ -36,6 +36,8 @@ async function getJourneys() {
             image: p.data.image
         });
     }
+    
+    journeys.sort((a, b) => b.date.valueOf() - a.date.valueOf());
 
     return journeys;
 }
