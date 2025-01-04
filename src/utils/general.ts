@@ -4,3 +4,8 @@ export function dateFormatter(date: Date, short: boolean = false) {
     year: 'numeric'
   })
 }
+
+export interface Author {
+  name: string;
+  fediverse: string;
+}

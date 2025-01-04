@@ -13,20 +13,21 @@ let {title} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class="
+<html lang="de-de" class="
 text-orange-900 bg-orange-100 dark:text-orange-200 dark:bg-stone-950
 selection:bg-red-600 selection:text-orange-50
  -z-50
 ">
 <head>
     <meta charset="UTF-8"/>
-    <meta name="description" content="Personal website of Lorenz Hoffmann"/>
+    <meta name="description" content="Reiseblog von Lorenz Hoffmann"/>
     <meta name="viewport" content="width=device-width"/>
     <link rel="icon" type="image/svg+xml" href="/travel/favicon.svg"/>
     <meta name="generator" content={Astro.generator}/>
     <meta name="theme-color" content="#FFEDD4" media="(prefers-color-scheme: light)"/>
     <meta name="theme-color" content="#0B0908" media="(prefers-color-scheme: dark)"/>
     <title>{title}</title>
+    <slot name="meta"/>
 </head>
 
 

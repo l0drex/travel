@@ -8,7 +8,9 @@ const blogCollection = defineCollection({
     // sync with utils/travel/journeyTypes
     type: z.literal('bike').or(z.literal('hiking')),
     image: z.optional(z.string()),
-    gpx: z.string(), //reference('gpx')
+    gpx: z.string(), //reference('gpx'),
+    // sync with authors
+    author: z.literal("lorenz"),
   })
 })
 

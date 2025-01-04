@@ -5,7 +5,8 @@ import {journeyTypes} from "../utils/travel";
 
 const { frontmatter } = Astro.props;
 
-const date = dateFormatter(frontmatter.date ?? new Date());
+const jsDate: Date = frontmatter.date ?? new Date();
+const date = dateFormatter(jsDate);
 ---
 
 <section>
@@ -13,7 +14,7 @@ const date = dateFormatter(frontmatter.date ?? new Date());
     <div class="text-center text-2xl sm:text-3xl mb-8 flex align-baseline gap-2 justify-center">
         {(<JourneyType type={journeyTypes[frontmatter.type]} />)}
         <span>·</span>
-        {date}
+        <time datetime={jsDate.toISOString()}>{date}</time>
     </div>
 </section>
 

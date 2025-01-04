@@ -4,6 +4,7 @@ import MarkdownPostLayout from "@layouts/BlogPost.astro";
 import Layout from "@layouts/Layout.astro";
 import TrackView from "@components/TrackView.vue";
 import { arrayToColor, travelDark, travelLight } from "@utils/travel";
+import authors from "src/authors.json";
 
 export async function getStaticPaths() {
     const posts: CollectionEntry<'posts'>[] = await getCollection("posts");
@@ -22,6 +23,8 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 
 const geoJson = (await getEntry("gpx", entry.data.gpx)) as CollectionEntry<"gpx">;
+const author = authors[entry.data.author];
+
 ---
 
 <Layout
@@ -29,6 +32,13 @@ const geoJson = (await getEntry("gpx", entry.data.gpx)) as CollectionEntry<"gpx"
         background={arrayToColor(travelLight)}
         backgroundDark={arrayToColor(travelDark)}
 >
+    <Fragment slot="meta">
+        <meta name="title" content={entry.data.title} />
+        <meta name="date" content={entry.data.date.toISOString()} />
+        <meta name="author" content={author.name}/>
+        <meta name="fediverse:creator" content={author.fediverse}/>
+    </Fragment>
+    
     <MarkdownPostLayout frontmatter={entry.data}>
         <Content />
         <div slot="details">
