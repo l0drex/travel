@@ -1,23 +1,13 @@
 ---
-import { Color } from "three";
-
-
 interface Props {
   title: string;
-  background?: string;
-  backgroundDark?: string;
 }
 
-let {title} = Astro.props;
-
+const {title} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="de-de" class="
-text-orange-900 bg-orange-100 dark:text-orange-200 dark:bg-stone-950
-selection:bg-red-600 selection:text-orange-50
- -z-50
-">
+<html lang="de-de">
 <head>
     <meta charset="UTF-8"/>
     <meta name="description" content="Reiseblog von Lorenz Hoffmann"/>
@@ -31,9 +21,13 @@ selection:bg-red-600 selection:text-orange-50
 </head>
 
 
-<body class="flex flex-col justify-between min-h-screen font-sans">
+<body class="flex flex-col justify-between min-h-screen font-sans 
+text-orange-900 bg-orange-100 
+dark:text-orange-200 dark:bg-stone-950
+selection:bg-red-600 selection:text-orange-50
+ -z-50">
 
-<div class="absolute top-0 left-0 w-full h-full -z-40">
+<div class="absolute top-0 left-0 w-screen h-screen -z-40">
     <slot name="background"/>
 </div>
 

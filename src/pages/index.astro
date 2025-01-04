@@ -1,18 +1,13 @@
 ---
 import { getCollection, getEntry } from "astro:content";
 import type { CollectionEntry } from "astro:content";
-import Layout from "@layouts/Layout.astro";
+import Layout from "@layouts/BaseLayout.astro";
 import EarthOverview from "@components/earth/EarthOverview.vue";
 import BlogListEntry from "@components/TravelEntry.astro";
-import {
-    getPoints,
-    type Journey,
-    arrayToColor,
-    earthDarkColor,
-    earthLightColor,
-    travelDark,
-    travelLight, type JourneyType,
-} from "@utils/travel";
+import {colors} from "@utils/theme";
+import type {Journey, JourneyType} from "@utils/types";
+import {getPoints} from "../utils/geoJson";
+
 
 const posts: CollectionEntry<"posts">[] = await getCollection("posts");
 
@@ -44,23 +39,15 @@ async function getJourneys() {
 
 const journeys = await getJourneys();
 
-const backgroundDarkString = arrayToColor(travelDark);
-const earthDarkString = arrayToColor(earthDarkColor);
-const earthLightString = arrayToColor(earthLightColor);
-const backgroundLightString = arrayToColor(travelLight);
+const backgroundDarkString = colors.dark.bg;
+const earthDarkString = colors.dark.earth;
+const earthLightString = colors.light.earth;
+const backgroundLightString = colors.light.bg;
 ---
 
-<Layout
-    background={backgroundLightString}
-    backgroundDark={backgroundDarkString}
-    title="/travel"
->
+<Layout title="/travel">
     <EarthOverview client:only="vue" journeys={journeys} slot="background">
-        <svg
-                class=""
-                viewBox="0 0 100 100"
-                xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg viewBox="0 5 100 90" xmlns="http://www.w3.org/2000/svg" class="w-screen h-screen">
             <defs>
                 <linearGradient id="earthGradient">
                     <stop offset="0%" stop-color={earthLightString}></stop>
@@ -75,29 +62,15 @@ const backgroundLightString = arrayToColor(travelLight);
                 </linearGradient>
             </defs>
 
-            <circle cx="50" cy="50" r="50" fill="url(#earthGradient)"></circle>
+            <circle cx="50" cy="50" r="50" class="fill-[url(#earthGradient)] dark:fill-[url(#earthGradientDark)]"></circle>
         </svg>
     </EarthOverview>
     
-    <h1 class="text-5xl font-extrabold mb-20 mt-20 text-center mx-5 sm:text-6xl
-    text-red-600">Discover my Adventures!</h1>
+    <h1 class="text-5xl font-extrabold mb-20 mt-20 text-center mx-5 sm:text-6xl text-red-600">
+        Discover my Adventures!
+    </h1>
     
     <ul id="blogs" class="flex flex-col gap-3">
         {journeys.map((j) => <BlogListEntry journey={j} />)}
     </ul>
 </Layout>
-
-<style define:vars={{ earthDarkString, earthLightString }}>
-    #earth {
-        margin: 0 auto;
-        display: block;
-        max-width: 100%;
-        height: 100%;
-    }
-
-    @media (prefers-color-scheme: dark) {
-        circle {
-            fill: url(#earthGradientDark);
-        }
-    }
-</style>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import { positionAtCoordinate } from "@utils/travel.ts";
+import { positionAtCoordinate } from "@utils/geoJson.ts";
 import {usePreferredColorScheme} from "@vueuse/core";
 
 const colorScheme = usePreferredColorScheme()
