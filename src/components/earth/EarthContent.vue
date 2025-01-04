@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {shallowRef} from "vue";
+import {computed, shallowRef} from "vue";
 import {
   DataTexture,
   Euler,
@@ -19,14 +19,13 @@ import {toRadians} from "chart.js/helpers";
 import type {Journey} from "@utils/types.ts";
 
 const {onBeforeRender} = useLoop();
+const prefersDark = usePreferredDark();
 
 // the earth
 
 function getEarthMaterial() {
   const earthTexture = new TextureLoader().load(color.src);
-
-  const prefersDark = usePreferredDark();
-
+  
   const gradientData = new Uint8Array([
     ...colorArray(prefersDark.value ? colors.dark.bg : colors.light.bg),
     ...colorArray(prefersDark.value ? colors.dark.earth : colors.light.earth)
@@ -68,7 +67,7 @@ function getEarthMaterial() {
 }
 
 const earthRadius = .5;
-const earthMaterial = getEarthMaterial();
+const earthMaterial = computed(getEarthMaterial);
 
 
 // camera setup
