@@ -6,7 +6,7 @@ import TrackView from "@components/TrackView.vue";
 import { arrayToColor, travelDark, travelLight } from "@utils/travel";
 
 export async function getStaticPaths() {
-    const posts = await getCollection("posts");
+    const posts: CollectionEntry<'posts'>[] = await getCollection("posts");
 
     return posts.map((entry) => ({
         params: { slug: entry.slug },
