@@ -17,17 +17,16 @@ if (hasImage && !images[imagePath]) {
 ---
 
 <li>
-    <a href={journey.url} class="block 
+    <a href={journey.url} class="flex items-center gap-4 group
     backdrop-filter backdrop-blur-md transition-colors duration-300
-    bg-orange-100 bg-opacity-50 dark:bg-stone-700 dark:bg-opacity-50
+    bg-orange-100 bg-opacity-50 dark:bg-stone-700 dark:bg-opacity-50 border-2 
+    border-orange-200 dark:border-transparent focus:border-red-700 focus:outline-none
     hover:bg-orange-50 hover:text-orange-950 dark:hover:bg-stone-700 dark:hover:text-orange-200
     active:bg-red-700 active:text-orange-50
     visited:text-stone-500 dark:visited:text-stone-300
     rounded-2xl px-4 py-3 
-    decoration-none select-none
-    flex items-center gap-4
-    ">
-        {hasImage && <Image src={images[imagePath]()} alt="" width={64} height={64} class="rounded-xl object-cover w-16 h-16" loading="eager"/>}
+    decoration-none select-none">
+        {hasImage && <Image src={images[imagePath]()} alt="" width={64} height={64} class="rounded-xl object-cover w-16 h-16 sepia group-hover:sepia-0 transition-all" loading="eager"/>}
         <div>
             <h2 class="font-bold text-xl inline-flex mr-2 items-baseline">
                 {journey.title} <Icon name="mdi:chevron-right" />
