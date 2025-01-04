@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import {LineChart} from "vue-chart-3";
-import {ref} from "vue";
+import {computed, reactive, ref} from "vue";
 import {getDistance, getElevation, getPoints, reduceSize} from "@utils/geoJson.ts";
 import type {GeoJSON} from "geojson";
+import colors from "tailwindcss/colors";
+import type {CartesianScaleOptions, ChartOptions} from "chart.js";
+import {usePreferredDark} from "@vueuse/core";
+import type {_DeepPartialObject} from "chart.js/types/utils";
 
-const {geoJson} = defineProps<{
+const {geoJson, trackColor} = defineProps<{
   geoJson: GeoJSON,
   trackColor: string,
 }>();
@@ -32,11 +36,55 @@ const data = ref({
   }]
 });
 
+const darkMode = usePreferredDark();
+
+const options = computed<ChartOptions<"line">>(() => {
+  const labelColor = colors.stone["500"];
+  const lineColor = darkMode.value ? colors.stone["800"] : colors.stone["300"];
+
+  const axisConf: _DeepPartialObject<CartesianScaleOptions> = {
+    grid: {
+      color: lineColor,
+    },
+    ticks: {
+      color: labelColor,
+    },
+  };
+  
+  return {
+    borderColor: trackColor, 
+    backgroundColor: trackColor,
+    elements: {
+      point: {
+        radius: 0
+      }
+    },
+    plugins: {
+      title: {
+        display: true,
+        text: "Höhenprofil",
+        color: labelColor
+      },
+      legend: {
+        display: false
+      },
+    },
+    scales: {
+      x: axisConf,
+      y: {
+        ...axisConf,
+        ticks: {
+          callback: (value: number) => `${value} m`
+        }
+      }
+    }
+  }
+});
+
 </script>
 
 <template>
-  <LineChart :chart-data="data" :options="{ borderColor: trackColor, backgroundColor: trackColor, pointRadius: 0 }"
-             :height="200"/>
+  <LineChart :chart-data="data" :options="options" :height="200"/>
 </template>
 
 <style scoped>
