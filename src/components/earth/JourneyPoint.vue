@@ -1,16 +1,13 @@
 <script setup lang="ts">
-
 import { positionAtCoordinate } from "@utils/geoJson.ts";
-import {usePreferredColorScheme} from "@vueuse/core";
-
-const colorScheme = usePreferredColorScheme()
+import conf from "tailwind.config.mjs";
 
 const { location } = defineProps<{
   location: [number, number];
 }>();
 const dotPos = positionAtCoordinate(location[0], location[1]);
 const dotLook = positionAtCoordinate(location[0], location[1], 1);
-const color = colorScheme.value === "dark" ? "#450a0a" : "#f87171";
+const color = conf.theme.extend.colors.primary;
 </script>
 
 <template>

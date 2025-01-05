@@ -9,7 +9,7 @@ The metadata is documented in [config.ts](src/content/config.ts).
 Finally, run the dev command below to preview the website in the browser, or another command to deploy it.
 You can also deploy the site on GitHub pages.
 
-You can adjust the colors in [theme.ts](src/utils/theme.ts). As the project uses tailwind, I recommend using one of the
+You can adjust the colors in the [tailwind config](tailwind.config.mts). As the project uses tailwind, I recommend using one of the
 colors in [their palette](https://tailwindcss.com/docs/customizing-colors).
 
 ## 🚀 Project Structure

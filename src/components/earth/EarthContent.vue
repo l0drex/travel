@@ -11,12 +11,13 @@ import {
   Vector3
 } from "three";
 import {type TresInstance, useLoop} from "@tresjs/core";
-import {colorArray, colors} from "@utils/theme.ts";
 import color from "@assets/earth/2k_earth_bw.jpg";
 import JourneyPoint from "./JourneyPoint.vue";
 import {usePreferredDark} from "@vueuse/core";
 import {toRadians} from "chart.js/helpers";
 import type {Journey} from "@utils/types.ts";
+import conf from "tailwind.config.mjs";
+import {colorStringToArray} from "@utils/general.ts";
 
 const {onBeforeRender} = useLoop();
 const prefersDark = usePreferredDark();
@@ -25,10 +26,14 @@ const prefersDark = usePreferredDark();
 
 function getEarthMaterial() {
   const earthTexture = new TextureLoader().load(color.src);
+  const bg = colorStringToArray(
+      prefersDark.value ? conf.theme.extend.colors.bg["2"].dark : conf.theme.extend.colors.bg["2"].DEFAULT);
+  const earth = colorStringToArray(
+      prefersDark.value ? conf.theme.extend.colors.bg["2"].dark : conf.theme.extend.colors.bg["2"].DEFAULT);
   
   const gradientData = new Uint8Array([
-    ...colorArray(prefersDark.value ? colors.dark.bg : colors.light.bg),
-    ...colorArray(prefersDark.value ? colors.dark.earth : colors.light.earth)
+    ...bg,
+    ...earth
   ])
   const gradientTexture = new DataTexture(gradientData, 2, 1, RGBAFormat);
   gradientTexture.needsUpdate = true;

@@ -4,9 +4,9 @@ import type { CollectionEntry } from "astro:content";
 import Layout from "@layouts/BaseLayout.astro";
 import EarthOverview from "@components/earth/EarthOverview.vue";
 import BlogListEntry from "@components/TravelEntry.astro";
-import {colors} from "@utils/theme";
 import type {Journey} from "@utils/types";
 import {getPoints} from "@utils/geoJson";
+import conf from "tailwind.config.mjs";
 
 
 const posts: CollectionEntry<"posts">[] = (await getCollection("posts"))
@@ -32,11 +32,6 @@ async function getJourneys() {
 }
 
 const journeys = await getJourneys();
-
-const backgroundDarkString = colors.dark.bg;
-const earthDarkString = colors.dark.earth;
-const earthLightString = colors.light.earth;
-const backgroundLightString = colors.light.bg;
 ---
 
 <Layout title="/travel">
@@ -44,14 +39,14 @@ const backgroundLightString = colors.light.bg;
         <svg viewBox="0 5 100 90" xmlns="http://www.w3.org/2000/svg" class="w-screen h-screen">
             <defs>
                 <linearGradient id="earthGradient">
-                    <stop offset="0%" stop-color={earthLightString}></stop>
-                    <stop offset="100%" stop-color={backgroundLightString}
+                    <stop offset="0%" stop-color={conf.theme.extend.colors.bg["2"].DEFAULT}></stop>
+                    <stop offset="100%" stop-color={conf.theme.extend.colors.bg.DEFAULT}
                     ></stop>
                 </linearGradient>
 
                 <linearGradient id="earthGradientDark">
-                    <stop offset="0%" stop-color={earthDarkString}></stop>
-                    <stop offset="100%" stop-color={backgroundDarkString}
+                    <stop offset="0%" stop-color={conf.theme.extend.colors.bg["2"].dark}></stop>
+                    <stop offset="100%" stop-color={conf.theme.extend.colors.bg.dark}
                     ></stop>
                 </linearGradient>
             </defs>
@@ -60,7 +55,7 @@ const backgroundLightString = colors.light.bg;
         </svg>
     </EarthOverview>
     
-    <h1 class="text-5xl font-extrabold mb-20 mt-20 text-center mx-5 sm:text-6xl text-red-600">
+    <h1 class="text-5xl font-extrabold mb-20 mt-20 text-center mx-5 sm:text-6xl text-primary">
         Discover my Adventures!
     </h1>
     

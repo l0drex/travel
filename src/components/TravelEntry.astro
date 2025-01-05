@@ -17,11 +17,11 @@ const previewAlt = getPreviewAlt(journey);
 <li>
     <a href={Astro.url + journey.slug} class="flex items-center gap-4 group
     backdrop-filter backdrop-blur-md transition-colors duration-300
-    bg-orange-100 bg-opacity-50 dark:bg-stone-700 dark:bg-opacity-50 border-2 
-    border-orange-200 dark:border-transparent focus:border-red-700 focus:outline-none
-    hover:bg-orange-50 hover:text-orange-950 dark:hover:bg-stone-700 dark:hover:text-orange-200
-    active:bg-red-700 active:text-orange-50
-    visited:text-stone-500 dark:visited:text-stone-300
+    bg-bg bg-opacity-50 dark:bg-bg-dark dark:bg-opacity-50 
+    border-2 border-bg-2 dark:border-bg-2-dark focus:border-primary focus:outline-none
+    hover:bg-bg-3 dark:hover:bg-bg-2-dark dark:hover:border-bg-3-dark
+    active:bg-primary active:text-bg
+    visited:text-fg-inactive dark:visited:text-fg-inactive-dark
     rounded-2xl px-4 py-3 
     decoration-none select-none">
         <Image src={journey.data.image} alt={previewAlt} width={64} height={64} class="rounded-xl object-cover w-16 h-16 sepia group-hover:sepia-0 transition-all" loading="eager"/>
