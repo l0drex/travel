@@ -5,7 +5,7 @@ import TrackView from "@components/track/TrackView.vue";
 import authors from "src/authors.json";
 import {journeyTypes} from "../utils/types";
 import JourneyType from "../components/TypeIcon.astro";
-import {dateFormatter} from "../utils/general";
+import {dateFormatter, getPreviewAlt} from "../utils/general";
 import "@styles/markdown.css";
 import {getImage} from "astro:assets";
 
@@ -38,6 +38,8 @@ const ogImage = await getImage({
     height: 630,
     format: "webp",
 });
+
+const ogAlt = getPreviewAlt(entry);
 ---
 
 <Layout title={entry.data.title}>
@@ -56,6 +58,7 @@ const ogImage = await getImage({
         <meta name="og:image:width" content={`${ogImage.options.width}`}/>
         <meta name="og:image:height" content={`${ogImage.options.height}`}/>
         <meta name="og:image:format" content={ogImage.options.format}/>
+        <meta name="og:image:alt" content={ogAlt}/>
     </Fragment>
 
     <section>

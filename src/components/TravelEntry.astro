@@ -1,15 +1,21 @@
 ---
-import { dateFormatter } from "@utils/general";
+import {dateFormatter, getPreviewAlt} from "@utils/general";
 import { Icon } from "astro-icon/components";
 import JourneyIcon from "@components/TypeIcon.astro";
 import {journeyTypes} from "../utils/types";
 import { Image } from 'astro:assets';
+import {type CollectionEntry} from "astro:content";
+
+interface Props {
+    journey: CollectionEntry<"posts">,
+}
 
 const { journey } = Astro.props;
+const previewAlt = getPreviewAlt(journey);
 ---
 
 <li>
-    <a href={journey.url} class="flex items-center gap-4 group
+    <a href={Astro.url + journey.slug} class="flex items-center gap-4 group
     backdrop-filter backdrop-blur-md transition-colors duration-300
     bg-orange-100 bg-opacity-50 dark:bg-stone-700 dark:bg-opacity-50 border-2 
     border-orange-200 dark:border-transparent focus:border-red-700 focus:outline-none
@@ -18,15 +24,15 @@ const { journey } = Astro.props;
     visited:text-stone-500 dark:visited:text-stone-300
     rounded-2xl px-4 py-3 
     decoration-none select-none">
-        <Image src={journey.image} alt="" width={64} height={64} class="rounded-xl object-cover w-16 h-16 sepia group-hover:sepia-0 transition-all" loading="eager"/>
+        <Image src={journey.data.image} alt={previewAlt} width={64} height={64} class="rounded-xl object-cover w-16 h-16 sepia group-hover:sepia-0 transition-all" loading="eager"/>
         <div>
             <h2 class="font-bold text-xl inline-flex mr-2 items-baseline">
-                {journey.title} <Icon name="mdi:chevron-right" />
+                {journey.data.title} <Icon name="mdi:chevron-right" />
             </h2>
             <div class="flex gap-2">
-                <JourneyIcon type={journeyTypes[journey.type]} />
+                <JourneyIcon type={journeyTypes[journey.data.type]} />
                 <div>·</div>
-                {dateFormatter(journey.date)}
+                {dateFormatter(journey.data.date)}
             </div>
         </div>
     </a>

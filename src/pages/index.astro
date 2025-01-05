@@ -9,7 +9,8 @@ import type {Journey, JourneyType} from "@utils/types";
 import {getPoints} from "../utils/geoJson";
 
 
-const posts: CollectionEntry<"posts">[] = await getCollection("posts");
+const posts: CollectionEntry<"posts">[] = (await getCollection("posts"))
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 async function getJourneys() {
     const journeys: Journey[] = [];
@@ -24,6 +25,7 @@ async function getJourneys() {
 
         journeys.push({
             title: p.data.title,
+            id: p.id,
             url: `${import.meta.env.BASE_URL}/${p.slug}`,
             type: p.data.type as JourneyType,
             date: p.data.date,
@@ -31,8 +33,6 @@ async function getJourneys() {
             image: p.data.image
         });
     }
-    
-    journeys.sort((a, b) => b.date.valueOf() - a.date.valueOf());
 
     return journeys;
 }
@@ -71,6 +71,6 @@ const backgroundLightString = colors.light.bg;
     </h1>
     
     <ul id="blogs" class="flex flex-col gap-3">
-        {journeys.map((j) => <BlogListEntry journey={j} />)}
+        {posts.map(p => <BlogListEntry journey={p} />)}
     </ul>
 </Layout>
