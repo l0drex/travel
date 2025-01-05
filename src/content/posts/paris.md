@@ -99,12 +99,12 @@ Nach Stuttgart führte uns der Paneuroparadweg durch schöne Wälder und Täler,
 grandioser Abstieg auf leeren Schotterwegen hinab im Schatten der Bäume, welche auch prima als Regenschutz dienten.
 Dieser Radweg sollte uns mehr oder weniger bis nach Paris führen.
 
-![](@assets/paris/paneuropa.jpg)
+![Das Schild des Paneuropa-Radwegs hängt an einem deutschen weiß-grünen Radwegweiser. Das Logo is ein blaues Rad auf einer gelben Ellipse umgeben von Sternen.](@assets/paris/paneuropa.jpg)
 
 In Pforzheim fanden wir einen Regenschutz unter einer Brücke für das Mittagessen, 
 und wenig später trafen wir nach Karlsruhe auf den Rhein.
 
-![](@assets/paris/wald.JPG)
+![Blick in einen verregneten Wald, durch den eine Stromleitung verläuft.](@assets/paris/wald.JPG)
 
 
 # Strasbourg und der Marne - Rhein Kanal
@@ -113,14 +113,14 @@ Am nächsten Tag trafen wir vormittags in Strasbourg ein.
 Wir besichtigten die Kirche, die Altstadt sowie das Europäische Parlament.
 Hinter uns lagen schon etwa 500 km, vor uns aber mindestens genauso viel. Es ging also weiter.
 
-![](@assets/paris/strasbourg.jpg)
+![Blick in eine kleine Altstadtgasse. Schiefe Fassaden mit hölzernen Fensterläden in hellen Beige-Tönen.](@assets/paris/strasbourg.jpg)
 
 Nicht weit außerhalb der Stadt trafen wir auf den Marne - Rhein Kanal. 
 Der Radweg war hier super ausgebaut, es gab einen geteerten Weg der flach neben dem Kanal gerade 
 durch die Landschaft führte. Bäume links und rechts spendeten angenehmen Schatten, und die Temperaturen blieben 
-bei schönen 20°C. 
+bei schönen 20 °C. 
 
-![](@assets/paris/kanal.JPG)
+![Ein einsamer Radfahrer fährt auf geteertem Radweg links eines geradlinigen Kanals umgeben von Bäumen.](@assets/paris/kanal.JPG)
 
 Die Nacht verbrachten wir wieder auf einem Feld, auf dem ein Bauer seine Geräte abgestellt hatte.
 
@@ -129,31 +129,31 @@ Die Nacht verbrachten wir wieder auf einem Feld, auf dem ein Bauer seine Geräte
 Nach der ersten Nacht in Frankreich ging es erstmal weiter am Kanal. Das sollte sich bis Paris auch nicht mehr großartig ändern. 
 Die Fahrt am Kanal war angenehm, aber ein wenig langweilig. Die wenigen Städte, die wir gesehen haben, waren allerdings wunderschön.
 
-![](@assets/paris/frankreich.jpg)
+![Bunte Altstadtfassaden mit Fensterläden und bunten Blumen](@assets/paris/frankreich.jpg)
 
 Zwischendurch fanden wir ein paar einsame alte Häuser von den damaligen Schleusenwärtern.
 
-![](@assets/paris/zoellner.jpg)
+![Ein kleines, altes Zöllner Haus an einer alten Schleuse an einem Kanal in Frankreich. Es steht auf einer einem kleinen Fels umgeben von Wald.](@assets/paris/zoellner.jpg)
 
 Die größte Schleuse auf unserer war mit 15 Metern die Schleuse _Réchicourt-le-Chateau_.
 
-![](@assets/paris/schleuse.jpg)
+![Geschlossenen Schleusentor. Vor dem Tor geht es in einem Betonschacht sehr weit nach unten ins dunkle. Der Boden ist nicht sichtbar. Der Schacht is abgesperrt durch blaue Gitter.](@assets/paris/schleuse.jpg)
 
 Kurz vor Nancy haben wir uns eine schöne Basilika angeschaut.
 
-![](@assets/paris/basilika.jpg)
+![Ein weißes Kirchenschiff streckt sich in den Hintergrund. Hinten sind schmale hohe Fenster zu sehen. Das Schiff ist etwas gekrümmt.](@assets/paris/basilika.jpg)
 
 Unser Mittagessen wollten wir vor einer Scheune in einer kleinen Ortschaft essen, da es etwas nach Regen aussah.
 Kurz darauf waren wir in einem netten Gespräch mit einer älteren Dame verwickelt. Mein grausiges Schulfranzösisch
 wurde durch die Tochter der Dame am Telefon abgelöst, die für uns auf Englisch übersetzte.
 Wenige Minuten später hatten wir einen Tisch, Stühle, einen leckeren Apfelkuchen und ein paar Scheiben Weißbrot.
 
-![](@assets/paris/mittag.jpg)
+![Alter Klapptisch mit zwei Höckern. Darauf ein Apfelkuchen, Brot und Trinkflaschen.](@assets/paris/mittag.jpg)
 
 Gut gestärkt fuhren wir weiter, bis wir plötzlich von einer Straßensperrung überrascht wurden. Das Wasser des
 Kanals ist übergetreten und versperrte uns den Weg. Über kleine Umwege ging es aber weiter.
 
-![](@assets/paris/hochwasser.jpg)
+![Überflutete Straße mitten im Wald, die einem Radfahrer im Vordergrund den Weg versperrt.](@assets/paris/hochwasser.jpg)
 
 Abends entschieden wir uns wieder neben einem Sportplatz zu schlafen, diesmal sogar mit Blick auf einen tollen See.
 Dort lernten wir auch, wie französische Parties ablaufen: Es wurden viele Volkslieder gesungen.
@@ -163,7 +163,7 @@ Dort lernten wir auch, wie französische Parties ablaufen: Es wurden viele Volks
 Wir fuhren immer weiter am Kanal, bis wir plötzlich doch ein paar Berge sahen. 
 Weinberge! Wir waren plötzlich in der Champagne. 
 
-![](@assets/paris/champagne.jpg)
+![Blick auf Weinberge mit einem kleinen Dorf. Eine Statue eines Priester ist in der Ferne zu sehen.](@assets/paris/champagne.jpg)
 
 Es ging vorbei an zahlreichen Keltereien, 
 aber leider nicht mehr auf einem Radweg — oft fuhren wir Landstraßen entlang. 
@@ -197,8 +197,8 @@ für sämtliche städtische Versorgungsfahrzeuge diente: Müllfahrzeuge, Grünan
 Die Vorbereitung auf die olympischen Sommerspiele befeuerte das Chaos noch weiter. Zahlreiche nennenswerte 
 Orte waren abgesperrt, so auch der Eiffelturm. Daher musste das finale Foto erstmal lange eine gute Perspektive gesucht werden. 
 
-![](@assets/paris/tacho.jpg)
-![](@assets/paris/notre-dame.jpg)
+![Tach mit der Anzeige "1116 Gesamtstrecke" vor dem Eiffelturm.](@assets/paris/tacho.jpg)
+![Kirchtürme der Notre Dame neben einem Kran. Der Rest der Kirche ist eingezäunt.](@assets/paris/notre-dame.jpg)
 
 Danach ging es ins Hostel, wo wir unsere australischen und niederländischen Mitbewohner trafen.
 Wir zogen nochmal ohne Räder los um die Stadt zu erkunden, und vielen abends frisch geduscht ins erste echte Bett seit zwölf Tagen.
