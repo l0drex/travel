@@ -5,8 +5,8 @@ import Layout from "@layouts/BaseLayout.astro";
 import EarthOverview from "@components/earth/EarthOverview.vue";
 import BlogListEntry from "@components/TravelEntry.astro";
 import {colors} from "@utils/theme";
-import type {Journey, JourneyType} from "@utils/types";
-import {getPoints} from "../utils/geoJson";
+import type {Journey} from "@utils/types";
+import {getPoints} from "@utils/geoJson";
 
 
 const posts: CollectionEntry<"posts">[] = (await getCollection("posts"))
@@ -24,13 +24,7 @@ async function getJourneys() {
         const loc: [number, number] = [coordinates[1], coordinates[0]];
 
         journeys.push({
-            title: p.data.title,
-            id: p.id,
-            url: `${import.meta.env.BASE_URL}/${p.slug}`,
-            type: p.data.type as JourneyType,
-            date: p.data.date,
-            location: loc,
-            image: p.data.image
+            location: loc
         });
     }
 
