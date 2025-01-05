@@ -4,13 +4,16 @@ This is the Astro project of my little travel blog.
 
 You can easily use this for yourself. Just replace the markdown files in `src/content/posts` - that's it!
 If you want, you can add and link a GPX file of your travel journey in the `gpx` folder.
-The metadata is documented in [config.ts](src/content/config.ts).
+The metadata is documented in the [collection config](src/content/config.ts).
 
 Finally, run the dev command below to preview the website in the browser, or another command to deploy it.
 You can also deploy the site on GitHub pages.
 
 You can adjust the colors in the [tailwind config](tailwind.config.mts). As the project uses tailwind, I recommend using one of the
 colors in [their palette](https://tailwindcss.com/docs/customizing-colors).
+
+The map style can be adjusted in `src/components/track/MapView.vue`. There are some predefined styles,
+but of course you can add your own. Be aware that you need to have a (free) account for some of them once deployed.
 
 ## 🚀 Project Structure
 
