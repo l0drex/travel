@@ -7,6 +7,7 @@ import {journeyTypes} from "../utils/types";
 import JourneyType from "../components/TypeIcon.astro";
 import {dateFormatter} from "../utils/general";
 import "@styles/markdown.css";
+import {getImage} from "astro:assets";
 
 export async function getStaticPaths() {
     const posts: CollectionEntry<'posts'>[] = await getCollection("posts");
@@ -28,15 +29,33 @@ const geoJson = (await getEntry("gpx", entry.data.gpx)) as CollectionEntry<"gpx"
 const author = authors[entry.data.author];
 
 const jsDate: Date = entry.data.date;
-const date = dateFormatter(jsDate);
+const machineDate = jsDate.toDateString();
+const humanDate = dateFormatter(jsDate);
+
+const ogImage = await getImage({
+    src: entry.data.image,
+    width: 1200,
+    height: 630,
+    format: "webp",
+});
 ---
 
 <Layout title={entry.data.title}>
     <Fragment slot="meta">
-        <meta name="title" content={entry.data.title} />
-        <meta name="date" content={entry.data.date.toISOString()} />
+        <meta name="og:type" content="article" />
+        <meta name="og:article:section" content="travel"/>
+        <meta name="og:article:section" content={entry.data.type} />
+        <meta name="og:article:tag" content="travel" />
+        <meta name="og:article:tag" content={entry.data.type} />
+        <meta name="date" content={machineDate} />
+        <meta name="og:article:published_time" content={machineDate} />
         <meta name="author" content={author.name}/>
         <meta name="fediverse:creator" content={author.fediverse}/>
+        <meta name="og:article:author" content={author.name}/>
+        <meta name="og:image" content={ogImage.src}/>
+        <meta name="og:image:width" content={`${ogImage.options.width}`}/>
+        <meta name="og:image:height" content={`${ogImage.options.height}`}/>
+        <meta name="og:image:format" content={ogImage.options.format}/>
     </Fragment>
 
     <section>
@@ -44,7 +63,7 @@ const date = dateFormatter(jsDate);
         <div class="text-center text-2xl sm:text-3xl mb-8 flex align-baseline gap-2 justify-center">
             {(<JourneyType type={journeyTypes[entry.data.type]} />)}
             <span>·</span>
-            <time datetime={jsDate.toISOString()}>{date}</time>
+            <time datetime={jsDate.toISOString()}>{humanDate}</time>
         </div>
     </section>
     
