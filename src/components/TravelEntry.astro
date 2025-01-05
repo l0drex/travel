@@ -6,14 +6,6 @@ import {journeyTypes} from "../utils/types";
 import { Image } from 'astro:assets';
 
 const { journey } = Astro.props;
-
-let imagePath = journey.image;
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/**/*.{jpeg,jpg,png,gif}');
-const hasImage = imagePath != null && imagePath.length > 0;
-imagePath = "/src/assets/" + imagePath;
-if (hasImage && !images[imagePath]) {
-    throw new Error(`"${imagePath}" does not exist in glob: "src/assets/**/*.{jpeg,jpg,png,gif}"`);
-}
 ---
 
 <li>
@@ -26,7 +18,7 @@ if (hasImage && !images[imagePath]) {
     visited:text-stone-500 dark:visited:text-stone-300
     rounded-2xl px-4 py-3 
     decoration-none select-none">
-        {hasImage && <Image src={images[imagePath]()} alt="" width={64} height={64} class="rounded-xl object-cover w-16 h-16 sepia group-hover:sepia-0 transition-all" loading="eager"/>}
+        <Image src={journey.image} alt="" width={64} height={64} class="rounded-xl object-cover w-16 h-16 sepia group-hover:sepia-0 transition-all" loading="eager"/>
         <div>
             <h2 class="font-bold text-xl inline-flex mr-2 items-baseline">
                 {journey.title} <Icon name="mdi:chevron-right" />

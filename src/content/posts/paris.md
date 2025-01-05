@@ -4,7 +4,7 @@ date: 2024-06-28
 type: bike
 author: lorenz
 gpx: münchen-paris
-image: paris/zoellner.jpg
+image: "@assets/paris/zoellner.jpg"
 ---
 
 # Anreise
