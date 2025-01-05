@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import {LineChart} from "vue-chart-3";
 import {computed, ref} from "vue";
-import {getDistance, getElevation, getPoints, reduceSize} from "@utils/geoJson.ts";
-import type {GeoJSON} from "geojson";
-import type {CartesianScaleOptions, ChartOptions} from "chart.js";
+import {getDistance, getPoints, reduceSize} from "@utils/geoJson.ts";
+import type {GeoJSON, Position} from "geojson";
+import type {CartesianScaleOptions, ChartData, ChartOptions} from "chart.js";
 import {usePreferredDark} from "@vueuse/core";
 import type {_DeepPartialObject} from "chart.js/types/utils";
 import conf from "tailwind.config.mjs";
@@ -14,27 +14,36 @@ const {geoJson} = defineProps<{
   geoJson: GeoJSON,
 }>();
 
-const points = getPoints(geoJson);
-const elevation = getElevation(points);
+// collect coordinates in geo json
+const coordinates = getPoints(geoJson);
+// convert to types for chart
+const elevationData = toData(coordinates);
+// reduce size
+const elevationReduced = reduceSize(elevationData, 10);
 
-function getLabels() {
+function toData(points: Position[]) {
   let distances = points.map((k, i) => getDistance(k, points[i - 1]));
-
+  
   // accumulate distances
   let lastProgress = 0;
-  return distances.map((d, i) => {
-    let p = (i === 0) ? 0 : d + lastProgress;
-    lastProgress = p;
-    return `${Math.round(p)} km`;
-  });
+  let progress = distances
+      .map((d, i) => {
+        let p = (i === 0) ? 0 : d + lastProgress;
+        lastProgress = p;
+        return p;
+      });
+  
+  return points.map((point, i) => ({x: progress[i], y: point[2]}))
 }
 
-const data = ref({
-  labels: reduceSize(getLabels(), 300),
+const data = ref<ChartData<"line">>({
   datasets: [{
     label: 'Elevation',
-    data: reduceSize(elevation, 300)
-  }]
+    data: elevationReduced,
+    borderColor: conf.theme.extend.colors.primary,
+    fill: "origin",
+    tension: .1
+  }],
 });
 
 const darkMode = usePreferredDark();
@@ -53,8 +62,6 @@ const options = computed<ChartOptions<"line">>(() => {
   };
   
   return {
-    borderColor: conf.theme.extend.colors.primary, 
-    backgroundColor: conf.theme.extend.colors.primary,
     elements: {
       point: {
         radius: 0
@@ -71,7 +78,15 @@ const options = computed<ChartOptions<"line">>(() => {
       },
     },
     scales: {
-      x: axisConf,
+      x: {
+        ...axisConf,
+        type: "linear",
+        ticks: {
+          ...axisConf.ticks,
+          stepSize: 20,
+          callback: (value: number) => `${value} km`
+        }
+      },
       y: {
         ...axisConf,
         ticks: {

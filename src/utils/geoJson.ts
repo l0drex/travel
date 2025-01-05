@@ -24,21 +24,16 @@ export function getPoints(geoJson: GeoJSON): Position[] {
   }
 }
 
-export function reduceSize(array: any[], targetLength: number) {
-  if (targetLength < 0) return array;
-
-  if (array.length === targetLength) {
-    return array;
+export function reduceSize<T extends {y: number}>(array: T[], precision: number) {
+  const filtered = [array[0]]
+  
+  let last = array[0];
+  for (const v of array) {
+    if (Math.abs(v.y - last.y) < precision) continue;
+    filtered.push(v);
+    last = v;
   }
-
-  const relation = Math.round(array.length / targetLength);
-  const filtered = array.filter((_, i) => i % relation === 0);
-
   return filtered;
-}
-
-export function getElevation(points: Position[]) {
-  return points.map((p) => p[2]);
 }
 
 export function getDistance(a: Position, b: Position) {
