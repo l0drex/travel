@@ -1,50 +1,19 @@
-article {
-    color: #7B2D11; /* orange 900 */
-}
-
-@media (prefers-color-scheme: dark) {
-    article {
-        color: #FED6AA; /* orange-200 */
-    }
-}
-
 article h1 {
-    font-size: 1.5rem;
-    margin-top: 1em;
-    font-weight: 700;
+    @apply text-2xl mt-4 font-bold;
 }
 
 article p {
-    margin: .5em 0;
+    @apply my-2;
 }
 
 article a {
-    color: #dc2626; /* red 600 */
-}
-
-article a:hover {
-    text-decoration: underline;
+    @apply text-red-600 hover:underline;
 }
 
 article blockquote {
-    border-left: solid 5pt;
-    padding: .25em 0;
-    padding-left: 2em;
-    font-family: cursive, serif;
-    border-color: #7B2D11; /* orange 900 */
-    background-color: rgba(123, 45, 17, 0.25); /* orange-50 */;
+    @apply border-l-4 border-orange-900 bg-orange-200 py-0.5 pl-4 font-serif;
 }
 
 article img {
-    object-fit: contain;
-    max-width: min-content;
-    max-height: min-content;
-    width: 100%;
-    height: fit-content;
-
-    display: block;
-    margin: 1rem auto;
-
-    box-shadow: rgba(0, 0, 0, 0.33) 0 0.25rem 0.5rem;
-    border-radius: 0.5rem;
+    @apply object-contain max-w-min max-h-min w-full h-fit block mx-auto my-4 shadow-md rounded-lg;
 }
