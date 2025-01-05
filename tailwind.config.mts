@@ -28,13 +28,18 @@ export default {
 					// eg visited links
 					inactive: {
 						DEFAULT: colors.stone["500"],
-						dark: colors.stone["300"],
+						dark: colors.stone["500"],
 					}
 				},
 				// primary accent: active buttons, header on home page, lines in map
 				primary: colors.red["600"],
 				// secondary accent: lines in graph
-				secondary: colors.orange["600"]
+				secondary: colors.orange["600"],
+				// grid lines and borders
+				line: {
+					DEFAULT: colors.stone["800"],
+					dark: colors.stone["300"],
+				}
 			}
 		},
 	},

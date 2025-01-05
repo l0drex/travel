@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import {LineChart} from "vue-chart-3";
-import {computed, reactive, ref} from "vue";
+import {computed, ref} from "vue";
 import {getDistance, getElevation, getPoints, reduceSize} from "@utils/geoJson.ts";
 import type {GeoJSON} from "geojson";
-import colors from "tailwindcss/colors";
 import type {CartesianScaleOptions, ChartOptions} from "chart.js";
 import {usePreferredDark} from "@vueuse/core";
 import type {_DeepPartialObject} from "chart.js/types/utils";
+import conf from "tailwind.config.mjs";
 
-const {geoJson, trackColor} = defineProps<{
+const colors = conf.theme.extend.colors;
+
+const {geoJson} = defineProps<{
   geoJson: GeoJSON,
-  trackColor: string,
 }>();
 
 const points = getPoints(geoJson);
@@ -39,8 +40,8 @@ const data = ref({
 const darkMode = usePreferredDark();
 
 const options = computed<ChartOptions<"line">>(() => {
-  const labelColor = colors.stone["500"];
-  const lineColor = darkMode.value ? colors.stone["800"] : colors.stone["300"];
+  const labelColor = darkMode.value ? colors.fg.inactive.dark : colors.fg.inactive.DEFAULT;
+  const lineColor = darkMode.value ? colors.line.DEFAULT : colors.line.dark;
 
   const axisConf: _DeepPartialObject<CartesianScaleOptions> = {
     grid: {
@@ -52,8 +53,8 @@ const options = computed<ChartOptions<"line">>(() => {
   };
   
   return {
-    borderColor: trackColor, 
-    backgroundColor: trackColor,
+    borderColor: conf.theme.extend.colors.primary, 
+    backgroundColor: conf.theme.extend.colors.primary,
     elements: {
       point: {
         radius: 0
@@ -74,6 +75,7 @@ const options = computed<ChartOptions<"line">>(() => {
       y: {
         ...axisConf,
         ticks: {
+          ...axisConf.ticks,
           callback: (value: number) => `${value} m`
         }
       }

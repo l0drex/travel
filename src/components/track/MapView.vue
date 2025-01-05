@@ -19,8 +19,8 @@ const geoStyler: StyleFunction = (feature) => {
   index++;
   let color = trackColors[index % 2];
   return {
-    opacity: feature?.properties.code / 100000,
-    color: color
+    color: color,
+    weight: 5
   };
 };
 
@@ -35,8 +35,8 @@ const styles = {
 </script>
 
 <template>
-  <div id="map-container">
-    <l-map v-model:zoom="zoom" :center="[49.000, 13.000]">
+  <div id="map-container" class="h-96 relative">
+    <l-map v-model:zoom="zoom" :center="[49.000, 13.000]" class="rounded-lg border-2 border-fg dark:border-fg-dark">
       <l-tile-layer
           :url="styles.toner"
           layer-type="base"
@@ -47,11 +47,3 @@ const styles = {
     </l-map>
   </div>
 </template>
-
-<style scoped>
-#map-container {
-  width: 100%;
-  height: 450px;
-  position: relative;
-}
-</style>
