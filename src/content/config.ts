@@ -5,15 +5,19 @@ const blogCollection = defineCollection({
   schema: ({image}) => z.object({
     title: z.string(),
     date: z.date(),
-    // sync with utils/travel/journeyTypes
+    // sync with utils/types/journeyTypes
     type: z.literal('bike').or(z.literal('hiking')),
+    // preview image used for open graph previews and the list on the home page
     image: image(),
+    // a gpx track of the tour, will generate a map, elevation profile and entry on the background globe on the home page
     gpx: z.string(), //reference('gpx'),
-    // sync with authors
+    // key to the author of the post
+    // sync with authors.json
     author: z.literal("lorenz"),
   })
 })
 
+// .gpx files of your journeys
 const gpxCollection = defineCollection({
   type: 'content',
   schema: z.any()
