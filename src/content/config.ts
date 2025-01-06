@@ -14,6 +14,8 @@ const blogCollection = defineCollection({
     // key to the author of the post
     // sync with authors.json
     author: z.literal("lorenz"),
+    // short description of the tour
+    description: z.string(),
   })
 })
 

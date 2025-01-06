@@ -5,6 +5,7 @@ type: bike
 author: lorenz
 gpx: münchen-paris
 image: "@assets/paris/zoellner.jpg"
+description: Fahrradtour von München nach Paris über Augsburg, Ulm, Schwäbische Alp, Stuttgart, Karlsruhe, Strasbourg und Nancy.
 ---
 
 # Anreise

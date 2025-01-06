@@ -5,6 +5,7 @@ type: bike
 author: lorenz
 gpx: dresden-prag
 image: "@assets/prague/boehmische-schweiz.jpg"
+description: Fahrradtour von Dresden nach Prag über Ústí nad Labem und Mělník entlang der Elbe.
 ---
 
 # Dresden, Sächsische Schweiz und Böhmische Schweiz

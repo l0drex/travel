@@ -5,6 +5,7 @@ type: bike
 author: lorenz
 gpx: dresden-bielefeld
 image: "@assets/bielefeld/sonnenuntergang.jpg"
+description: Fahrradtour von Dresden nach Bielefeld entlang der Elbe, über den Harz, das Weser-Bergland und den Teutoburger Wald.
 ---
 
 # Bei Sturm nach Torgau

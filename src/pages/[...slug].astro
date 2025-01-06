@@ -27,9 +27,10 @@ const { Content } = await entry.render();
 
 const geoJson = (await getEntry("gpx", entry.data.gpx)) as CollectionEntry<"gpx">;
 const author = authors[entry.data.author];
+const journeyType = journeyTypes[entry.data.type];
 
 const jsDate: Date = entry.data.date;
-const machineDate = jsDate.toDateString();
+const machineDate = jsDate.toISOString();
 const humanDate = dateFormatter(jsDate);
 
 const ogImage = await getImage({
@@ -49,11 +50,17 @@ const ogAlt = getPreviewAlt(entry);
         <meta name="og:article:section" content={entry.data.type} />
         <meta name="og:article:tag" content="travel" />
         <meta name="og:article:tag" content={entry.data.type} />
+        
         <meta name="date" content={machineDate} />
         <meta name="og:article:published_time" content={machineDate} />
+        
         <meta name="author" content={author.name}/>
         <meta name="fediverse:creator" content={author.fediverse}/>
         <meta name="og:article:author" content={author.name}/>
+        
+        <meta name="description" content={entry.data.description} />
+        <meta name="og:description" content={entry.data.description} />
+        
         <meta name="og:image" content={ogImage.src}/>
         <meta name="og:image:width" content={`${ogImage.options.width}`}/>
         <meta name="og:image:height" content={`${ogImage.options.height}`}/>
@@ -64,7 +71,7 @@ const ogAlt = getPreviewAlt(entry);
     <section>
         <h1 class="font-bold text-4xl sm:text-5xl mb-4 text-center">{entry.data.title}</h1>
         <div class="text-center text-2xl sm:text-3xl mb-8 flex align-baseline gap-2 justify-center">
-            {(<JourneyType type={journeyTypes[entry.data.type]} />)}
+            {(<JourneyType type={journeyType} />)}
             <span>·</span>
             <time datetime={jsDate.toISOString()}>{humanDate}</time>
         </div>
