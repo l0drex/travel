@@ -2,7 +2,6 @@
 import { defineConfig } from "astro/config";
 import vue from "@astrojs/vue";
 import { templateCompilerOptions } from "@tresjs/core";
-import gpx from "./src/astro-gpx/index.ts";
 
 import icon from "astro-icon";
 
@@ -14,5 +13,5 @@ export default defineConfig({
     base: "/travel",
     integrations: [vue({
         ...templateCompilerOptions
-    }), gpx(), icon(), tailwind()]}
+    }), icon(), tailwind()]}
 );

@@ -1,4 +1,5 @@
 import { z, defineCollection } from "astro:content";
+import {gpxLoader} from "@utils/gpxLoader.ts";
 
 const blogCollection = defineCollection({
   type: 'content',
@@ -21,7 +22,7 @@ const blogCollection = defineCollection({
 
 // .gpx files of your journeys
 const gpxCollection = defineCollection({
-  type: 'content',
+  loader: gpxLoader({url: "./gpx/"}),
   schema: z.any()
 })
 
