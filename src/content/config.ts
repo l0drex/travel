@@ -1,4 +1,4 @@
-import { z, defineCollection } from "astro:content";
+import {z, defineCollection, reference} from "astro:content";
 import {gpxLoader} from "@utils/gpxLoader.ts";
 
 const blogCollection = defineCollection({
@@ -11,7 +11,7 @@ const blogCollection = defineCollection({
     // preview image used for open graph previews and the list on the home page
     image: image(),
     // a gpx track of the tour, will generate a map, elevation profile and entry on the background globe on the home page
-    gpx: z.string(), //reference('gpx'),
+    gpx: reference('gpx'),
     // key to the author of the post
     // sync with authors.json
     author: z.literal("lorenz"),

@@ -25,7 +25,7 @@ interface Props {
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 
-const geoJson = (await getEntry("gpx", entry.data.gpx)) as CollectionEntry<"gpx">;
+const geoJson = await getEntry(entry.data.gpx);
 const author = authors[entry.data.author];
 const journeyType = journeyTypes[entry.data.type];
 

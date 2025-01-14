@@ -16,7 +16,7 @@ async function getJourneys() {
     const journeys: Journey[] = [];
 
     for (let p of posts) {
-        const entry = await getEntry("gpx", p.data.gpx) as CollectionEntry<"gpx">;
+        const entry = await getEntry(p.data.gpx);
         const geoJson = entry.data;
         const points = getPoints(geoJson);
         const coordinates = points[points.length - 1];
