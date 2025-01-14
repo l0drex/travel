@@ -1,4 +1,4 @@
-import { DOMParser } from 'xmldom';
+import { DOMParser } from '@xmldom/xmldom';
 import { gpx as gpxToJson } from '@tmcw/togeojson';
 import type {Loader, LoaderContext} from "astro/loaders";
 import fs from "node:fs";
@@ -8,7 +8,7 @@ import path from "node:path";
 import type {GeoJSON} from "geojson";
 
 export function parseGpx(code: string) {
-  const xml = new DOMParser().parseFromString(code);
+  const xml = new DOMParser().parseFromString(code, "text/xml");
   const geoJson = gpxToJson(xml);
 
   return geoJson;
