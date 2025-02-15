@@ -16,25 +16,27 @@ import JourneyPoint from "./JourneyPoint.vue";
 import {usePreferredDark} from "@vueuse/core";
 import {toRadians} from "chart.js/helpers";
 import type {Journey} from "@utils/types.ts";
-import conf from "tailwind.config.mjs";
-import {colorStringToArray} from "@utils/general.ts";
+import {getColorPropertyArray} from "@utils/general.ts";
 
 const {onBeforeRender} = useLoop();
 const prefersDark = usePreferredDark();
+
+const bg2 = getColorPropertyArray("bg-2");
+const bg2Dark = getColorPropertyArray("bg-2-dark");
 
 // the earth
 
 function getEarthMaterial() {
   const earthTexture = new TextureLoader().load(color.src);
-  const bg = colorStringToArray(
-      prefersDark.value ? conf.theme.extend.colors.bg["2"].dark : conf.theme.extend.colors.bg["2"].DEFAULT);
-  const earth = colorStringToArray(
-      prefersDark.value ? conf.theme.extend.colors.bg["2"].dark : conf.theme.extend.colors.bg["2"].DEFAULT);
+  const bg = prefersDark.value ? bg2Dark : bg2;
+  const earth = prefersDark.value ? bg2Dark : bg2;
   
+  // colors should be vec4
   const gradientData = new Uint8Array([
     ...bg,
     ...earth
-  ])
+  ].map(c => c * 255.0));
+  
   const gradientTexture = new DataTexture(gradientData, 2, 1, RGBAFormat);
   gradientTexture.needsUpdate = true;
   

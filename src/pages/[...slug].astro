@@ -6,8 +6,8 @@ import authors from "src/authors.json";
 import {journeyTypes} from "../utils/types";
 import JourneyType from "../components/TypeIcon.astro";
 import {dateFormatter, getPreviewAlt} from "../utils/general";
-import "@styles/markdown.css";
 import {getImage} from "astro:assets";
+import JourneyContent from "../components/JourneyContent.astro";
 
 export async function getStaticPaths() {
     const posts: CollectionEntry<'posts'>[] = await getCollection("posts");
@@ -81,9 +81,9 @@ const ogAlt = getPreviewAlt(entry);
         <TrackView client:only="vue" geoJson={geoJson.data}/>
     </div>
     
-    <article class="max-w-3xl mx-5 sm:mx-10">
+    <JourneyContent>
         <Content />
-    </article>
+    </JourneyContent>
     
     <a href={import.meta.env.BASE_URL} class="block px-2 py-1 
         border-2 rounded-lg mt-5 mb-10

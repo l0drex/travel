@@ -4,6 +4,7 @@ import { TresCanvas } from '@tresjs/core';
 import type { Journey } from "@utils/types.ts";
 import EarthContent from "./EarthContent.vue";
 import {usePreferredReducedMotion} from "@vueuse/core";
+import {getColorPropertyString} from "@utils/general.ts";
 
 const reducedMotion = usePreferredReducedMotion();
 const enableAnimatedEarth: boolean = WebGL.isWebGL2Available() && reducedMotion.value != "reduce";
@@ -11,6 +12,12 @@ const enableAnimatedEarth: boolean = WebGL.isWebGL2Available() && reducedMotion.
 const {journeys} = defineProps<{
   journeys: Journey[]
 }>();
+
+// tailwind colors
+const bg = getColorPropertyString("bg")
+const bgDark = getColorPropertyString("bg-dark")
+const bg2 = getColorPropertyString("bg-2")
+const bg2Dark = getColorPropertyString("bg-2-dark")
 </script>
 
 <template>
@@ -18,5 +25,21 @@ const {journeys} = defineProps<{
     <EarthContent :journeys="journeys"/>
   </TresCanvas>
 
-  <slot v-else/>
+  <svg v-else viewBox="0 5 100 90" xmlns="http://www.w3.org/2000/svg" class="w-screen h-screen">
+    <defs>
+      <linearGradient id="earthGradient">
+        <stop offset="0%" :stop-color="bg2"></stop>
+        <stop offset="100%" :stop-color="bg"
+        ></stop>
+      </linearGradient>
+
+      <linearGradient id="earthGradientDark">
+        <stop offset="0%" :stop-color="bg2Dark"></stop>
+        <stop offset="100%" :stop-color="bgDark"
+        ></stop>
+      </linearGradient>
+    </defs>
+
+    <circle cx="50" cy="50" r="50" class="fill-[url(#earthGradient)] dark:fill-[url(#earthGradientDark)]"></circle>
+  </svg>
 </template>

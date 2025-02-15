@@ -2,16 +2,17 @@
 import { defineConfig } from "astro/config";
 import vue from "@astrojs/vue";
 import { templateCompilerOptions } from "@tresjs/core";
-
 import icon from "astro-icon";
-
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-    site: "https://l0drex.github.io",
-    base: "/travel",
-    integrations: [vue({
-        ...templateCompilerOptions
-    }), icon(), tailwind()]}
-);
+  site: "https://l0drex.github.io",
+  base: "/travel",
+  integrations: [vue({
+      ...templateCompilerOptions
+  }), icon()],
+  vite: {
+    plugins: [tailwindcss()]
+  }
+});

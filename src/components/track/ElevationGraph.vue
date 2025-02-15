@@ -6,9 +6,13 @@ import type {GeoJSON, Position} from "geojson";
 import type {CartesianScaleOptions, ChartData, ChartOptions} from "chart.js";
 import {usePreferredDark} from "@vueuse/core";
 import type {_DeepPartialObject} from "chart.js/types/utils";
-import conf from "tailwind.config.mjs";
+import {getColorPropertyString} from "@utils/general.ts";
 
-const colors = conf.theme.extend.colors;
+const fgInactive = getColorPropertyString("fg-inactive");
+const fgInactiveDark = getColorPropertyString("fg-inactive-dark");
+const line = getColorPropertyString("line");
+const lineDark = getColorPropertyString("line-dark");
+const primary = getColorPropertyString("primary");
 
 const {geoJson} = defineProps<{
   geoJson: GeoJSON,
@@ -40,7 +44,7 @@ const data = ref<ChartData<"line">>({
   datasets: [{
     label: 'Elevation',
     data: elevationReduced,
-    borderColor: conf.theme.extend.colors.primary,
+    borderColor: primary,
     fill: "origin",
     tension: .1
   }],
@@ -49,8 +53,8 @@ const data = ref<ChartData<"line">>({
 const darkMode = usePreferredDark();
 
 const options = computed<ChartOptions<"line">>(() => {
-  const labelColor = darkMode.value ? colors.fg.inactive.dark : colors.fg.inactive.DEFAULT;
-  const lineColor = darkMode.value ? colors.line.DEFAULT : colors.line.dark;
+  const labelColor = darkMode.value ? fgInactiveDark : fgInactive;
+  const lineColor = darkMode.value ? line : lineDark;
 
   const axisConf: _DeepPartialObject<CartesianScaleOptions> = {
     grid: {

@@ -4,7 +4,7 @@ import {LGeoJson, LMap, LTileLayer} from "@vue-leaflet/vue-leaflet";
 import type {GeoJSON} from "geojson";
 import L, {type StyleFunction} from "leaflet";
 import {Chart, registerables} from "chart.js";
-import conf from "tailwind.config.mjs"
+import {getColorPropertyString} from "@utils/general.ts";
 
 globalThis.L = L;
 Chart.register(...registerables);
@@ -14,7 +14,7 @@ const {geoJson} = defineProps<{
 }>();
 
 let index = -1;
-const trackColors = [conf.theme.extend.colors.primary, conf.theme.extend.colors.secondary];
+const trackColors = [getColorPropertyString("primary"), getColorPropertyString("secondary")];
 const geoStyler: StyleFunction = (feature) => {
   index++;
   let color = trackColors[index % 2];

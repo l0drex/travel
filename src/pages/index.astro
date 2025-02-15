@@ -6,7 +6,6 @@ import EarthOverview from "@components/earth/EarthOverview.vue";
 import BlogListEntry from "@components/TravelEntry.astro";
 import type {Journey} from "@utils/types";
 import {getPoints} from "@utils/geoJson";
-import conf from "tailwind.config.mjs";
 
 
 const posts: CollectionEntry<"posts">[] = (await getCollection("posts"))
@@ -35,25 +34,7 @@ const journeys = await getJourneys();
 ---
 
 <Layout title="/travel">
-    <EarthOverview client:only="vue" journeys={journeys} slot="background">
-        <svg viewBox="0 5 100 90" xmlns="http://www.w3.org/2000/svg" class="w-screen h-screen">
-            <defs>
-                <linearGradient id="earthGradient">
-                    <stop offset="0%" stop-color={conf.theme.extend.colors.bg["2"].DEFAULT}></stop>
-                    <stop offset="100%" stop-color={conf.theme.extend.colors.bg.DEFAULT}
-                    ></stop>
-                </linearGradient>
-
-                <linearGradient id="earthGradientDark">
-                    <stop offset="0%" stop-color={conf.theme.extend.colors.bg["2"].dark}></stop>
-                    <stop offset="100%" stop-color={conf.theme.extend.colors.bg.dark}
-                    ></stop>
-                </linearGradient>
-            </defs>
-
-            <circle cx="50" cy="50" r="50" class="fill-[url(#earthGradient)] dark:fill-[url(#earthGradientDark)]"></circle>
-        </svg>
-    </EarthOverview>
+    <EarthOverview client:only="vue" journeys={journeys} slot="background" />
     
     <h1 class="text-5xl font-extrabold mb-20 mt-20 text-center mx-5 sm:text-6xl text-primary">
         Discover my Adventures!

@@ -1,19 +1,23 @@
-article h1 {
-    @apply text-3xl mt-16 font-extrabold font-sans font-stretch-normal;
-}
+@reference "./global.css";
 
-article p {
-    @apply my-2 font-serif text-justify hyphens-auto text-pretty;
-}
+article {
+    h1 {
+        @apply text-3xl mt-16 font-extrabold font-sans font-stretch-normal;
+    }
 
-article a {
-    @apply text-primary hover:underline;
-}
+    p {
+        @apply my-2 font-serif text-justify hyphens-auto text-pretty;
+    }
 
-article blockquote {
-    @apply border-l-4 border-fg bg-bg-2 dark:border-fg-dark dark:bg-bg-2-dark py-0.5 pl-4 font-serif;
-}
+    a {
+        @apply text-primary hover:underline;
+    }
 
-article img {
-    @apply object-contain max-w-min max-h-min w-full h-fit block mx-auto my-4 shadow-md rounded-lg;
+    blockquote {
+        @apply border-l-4 border-fg bg-bg-2 dark:border-fg-dark dark:bg-bg-2-dark py-0.5 pl-4 font-serif;
+    }
+
+    img {
+        @apply object-contain max-w-min max-h-min w-full h-fit block mx-auto my-4 shadow-md rounded-lg;
+    }
 }
