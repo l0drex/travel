@@ -1,9 +1,9 @@
 article h1 {
-    @apply text-2xl mt-4 font-bold;
+    @apply text-3xl mt-16 font-extrabold font-sans font-stretch-normal;
 }
 
 article p {
-    @apply my-2;
+    @apply my-2 font-serif text-justify hyphens-auto text-pretty;
 }
 
 article a {
