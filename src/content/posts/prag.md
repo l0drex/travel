@@ -8,21 +8,16 @@ image: "@assets/prague/boehmische-schweiz.jpg"
 description: Fahrradtour von Dresden nach Prag über Ústí nad Labem und Mělník entlang der Elbe.
 ---
 
-# Dresden, Sächsische Schweiz und Böhmische Schweiz
+# Sächsische und Böhmische Schweiz
 
 An einem schön sonnigen Freitagmorgen ging es los.
 Das neue Fahrrad wurde für seine erste größere Tour gepackt, und es ging los zum Treffpunkt in den _Großen Garten_ in Dresden.
 Dann kam die erste schlechte Nachricht: Mein Kumpel hat seinen Zug verpasst da der Reifen plat war.
 Also eine Stunde warten. Die Zeit wurde gleich genutzt, um den Packsack etwas kompakter zu packen.
 
-![Fahrrad von der Seite. Auf dem Gepäckträger ist ein Packsack, der gute 20 bis 30 cm herausragt.](@assets/prague/packsack-gross.jpeg)
-![Das gleiche Fahrrad. Der Packsack hat seine Überlänge verloren und dafür an Durchmesser zugenommen.](@assets/prague/packsack-klein.jpg)
-
 Dann ging es direkt los an die Elbe. Wie erwartet gab es sehr viel Verkehr auf dem Radweg, aber dafür fuhr er sich super.
 Die erste Pause gab es in der Sächsischen Schweiz mit Blick auf Festung Königstein.
 Zum Mittagessen gab es kurze Zeit später eine leckere Pizza.
-
-![Blick von der Elbe auf Festung Königstein, eine Burg die auf einem Felsen trohnt.](@assets/prague/koenigstein.jpg)
 
 An der tschechischen Grenze wurden anschließend ein paar Aufnahmen gemacht, dann ging es ins wunderschöne Tschechien.
 
@@ -30,8 +25,6 @@ An der tschechischen Grenze wurden anschließend ein paar Aufnahmen gemacht, dan
 
 Abends erreichten wir _Ústí nad Labem_ (deutsch: _Aussig_), wo wir unser Zelt an einem kostenlosen Campingplatz mit See übernachten wollten.
 Um uns das zu verdienen, mussten wir uns jedoch zunächst durchs verregnete Stadtchaos quälen.
-
-![Unser Zelt auf dem Rasen des Campingplatzes mit Blick auf den See.](@assets/prague/usti-camping.jpg)
 
 Der Campingplatz war wunderschön. Es gab sogar abschließbare Container und Dixieklos!
 Einzig der lehmige Boden machte uns zu schaffen: Der Regen hatte ihn schön aufgeweicht, und so pflügten wir mit unseren Rädern ungewollt den Rasen.
@@ -65,5 +58,4 @@ In Prag stellten das Zelt auf einem Campingplatz auf einer Insel in der Moldau a
 Am nächsten Tag schauten wir uns noch ein wenig mehr von Prag an, inklusive _Pražský hrad_ (deutsch: _Prager Burg_),
 und fuhren dann mit dem EuroJet zurück nach Dresden.
 
-![Die astronomische Uhr in Prag. Ein komplexer Mechanismus aus Rädern und Zahlen an der Fassade des Rathauses.](@assets/prague/prague.jpg)
 ![Blick von der Prager Burg hinunter auf die Altstadt](@assets/prague/prague-hill.jpg)
