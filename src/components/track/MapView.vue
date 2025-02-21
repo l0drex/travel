@@ -47,3 +47,10 @@ const styles = {
     </l-map>
   </div>
 </template>
+
+<style scoped>
+#map-container {
+  /* h-96 seems to not work here */
+  height: calc(var(--spacing) * 96);
+}
+</style>
