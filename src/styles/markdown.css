@@ -2,11 +2,11 @@
 
 article {
     h1 {
-        @apply text-3xl first:mt-8 not-first:mt-16 font-extrabold font-sans font-stretch-normal;
+        @apply text-3xl first:mt-8 not-first:mt-16 font-extrabold font-stretch-normal;
     }
 
     p {
-        @apply my-2 font-serif text-justify hyphens-auto text-pretty;
+        @apply my-2 text-justify hyphens-auto text-pretty;
     }
 
     a {
@@ -14,7 +14,7 @@ article {
     }
 
     blockquote {
-        @apply border-l-4 border-fg bg-bg-2 dark:border-fg-dark dark:bg-bg-2-dark py-0.5 pl-4 font-serif;
+        @apply border-l-4 border-fg bg-bg-2 dark:border-fg-dark dark:bg-bg-2-dark py-0.5 pl-4;
     }
 
     img {
