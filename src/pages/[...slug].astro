@@ -23,7 +23,7 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content, headings } = await entry.render();
 
 const geoJson = await getEntry(entry.data.gpx);
 const author = authors[entry.data.author];
@@ -75,11 +75,22 @@ const ogAlt = getPreviewAlt(entry);
             <span>·</span>
             <time datetime={jsDate.toISOString()}>{humanDate}</time>
         </div>
+
+        <div class="w-full px-5 md:px-0 mx-auto max-w-7xl flex gap-4">
+            <div class="grow">
+                <TrackView client:only="vue" geoJson={geoJson.data}/>
+            </div>
+
+            <nav class="w-xs">
+                <ol class="font-bold text-lg list-decimal ml-8">
+                    {
+                        headings.map((heading) =>
+                                <li class="not-last:mb-2 hover:text-primary"><a href={"#" + heading.slug}>{heading.text}</a></li>)
+                    }
+                </ol>
+            </nav>
+        </div>
     </section>
-    
-    <div class="w-full px-5 sm:px-10">
-        <TrackView client:only="vue" geoJson={geoJson.data}/>
-    </div>
     
     <JourneyContent>
         <Content />
