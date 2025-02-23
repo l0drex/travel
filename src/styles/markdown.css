@@ -2,7 +2,7 @@
 
 article {
     h1 {
-        @apply text-3xl mt-16 font-extrabold font-sans font-stretch-normal;
+        @apply text-3xl first:mt-8 not-first:mt-16 font-extrabold font-sans font-stretch-normal;
     }
 
     p {
