@@ -27,16 +27,18 @@ const geoStyler: StyleFunction = (feature) => {
 
 // zoom to show the whole track
 
-const map = ref();
-const geoLayer = ref();
+const map = useTemplateRef("map");
+const geoLayer = useTemplateRef("geoLayer");
 
 function updateZoom() {
   if (map.value == null || geoLayer.value == null) {
     return;
   }
 
-  const bounds = geoLayer.value.leafletObject.getBounds();
-  map.value.leafletObject.fitBounds(bounds);
+  const bounds = geoLayer.value.leafletObject?.getBounds();
+  if (bounds != null) {
+    map.value.leafletObject?.fitBounds(bounds);
+  }
 }
 
 watch(map, updateZoom);
