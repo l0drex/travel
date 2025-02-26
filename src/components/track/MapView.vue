@@ -5,6 +5,7 @@ import type {GeoJSON} from "geojson";
 import L, {type StyleFunction} from "leaflet";
 import {Chart, registerables} from "chart.js";
 import {getColorPropertyString} from "@utils/general.ts";
+import {computed, onBeforeUpdate, onMounted, onUpdated, ref, watch} from "vue";
 
 globalThis.L = L;
 Chart.register(...registerables);
@@ -24,7 +25,22 @@ const geoStyler: StyleFunction = (feature) => {
   };
 };
 
-const zoom = 4;
+// zoom to show the whole track
+
+const map = ref();
+const geoLayer = ref();
+
+function updateZoom() {
+  if (map.value == null || geoLayer.value == null) {
+    return;
+  }
+
+  const bounds = geoLayer.value.leafletObject.getBounds();
+  map.value.leafletObject.fitBounds(bounds);
+}
+
+watch(map, updateZoom);
+watch(geoLayer, updateZoom);
 
 const styles = {
   default: "https://tile.openstreetmap.de/{z}/{x}/{y}.png",
@@ -36,14 +52,14 @@ const styles = {
 
 <template>
   <div id="map-container" class="h-96 relative">
-    <l-map v-model:zoom="zoom" :center="[49.000, 13.000]" class="rounded-lg border-2 border-fg dark:border-fg-dark">
+    <l-map ref="map" class="rounded-lg border-2 border-fg dark:border-fg-dark">
       <l-tile-layer
           :url="styles.toner"
           layer-type="base"
           name="OpenStreetMap"
           attribution="<a href='https://www.openstreetmap.de'>OpenStreetMap</a>"
       ></l-tile-layer>
-      <l-geo-json :geojson="geoJson" :options-style="geoStyler"></l-geo-json>
+      <l-geo-json ref="geoLayer" :geojson="geoJson" :options-style="geoStyler"></l-geo-json>
     </l-map>
   </div>
 </template>
