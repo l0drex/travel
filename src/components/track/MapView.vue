@@ -5,7 +5,7 @@ import type {GeoJSON} from "geojson";
 import L, {type StyleFunction} from "leaflet";
 import {Chart, registerables} from "chart.js";
 import {getColorPropertyString} from "@utils/general.ts";
-import {computed, onBeforeUpdate, onMounted, onUpdated, ref, watch} from "vue";
+import {ref, watch} from "vue";
 
 globalThis.L = L;
 Chart.register(...registerables);
@@ -54,7 +54,7 @@ const styles = {
   <div id="map-container" class="h-96 relative">
     <l-map ref="map" class="rounded-lg border-2 border-fg dark:border-fg-dark">
       <l-tile-layer
-          :url="styles.toner"
+          :url="styles.default"
           layer-type="base"
           name="OpenStreetMap"
           attribution="<a href='https://www.openstreetmap.de'>OpenStreetMap</a>"
