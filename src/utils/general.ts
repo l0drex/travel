@@ -50,8 +50,6 @@ export function useUrlTitle(): Ref<string | null, string | null> {
   const title = ref<string | null>(null);
   
   function update() {
-    console.debug("updating title")
-    
     let t = document.getElementById(new URL(document.URL).hash.replace("#", ""))?.innerText;
 
     if (!t || t == "") {

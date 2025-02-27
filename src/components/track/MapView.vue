@@ -13,22 +13,24 @@ const {geoJson} = defineProps<{
 
 // style tracks
 
-// TODO this is not responsive, a page reload is required
-const currentUrlTitle = useUrlTitle();
 const trackColors = [getColorPropertyString("primary"), getColorPropertyString("secondary")];
-let index = 0;
+const currentUrlTitle = useUrlTitle();
 
-const geoJsonOptions: L.GeoJSONOptions = {
-  style: (feature) => {    
+const geoJsonOptions = computed<L.GeoJSONOptions>(() => {
+  let title = currentUrlTitle.value;
+  let index = 0;
+  
+  return {
+    style: (feature) => {
       // apply differing styles by default
       let color = trackColors[index % 2];
 
       // if a title is selected, highlight current track instead
       // NOTE this will turn all tracks to the same color if no track has the corresponding title
-      if (currentUrlTitle.value != null) {
+      if (title != null) {
         const currentFeatureTitle = feature?.properties?.name;
 
-        if (currentFeatureTitle == currentUrlTitle.value) {
+        if (currentFeatureTitle == title) {
           color = trackColors[0];
         } else {
           color = trackColors[1];
@@ -41,7 +43,8 @@ const geoJsonOptions: L.GeoJSONOptions = {
         weight: 5
       };
     }
-}
+  }
+});
 
 const styles = {
   default: "https://tile.openstreetmap.de/{z}/{x}/{y}.png",
