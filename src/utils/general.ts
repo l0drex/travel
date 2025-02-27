@@ -1,6 +1,7 @@
 import alt from "@assets/alt.json";
 import type {CollectionEntry} from "astro:content";
 import Color from "colorjs.io";
+import {type Ref, ref} from "vue";
 
 export function dateFormatter(date: Date, short: boolean = false) {
   return date.toLocaleDateString(undefined, {
@@ -39,4 +40,29 @@ export function getColorPropertyArray(name: string) {
   const colors = color.coords;
   colors.push(1);
   return colors;
+}
+
+/**
+ * Returns the text of the title currently referenced in the URL.
+ * A title is referenced in the url for example if the user clicked on it in the toc.
+ */
+export function useUrlTitle(): Ref<string | null, string | null> {
+  const title = ref<string | null>(null);
+  
+  function update() {
+    console.debug("updating title")
+    
+    let t = document.getElementById(new URL(document.URL).hash.replace("#", ""))?.innerText;
+
+    if (!t || t == "") {
+      title.value = null;
+    } else {
+      title.value = t;
+    }
+  }
+  
+  update();
+  window.addEventListener("hashchange", update);
+  
+  return title;
 }

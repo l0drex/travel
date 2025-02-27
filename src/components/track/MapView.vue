@@ -4,8 +4,8 @@ import {LGeoJson, LMap, LTileLayer} from "@vue-leaflet/vue-leaflet";
 import type {GeoJSON} from "geojson";
 import L, {type StyleFunction} from "leaflet";
 import {Chart, registerables} from "chart.js";
-import {getColorPropertyString} from "@utils/general.ts";
-import {ref, watch} from "vue";
+import {getColorPropertyString, useUrlTitle} from "@utils/general.ts";
+import {computed, useTemplateRef, watch} from "vue";
 
 globalThis.L = L;
 Chart.register(...registerables);
@@ -14,16 +14,36 @@ const {geoJson} = defineProps<{
   geoJson: GeoJSON
 }>();
 
-let index = -1;
-const trackColors = [getColorPropertyString("primary"), getColorPropertyString("secondary")];
-const geoStyler: StyleFunction = (feature) => {
-  index++;
-  let color = trackColors[index % 2];
-  return {
-    color: color,
-    weight: 5
+// style tracks
+
+// TODO this is not responsive, a page reload is required
+const currentUrlTitle = useUrlTitle();
+const geoStyler = computed<StyleFunction>(() => {
+  const trackColors = [getColorPropertyString("primary"), getColorPropertyString("secondary")];
+  let index = -1;
+  
+  return (feature) => {
+    // apply differing styles by default
+    let color = trackColors[index % 2];
+  
+    // if a title is selected, highlight current track instead
+    // NOTE this will turn all tracks to the same color if no track has the corresponding title
+    if (currentUrlTitle.value != null) {
+      const currentFeatureTitle = feature?.properties?.name;
+  
+      if (currentFeatureTitle == currentUrlTitle.value) {
+        color = trackColors[0];
+      } else {
+        color = trackColors[1];
+      }
+    }
+  
+    index++;
+    return {
+      color: color,
+      weight: 5
   };
-};
+}});
 
 // zoom to show the whole track
 
