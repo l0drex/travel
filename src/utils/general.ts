@@ -24,6 +24,9 @@ export function getPreviewAlt(journey: CollectionEntry<"posts">) {
 export function getColorProperty(name: string) {
   const style = getComputedStyle(document.documentElement);
   const prop = style.getPropertyValue(`--color-${name}`);
+  
+  console.assert(prop != "", "Color must not be empty");
+  
   let color = new Color(prop);
   color = color.to("srgb")
   return color;

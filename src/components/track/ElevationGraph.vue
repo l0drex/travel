@@ -3,7 +3,7 @@ import {LineChart} from "vue-chart-3";
 import {computed, ref} from "vue";
 import {getDistance, getPoints, reduceSize} from "@utils/geoJson.ts";
 import type {GeoJSON, Position} from "geojson";
-import type {CartesianScaleOptions, ChartData, ChartOptions} from "chart.js";
+import {type CartesianScaleOptions, Chart, type ChartData, type ChartOptions, registerables} from "chart.js";
 import {usePreferredDark} from "@vueuse/core";
 import type {_DeepPartialObject} from "chart.js/types/utils";
 import {getColorPropertyString} from "@utils/general.ts";
@@ -13,6 +13,8 @@ const fgInactiveDark = getColorPropertyString("fg-inactive-dark");
 const line = getColorPropertyString("line");
 const lineDark = getColorPropertyString("line-dark");
 const primary = getColorPropertyString("primary");
+
+Chart.register(...registerables);
 
 const {geoJson} = defineProps<{
   geoJson: GeoJSON,
