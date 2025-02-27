@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd http://www.garmin.com/xmlschemas/PowerExtension/v1 http://www.garmin.com/xmlschemas/PowerExtensionv1.xsd http://www.topografix.com/GPX/gpx_style/0/2 http://www.topografix.com/GPX/gpx_style/0/2/gpx_style.xsd" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xmlns:gpx_style="http://www.topografix.com/GPX/gpx_style/0/2" version="1.1" creator="outdooractive - http://www.outdooractive.com" xmlns:gpxpx="http://www.garmin.com/xmlschemas/PowerExtension/v1">
+<gpx schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd http://www.garmin.com/xmlschemas/PowerExtension/v1 http://www.garmin.com/xmlschemas/PowerExtensionv1.xsd http://www.topografix.com/GPX/gpx_style/0/2 http://www.topografix.com/GPX/gpx_style/0/2/gpx_style.xsd" version="1.1" creator="outdooractive - http://www.outdooractive.com" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd http://www.garmin.com/xmlschemas/PowerExtension/v1 http://www.garmin.com/xmlschemas/PowerExtensionv1.xsd http://www.topografix.com/GPX/gpx_style/0/2 http://www.topografix.com/GPX/gpx_style/0/2/gpx_style.xsd" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xmlns:gpxpx="http://www.garmin.com/xmlschemas/PowerExtension/v1" xmlns:gpx_style="http://www.topografix.com/GPX/gpx_style/0/2">
   <metadata>
     <name>Dresden - Prag</name>
     <desc>Elbe- und Moldauradweg</desc>
@@ -9,9 +9,13 @@
     </author>
   </metadata>
   <trk>
-    <name>Tag 1</name>
-    <desc/>
+    <name>Sächsische und Böhmische Schweiz</name>
     <type>Cycling</type>
+    <extensions>
+      <gpx_style:line>
+        <gpx_style:color>ff0000</gpx_style:color>
+      </gpx_style:line>
+    </extensions>
     <trkseg>
       <trkpt lat="51.053518" lon="13.747532">
         <ele>109.8</ele>
@@ -3558,108 +3562,48 @@
       </trkpt>
       <trkpt lat="50.858994" lon="14.222062">
         <ele>135.5</ele>
-        <extensions>
-          <gpxtpx:TrackPointExtension/>
-          <gpxpx:PowerExtension/>
-        </extensions>
       </trkpt>
       <trkpt lat="50.858938" lon="14.222019">
         <ele>135.25</ele>
-        <extensions>
-          <gpxtpx:TrackPointExtension/>
-          <gpxpx:PowerExtension/>
-        </extensions>
       </trkpt>
       <trkpt lat="50.858823" lon="14.221948">
         <ele>134.75</ele>
-        <extensions>
-          <gpxtpx:TrackPointExtension/>
-          <gpxpx:PowerExtension/>
-        </extensions>
       </trkpt>
       <trkpt lat="50.858688" lon="14.221896">
         <ele>133.75</ele>
-        <extensions>
-          <gpxtpx:TrackPointExtension/>
-          <gpxpx:PowerExtension/>
-        </extensions>
       </trkpt>
       <trkpt lat="50.85859" lon="14.221853">
         <ele>133</ele>
-        <extensions>
-          <gpxtpx:TrackPointExtension/>
-          <gpxpx:PowerExtension/>
-        </extensions>
       </trkpt>
       <trkpt lat="50.857492" lon="14.221196">
         <ele>139.25</ele>
-        <extensions>
-          <gpxtpx:TrackPointExtension/>
-          <gpxpx:PowerExtension/>
-        </extensions>
       </trkpt>
       <trkpt lat="50.8567" lon="14.220702">
         <ele>141</ele>
-        <extensions>
-          <gpxtpx:TrackPointExtension/>
-          <gpxpx:PowerExtension/>
-        </extensions>
       </trkpt>
       <trkpt lat="50.853936" lon="14.218559">
         <ele>136.75</ele>
-        <extensions>
-          <gpxtpx:TrackPointExtension/>
-          <gpxpx:PowerExtension/>
-        </extensions>
       </trkpt>
       <trkpt lat="50.851603" lon="14.216845">
         <ele>137.25</ele>
-        <extensions>
-          <gpxtpx:TrackPointExtension/>
-          <gpxpx:PowerExtension/>
-        </extensions>
       </trkpt>
       <trkpt lat="50.850064" lon="14.215891">
         <ele>140.75</ele>
-        <extensions>
-          <gpxtpx:TrackPointExtension/>
-          <gpxpx:PowerExtension/>
-        </extensions>
       </trkpt>
       <trkpt lat="50.849198" lon="14.215573">
         <ele>138</ele>
-        <extensions>
-          <gpxtpx:TrackPointExtension/>
-          <gpxpx:PowerExtension/>
-        </extensions>
       </trkpt>
       <trkpt lat="50.848283" lon="14.215343">
         <ele>138</ele>
-        <extensions>
-          <gpxtpx:TrackPointExtension/>
-          <gpxpx:PowerExtension/>
-        </extensions>
       </trkpt>
       <trkpt lat="50.847475" lon="14.215271">
         <ele>137.5</ele>
-        <extensions>
-          <gpxtpx:TrackPointExtension/>
-          <gpxpx:PowerExtension/>
-        </extensions>
       </trkpt>
       <trkpt lat="50.846859" lon="14.215298">
         <ele>136</ele>
-        <extensions>
-          <gpxtpx:TrackPointExtension/>
-          <gpxpx:PowerExtension/>
-        </extensions>
       </trkpt>
       <trkpt lat="50.84667" lon="14.21535">
         <ele>135.75</ele>
-        <extensions>
-          <gpxtpx:TrackPointExtension/>
-          <gpxpx:PowerExtension/>
-        </extensions>
       </trkpt>
       <trkpt lat="50.846666" lon="14.215314">
         <ele>114</ele>
@@ -4871,17 +4815,15 @@
         <ele>148.1</ele>
       </trkpt>
     </trkseg>
-    <extensions>
-      <gpx_style:line>
-        <color>ff0000</color>
-      </gpx_style:line>
-    </extensions>
   </trk>
   <trk>
-    <name>Tag 2</name>
-    <desc/>
-    <link/>
+    <name>Mělník</name>
     <type>Cycling</type>
+    <extensions>
+      <gpx_style:line>
+        <gpx_style:color>00bd16</gpx_style:color>
+      </gpx_style:line>
+    </extensions>
     <trkseg>
       <trkpt lat="50.658791" lon="14.047898">
         <ele>148.1</ele>
@@ -8208,38 +8150,24 @@
         <ele>160.2</ele>
       </trkpt>
     </trkseg>
-    <extensions>
-      <gpx_style:line>
-        <color>00bd16</color>
-      </gpx_style:line>
-    </extensions>
   </trk>
   <trk>
-    <name>Tag 3</name>
-    <desc/>
-    <link/>
+    <name>An der Moldau nach Prag</name>
     <type>Cycling</type>
+    <extensions>
+      <gpx_style:line>
+        <gpx_style:color>0400ff</gpx_style:color>
+      </gpx_style:line>
+    </extensions>
     <trkseg>
       <trkpt lat="50.351148" lon="14.466564">
         <ele>162</ele>
-        <extensions>
-          <gpxtpx:TrackPointExtension/>
-          <gpxpx:PowerExtension/>
-        </extensions>
       </trkpt>
       <trkpt lat="50.350987" lon="14.466516">
         <ele>162.3</ele>
-        <extensions>
-          <gpxtpx:TrackPointExtension/>
-          <gpxpx:PowerExtension/>
-        </extensions>
       </trkpt>
       <trkpt lat="50.350897" lon="14.466395">
         <ele>162.5</ele>
-        <extensions>
-          <gpxtpx:TrackPointExtension/>
-          <gpxpx:PowerExtension/>
-        </extensions>
       </trkpt>
       <trkpt lat="50.350861" lon="14.466341">
         <ele>162.5</ele>
@@ -14593,10 +14521,5 @@
         <ele>197.9</ele>
       </trkpt>
     </trkseg>
-    <extensions>
-      <gpx_style:line>
-        <color>0400ff</color>
-      </gpx_style:line>
-    </extensions>
   </trk>
 </gpx>

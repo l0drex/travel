@@ -8,7 +8,7 @@ image: "@assets/paris/zoellner.jpg"
 description: Fahrradtour von München nach Paris über Augsburg, Ulm, Schwäbische Alp, Stuttgart, Karlsruhe, Strasbourg und Nancy.
 ---
 
-# Anreise
+# München
 
 Die Anreise von Dresden nach München erfolgte via Zug. Da unsere ursprünglich geplante Verbindung von 6h mit Nahverkehr
 leider ausfiel, machten wir uns bereits einen Tag früher auf den Weg und verbrachten die Nacht in Erfurt.
@@ -107,6 +107,15 @@ und wenig später trafen wir nach Karlsruhe auf den Rhein.
 
 ![Blick in einen verregneten Wald, durch den eine Stromleitung verläuft.](@assets/paris/wald.JPG)
 
+# Der Rhein
+
+Die Fahrt am Rhein war sehr entspannt. Die Strecke war flach und gut geteert. 
+Am Rand vom Radweg waren schöne Wiesen, und wir konnten viele Vögel beobachten.
+Leider hat das Wetter nicht mitgespielt und es hat viel geregnet.
+
+Allerdings hatte die Gegend etwas ganz Besonderes zu bieten: die Namen der Ortschaften.
+_Baden Baden_ hat man schonmal gehört, aber _Iffezheim_, _Hügelsheim_ und _Scherzheim_ sicherlich nicht.
+In _Rastatt_ haben wir eine Rast eingelegt, und beinahe wären wir wieder in _Ulm_ gelandet.
 
 # Strasbourg und der Marne - Rhein Kanal
 
