@@ -46,6 +46,10 @@ const geoJsonOptions = computed<L.GeoJSONOptions>(() => {
   }
 });
 
+const tileOptions: L.TileLayerOptions = {
+  attribution: "<a href='https://openstreetmap.de'>&copy; OpenStreetMap DE</a>"
+}
+
 const styles = {
   default: "https://tile.openstreetmap.de/{z}/{x}/{y}.png",
   toner: "https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}.png",
@@ -57,7 +61,7 @@ const styles = {
 <template>
   <div class="rounded-lg border-2 border-fg dark:border-fg-dark">
     <leaflet-map height="400px">
-      <tile-layer :url-template="styles.default"/>
+      <tile-layer :url-template="styles.default" :options="tileOptions"/>
       <geo-json-layer :geo-json="geoJson" :options="geoJsonOptions"/>
     </leaflet-map>
   </div>
