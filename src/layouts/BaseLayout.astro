@@ -12,6 +12,21 @@ const themeColor = {
     dark: '#0A0807'
 }
 
+const rssLink = new URL(`${import.meta.env.BASE_URL}/rss.xml`, Astro.site);
+
+interface Link {
+    href: URL;
+    text: string;
+}
+
+const links: Link[] = [{
+    href: new URL("https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"),
+    text: "Privacy Statement",
+    }, {
+        href: rssLink,
+        text: 'RSS'
+}]
+
 ---
 
 <!doctype html>
@@ -35,6 +50,7 @@ const themeColor = {
         <meta property="og:description" content="Reiseblog von Lorenz Hoffmann"/>
         <meta property="og:type" content="website" />
     </slot>
+    <link rel="alternate" type="application/rss+xml" href={rssLink}/>
 </head>
 
 
@@ -51,8 +67,10 @@ selection:bg-primary selection:text-bg
     <slot/>
 </main>
 
-<footer class="flex justify-center m-2 text-fg-inactive dark:text-fg-inactive-dark">
-    <a href='https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement' class="hover:underline">Privacy Notice</a>
+<footer class="flex justify-center gap-8 m-2 text-fg-inactive dark:text-fg-inactive-dark">
+    {links.map(l => (
+            <a href={l.href} class="hover:underline">{l.text}</a>
+    ))}
 </footer>
 
 </body>
