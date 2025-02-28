@@ -13,7 +13,7 @@ const dotLook = positionAtCoordinate(location[0], location[1], 1);
 
 <template>
   <TresMesh :position="dotPos" :look-at="dotLook">
-    <TresCircleGeometry :args="[.01, 32]" />
+    <TresCircleGeometry :args="[.005, 32]" />
     <TresMeshStandardMaterial :color="primary" />
   </TresMesh>
 </template>
