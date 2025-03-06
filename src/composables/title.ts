@@ -8,7 +8,12 @@ export function useUrlTitle(): Ref<string | null, string | null> {
     const title = ref<string | null>(null);
 
     function update() {
-        let t = document.getElementById(decodeURIComponent(location.hash).replace("#", ""))?.innerText;
+        const hash = decodeURIComponent(location.hash).replace("#", "");
+        if (hash === "") {
+            return;
+        }
+        
+        const t = document.getElementById(hash)?.innerText;
 
         if (!t || t == "") {
             title.value = null;
