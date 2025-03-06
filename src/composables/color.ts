@@ -1,8 +1,40 @@
 import {computed, type ComputedRef, onMounted, ref} from "vue";
 import Color from "colorjs.io";
+import twconfig from "../../tailwind.config.mts"
+
+const colors = twconfig.theme.extend.colors;
+
+function getColorFromConfig(name: string): Color {
+    let color = new Color("#f0f");
+    
+    const path = name.split("-");
+    console.debug(path);
+    
+    let currentColor: any = colors;
+    for (let p of path) {
+        if (typeof currentColor !== "object") {
+            throw new Error("Error while parsing color");
+        }
+        
+        currentColor = currentColor[p];
+    }
+    
+    if (typeof currentColor !== "string") {
+        currentColor = currentColor['DEFAULT'];
+    }
+    
+    console.debug(currentColor);
+    if (typeof currentColor === "string") {
+        color = new Color(currentColor);
+    } else {
+        throw new Error("Could not find color");
+    }
+    
+    return color;
+}
 
 export function getColorProperty(name: string) {
-    const color = ref(new Color("#f0f"));
+    const color = ref(getColorFromConfig(name));
 
     onMounted(() => {
         const style = getComputedStyle(document.documentElement);
