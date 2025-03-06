@@ -26,7 +26,7 @@ Das Abendessen gab es bereits in München in Form eines Döners, und so mussten 
 Das erwies sich jedoch leichter gesagt als getan, da durch das Hochwasser wenige Wochen zuvor 
 die Mücken zur Plage wurden und uns auf dem Feld nicht verschonten.
 
-![Ich stehe in Vollvermummung vor Zelt und Rädern: Fahrradhandschuhe, lange Jogginghose, Pullover and Schlauchtuch ums Gesicht.](@assets/paris/muenchen.jpg)
+![Hunderte Mücken tummeln sich an der orangenen Wand des Außenzeltes.](@assets/paris/muecken.jpg)
 
 
 # Augsburg
@@ -44,8 +44,6 @@ Dort waren die Radwege wegen des Hochwassers stark beschädigt, aber glückliche
 Am Abend rannten wir wieder wie verrückt in Kreisen über das Feld, um während des Zähneputzens 
 nicht vollständig ausgesaugt zu werden. Gottseidank sollte es die letzte Nacht im mückenverseuchten Gebiet werden.
 
-![Hunderte Mücken tummeln sich an der orangenen Wand des Außenzeltes.](@assets/paris/muecken.jpg)
-
 # Ulm und Blaubeuren
 
 In Ulm besichtigten wir kurz den Dom und die Altstadt und füllten unsere Wasserflaschen an einem Brunnen auf.
@@ -62,8 +60,6 @@ Nach einem kurzen Gewitter ging es dann aus dem Tal hinaus, durch das schöne Ti
 
 Gegen Abend platzten die Wolken nochmal auf, während wir an einer Ladestation die Handyakkus und Mägen füllten.
 Nach dem Schauer fuhren wir eine Weile weiter, bis wir ein entlegenes Tal entdeckten. Dort stellten wir unser Nachtlager auf.
-
-![Eine schmale Straße führt durch ein breites, flaches Tal. Die Felder in der Mitte werden vom Wald außen umrahmt. Eine kleine Scheune steht in der Ferne.](@assets/paris/schwaebische-alp.jpg)
 
 # Hepsisau und Stuttgart
 
@@ -99,8 +95,6 @@ Letztendlich hat ein Blatt einigermaßen abhilfe geschaffen.
 Nach Stuttgart führte uns der Paneuroparadweg durch schöne Wälder und Täler, wie zum Beispiel das Würmertal: 
 grandioser Abstieg auf leeren Schotterwegen hinab im Schatten der Bäume, welche auch prima als Regenschutz dienten.
 Dieser Radweg sollte uns mehr oder weniger bis nach Paris führen.
-
-![Das Schild des Paneuropa-Radwegs hängt an einem deutschen weiß-grünen Radwegweiser. Das Logo is ein blaues Rad auf einer gelben Ellipse umgeben von Sternen.](@assets/paris/paneuropa.jpg)
 
 In Pforzheim fanden wir einen Regenschutz unter einer Brücke für das Mittagessen, 
 und wenig später trafen wir nach Karlsruhe auf den Rhein.
@@ -208,7 +202,6 @@ Die Vorbereitung auf die olympischen Sommerspiele befeuerte das Chaos noch weite
 Orte waren abgesperrt, so auch der Eiffelturm. Daher musste das finale Foto erstmal lange eine gute Perspektive gesucht werden. 
 
 ![Tach mit der Anzeige "1116 Gesamtstrecke" vor dem Eiffelturm.](@assets/paris/tacho.jpg)
-![Kirchtürme der Notre Dame neben einem Kran. Der Rest der Kirche ist eingezäunt.](@assets/paris/notre-dame.jpg)
 
 Danach ging es ins Hostel, wo wir unsere australischen und niederländischen Mitbewohner trafen.
 Wir zogen nochmal ohne Räder los um die Stadt zu erkunden, und vielen abends frisch geduscht ins erste echte Bett seit zwölf Tagen.
