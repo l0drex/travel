@@ -4,7 +4,7 @@ import { TresCanvas } from '@tresjs/core';
 import type { Journey } from "@utils/types.ts";
 import EarthContent from "./EarthContent.vue";
 import {usePreferredReducedMotion} from "@vueuse/core";
-import {getColorPropertyString} from "@utils/general.ts";
+import {getColorPropertyString} from "@utils/color.ts";
 
 const reducedMotion = usePreferredReducedMotion();
 const enableAnimatedEarth: boolean = WebGL.isWebGL2Available() && reducedMotion.value != "reduce";

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type {GeoJSON} from "geojson";
-import L, {type StyleFunction} from "leaflet";
-import {getColorPropertyString, useUrlTitle} from "@utils/general.ts";
+import L from "leaflet";
+import {getColorPropertyString} from "@utils/color.ts";
+import {useUrlTitle} from "@utils/title.ts";
 import {computed} from "vue";
 import LeafletMap from "src/leaflet/components/LeafletMap.vue";
 import TileLayer from "src/leaflet/components/TileLayer.vue";
@@ -39,7 +40,7 @@ const geoJsonOptions = computed<L.GeoJSONOptions>(() => {
 
       index++;
       return {
-        color: color,
+        color: color.value,
         weight: 5
       };
     }

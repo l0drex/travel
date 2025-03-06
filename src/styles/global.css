@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@theme {
+@theme inline {
     --color-bg: var(--color-orange-100);
     --color-bg-dark: var(--color-stone-950);
     --color-bg-2: var(--color-orange-200);

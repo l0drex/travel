@@ -16,7 +16,7 @@ import JourneyPoint from "./JourneyPoint.vue";
 import {usePreferredDark} from "@vueuse/core";
 import {toRadians} from "chart.js/helpers";
 import type {Journey} from "@utils/types.ts";
-import {getColorPropertyArray} from "@utils/general.ts";
+import {getColorPropertyArray} from "@utils/color.ts";
 
 const {onBeforeRender} = useLoop();
 const prefersDark = usePreferredDark();
@@ -32,12 +32,12 @@ function getEarthMaterial() {
   const earth = prefersDark.value ? bg2Dark : bg2;
   
   // colors should be vec4
-  const gradientData = new Uint8Array([
-    ...bg,
-    ...earth
-  ].map(c => c * 255.0));
+  const gradientData = computed<Uint8Array>(() => new Uint8Array([
+    ...bg.value,
+    ...earth.value
+  ].map(c => c * 255.0)));
   
-  const gradientTexture = new DataTexture(gradientData, 2, 1, RGBAFormat);
+  const gradientTexture = new DataTexture(gradientData.value, 2, 1, RGBAFormat);
   gradientTexture.needsUpdate = true;
   
   // we patch the existing lambert material for our use case

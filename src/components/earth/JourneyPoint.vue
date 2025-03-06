@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { positionAtCoordinate } from "@utils/geoJson.ts";
-import {getColorPropertyArray} from "@utils/general.ts";
+import {getColorPropertyArray} from "@utils/color.ts";
 
 const primary = getColorPropertyArray("primary");
 

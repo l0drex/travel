@@ -6,7 +6,7 @@ import type {GeoJSON, Position} from "geojson";
 import {type CartesianScaleOptions, Chart, type ChartData, type ChartOptions, registerables} from "chart.js";
 import {usePreferredDark} from "@vueuse/core";
 import type {_DeepPartialObject} from "chart.js/types/utils";
-import {getColorPropertyString} from "@utils/general.ts";
+import {getColorPropertyString} from "@utils/color.ts";
 
 const fgInactive = getColorPropertyString("fg-inactive");
 const fgInactiveDark = getColorPropertyString("fg-inactive-dark");
@@ -42,21 +42,21 @@ function toData(points: Position[]) {
   return points.map((point, i) => ({x: progress[i], y: point[2]}))
 }
 
-const data = ref<ChartData<"line">>({
+const data = computed<ChartData<"line">>(() => ({
   datasets: [{
     label: 'Elevation',
     data: elevationReduced,
-    borderColor: primary,
+    borderColor: primary.value,
     fill: "origin",
     tension: .1
   }],
-});
+}));
 
 const darkMode = usePreferredDark();
 
 const options = computed<ChartOptions<"line">>(() => {
-  const labelColor = darkMode.value ? fgInactiveDark : fgInactive;
-  const lineColor = darkMode.value ? line : lineDark;
+  const labelColor = (darkMode.value ? fgInactiveDark : fgInactive).value;
+  const lineColor = (darkMode.value ? line : lineDark).value;
 
   const axisConf: _DeepPartialObject<CartesianScaleOptions> = {
     grid: {
