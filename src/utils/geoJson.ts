@@ -24,6 +24,28 @@ export function getPoints(geoJson: GeoJSON): Position[] {
   }
 }
 
+export function getPointsOf(name: string, geoJson: GeoJSON): Position[] {
+    if (geoJson.type === "FeatureCollection") {
+        return geoJson.features.map((f) => getPointsOf(name, f)).flat(1);
+    }
+
+    if (geoJson.type === "Feature") {
+        if (geoJson.properties['name'] !== name) {
+            return [];
+        }
+        return getPoints(geoJson.geometry);
+    }
+
+    switch (geoJson.type) {
+        case "LineString":
+            return geoJson.coordinates;
+        case "MultiLineString":
+            return geoJson.coordinates.flat(1);
+        default:
+            return [];
+    }
+}
+
 export function reduceSize<T extends {y: number}>(array: T[], precision: number) {
   const filtered = [array[0]]
   
