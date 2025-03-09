@@ -56,7 +56,7 @@ const links: Link[] = [{
 </head>
 
 
-<body class="flex flex-col justify-between min-h-screen font-sans 
+<body class="flex flex-col justify-between h-screen font-sans 
 text-fg bg-bg dark:text-fg-dark dark:bg-bg-dark
 selection:bg-primary selection:text-bg
  -z-50">
@@ -65,9 +65,15 @@ selection:bg-primary selection:text-bg
     <slot name="background"/>
 </div>
 
-<main class="flex flex-col items-center">
-    <slot/>
-</main>
+<div class="flex">
+    <aside>
+        <slot name="aside" />
+    </aside>
+    
+    <main class="flex flex-col items-center grow overflow-auto">
+        <slot/>
+    </main>
+</div>
 
 <footer class="flex justify-center gap-8 m-2 text-fg-inactive dark:text-fg-inactive-dark">
     {links.map(l => (
