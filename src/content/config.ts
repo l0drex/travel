@@ -7,7 +7,7 @@ const blogCollection = defineCollection({
     title: z.string(),
     date: z.date(),
     // sync with utils/types/journeyTypes
-    type: z.literal('bike').or(z.literal('hiking')),
+    type: z.literal('bike').or(z.literal('hiking')).or(z.literal('roadtrip')),
     // preview image used for open graph previews and the list on the home page
     image: image(),
     // a gpx track of the tour, will generate a map, elevation profile and entry on the background globe on the home page

@@ -18,6 +18,12 @@ export const journeyTypes: {[i: string]: JourneyType} = {
             de: 'Wandern'
         },
         icon: 'mdi:hiking'
+    },
+    roadtrip: {
+        name: {
+            de: 'Roadtrip'
+        },
+        icon: 'mdi:car'
     }
 }
 
