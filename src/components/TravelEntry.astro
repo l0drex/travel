@@ -32,7 +32,7 @@ const previewAlt = getPreviewAlt(journey);
             <div class="flex gap-2">
                 <JourneyIcon type={journeyTypes[journey.data.type]} />
                 <div>·</div>
-                {dateFormatter(journey.data.date)}
+                {dateFormatter(journey.data.date, Astro.currentLocale)}
             </div>
         </div>
     </a>

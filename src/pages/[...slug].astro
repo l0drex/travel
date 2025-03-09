@@ -34,7 +34,7 @@ const journeyType = journeyTypes[entry.data.type];
 
 const jsDate: Date = entry.data.date;
 const machineDate = jsDate.toISOString();
-const humanDate = dateFormatter(jsDate);
+const humanDate = dateFormatter(jsDate, Astro.currentLocale);
 
 const ogImage = await getImage({
     src: entry.data.image,
