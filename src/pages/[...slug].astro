@@ -9,6 +9,7 @@ import {dateFormatter, getPreviewAlt} from "../utils/general";
 import {getImage} from "astro:assets";
 import JourneyContent from "../components/JourneyContent.astro";
 import Button from "../components/Button.astro";
+import { Icon } from "astro-icon/components";
 
 export async function getStaticPaths() {
     const posts: CollectionEntry<'posts'>[] = await getCollection("posts");
@@ -70,7 +71,14 @@ const ogAlt = getPreviewAlt(entry);
     </Fragment>
 
     <section class="w-full m-auto bg-bg-2 dark:bg-bg-2-dark pt-10 pb-4">
-        <h1 class="font-bold text-4xl sm:text-5xl mb-4 text-center">{entry.data.title}</h1>
+        <div class="absolute top-0 md:top-6 left-6 w-max">
+            <Button href={import.meta.env.BASE_URL}>
+                <Icon name="mdi:chevron-left" slot="icon"/>
+                Zurück zur Übersicht
+            </Button>
+        </div>
+        
+        <h1 class="font-bold text-4xl sm:text-5xl0 mt-8 md:mt-0 mb-4 text-center">{entry.data.title}</h1>
         <div class="text-center text-2xl sm:text-3xl mb-8 flex align-baseline gap-2 justify-center">
             {(<JourneyType type={journeyType} />)}
             <span>·</span>
@@ -97,7 +105,15 @@ const ogAlt = getPreviewAlt(entry);
         <Content />
     </JourneyContent>
     
-    <Button href={import.meta.env.BASE_URL}>
-        Zurück zur Übersicht
-    </Button>
+    <div>
+        <Button href={Astro.url.href}>
+            <Icon name="mdi:chevron-up" slot="icon"/>
+            Zurück nach oben
+        </Button>
+        
+        <Button href={import.meta.env.BASE_URL}>
+            <Icon name="mdi:chevron-left" slot="icon"/>
+            Zurück zur Übersicht
+        </Button>
+    </div>
 </Layout>
