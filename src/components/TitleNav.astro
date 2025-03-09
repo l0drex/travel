@@ -12,7 +12,7 @@ const {headings} = Astro.props;
 <nav class="w-xs hidden md:block">
     <ol class="font-bold text-lg list-decimal ml-8">
         {
-            headings.map((heading) =>
+            headings.filter(h => h.depth === 1).map((heading) =>
                     <li class="not-last:mb-2 hover:text-primary navelement">
                         <a href={"#" + heading.slug}>{heading.text}</a>
                     </li>)
