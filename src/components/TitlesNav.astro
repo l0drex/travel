@@ -1,0 +1,72 @@
+---
+import {type MarkdownHeading} from "astro";
+
+interface Props {
+    headings: Array<MarkdownHeading>,
+    depth?: number
+}
+
+const {headings} = Astro.props;
+let {depth} = Astro.props;
+depth ??= 1;
+
+function subheaders(heading: MarkdownHeading) {
+    const index = headings.indexOf(heading);
+    
+    if (index < 0) {
+        throw new Error("Could not find heading " + heading.text);
+    }
+    
+    const followings = headings.slice(index + 1);
+    let nextIndex = followings.findIndex(h => h.depth === 1);
+
+    if (nextIndex < 0) {
+        nextIndex = headings.length - 1;
+    }
+    
+    followings.length = nextIndex;
+    return followings;
+}
+
+---
+
+{(headings.length > 0) && 
+<ol class={depth === 1 ? "font-bold text-lg list-decimal ml-8" : "font-normal text-base"}>
+    {
+        headings.filter(h => h.depth === depth).map((heading) =>
+                <li class={depth === 1 ? "not-last:mb-2 navelement" : "not-last:mb-1 navelement"}>
+                    <a href={"#" + heading.slug} class="hover:text-primary">{heading.text}</a>
+
+                    {depth === 1 && 
+                            <Astro.self headings={subheaders(heading)} depth={2}/>
+                    }
+                </li>)
+    }
+</ol>}
+
+<script>
+    const elements = document.querySelectorAll(".navelement a");
+
+    function refreshElements() {
+        const hash = decodeURI(new URL(document.URL).hash);
+        
+        if (hash === "") {
+            for (let e of elements) {
+                e.classList.remove("text-primary");
+            }
+            
+            return;
+        }
+        
+        for (const e of elements) {
+            if (e.getAttribute("href")?.includes(hash)) {
+                e.classList.add("text-primary");
+            } else {
+                e.classList.remove("text-primary");
+            }
+        }
+    }
+    
+    refreshElements();
+    window.addEventListener("hashchange", refreshElements);
+</script>
