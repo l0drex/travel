@@ -7,9 +7,10 @@ import {journeyTypes} from "../utils/types";
 import JourneyType from "../components/TypeIcon.astro";
 import {dateFormatter, getPreviewAlt} from "../utils/general";
 import {getImage} from "astro:assets";
-import JourneyContent from "../components/JourneyContent.astro";
-import Button from "../components/Button.astro";
+import JourneyContent from "@components/JourneyContent.astro";
+import Button from "@components/Button.astro";
 import { Icon } from "astro-icon/components";
+import TitleNav from "@components/TitleNav.astro";
 
 export async function getStaticPaths() {
     const posts: CollectionEntry<'posts'>[] = await getCollection("posts");
@@ -90,14 +91,7 @@ const ogAlt = getPreviewAlt(entry);
                 <TrackView client:only="vue" geoJson={geoJson.data}/>
             </div>
 
-            <nav class="w-xs hidden md:block">
-                <ol class="font-bold text-lg list-decimal ml-8">
-                    {
-                        headings.map((heading) =>
-                                <li class="not-last:mb-2 hover:text-primary"><a href={"#" + heading.slug}>{heading.text}</a></li>)
-                    }
-                </ol>
-            </nav>
+            <TitleNav headings={headings} />
         </div>
     </section>
     
