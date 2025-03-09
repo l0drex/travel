@@ -8,7 +8,6 @@ function getColorFromConfig(name: string): Color {
     let color = new Color("#f0f");
     
     const path = name.split("-");
-    console.debug(path);
     
     let currentColor: any = colors;
     for (let p of path) {
@@ -23,14 +22,13 @@ function getColorFromConfig(name: string): Color {
         currentColor = currentColor['DEFAULT'];
     }
     
-    console.debug(currentColor);
     if (typeof currentColor === "string") {
         color = new Color(currentColor);
     } else {
         throw new Error("Could not find color");
     }
     
-    return color;
+    return color.to("srgb");
 }
 
 export function getColorProperty(name: string) {
@@ -61,8 +59,6 @@ export function getColorPropertyArray(name: string) {
     const color = getColorProperty(name);
 
     return computed(() => {
-        console.debug("Color changed");
-        
         let c = color.value.toJSON();
         const colors = c.coords;
         colors.push(1);

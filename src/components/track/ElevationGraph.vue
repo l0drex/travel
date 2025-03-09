@@ -34,9 +34,7 @@ const elevationTodayReduced = computed(() => {
   const coords = getPointsOf(title.value, geoJson);
   const startIndex = coordinates.findIndex(c => coords[0] === c);
   const endIndex = coordinates.findIndex(c => coords[coords.length - 1] === c);
-  
-  console.debug(startIndex, endIndex)
-  
+
   const elev = elevationData.toSpliced(0, startIndex);
   elev.length = endIndex - startIndex;
   
