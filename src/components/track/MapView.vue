@@ -7,6 +7,7 @@ import {computed} from "vue";
 import LeafletMap from "src/leaflet/components/LeafletMap.vue";
 import TileLayer from "src/leaflet/components/TileLayer.vue";
 import GeoJsonLayer from "src/leaflet/components/GeoJsonLayer.vue";
+import {getFeatureByName} from "@utils/geoJson.ts";
 
 const {geoJson} = defineProps<{
   geoJson: GeoJSON

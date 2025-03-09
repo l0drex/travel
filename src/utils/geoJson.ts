@@ -24,6 +24,21 @@ export function getPoints(geoJson: GeoJSON): Position[] {
   }
 }
 
+export function getFeatureByName(name: string, geoJson: GeoJSON): GeoJSON | undefined {
+    if (geoJson.type === "FeatureCollection") {
+        return geoJson.features.map((f) => 
+            getFeatureByName(name, f))
+            .flat(1).find(f => f != null);
+    }
+
+    if (geoJson.type === "Feature") {
+        if (geoJson.properties['name'] !== name) {
+            return undefined;
+        }
+        return geoJson;
+    }
+}
+
 export function getPointsOf(name: string, geoJson: GeoJSON): Position[] {
     if (geoJson.type === "FeatureCollection") {
         return geoJson.features.map((f) => getPointsOf(name, f)).flat(1);

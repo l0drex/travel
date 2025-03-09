@@ -17,7 +17,7 @@ const update = () => {
   layer.value.removeFrom(map.value!);
   
   layer.value.addTo(map.value!);
-  map.value?.fitBounds(layer.value.getBounds())
+  map.value?.fitBounds(layer.value.getBounds());
 };
 
 onMapReady(update);
