@@ -1,10 +1,10 @@
 ---
 
 interface Props {
-    href: string
+    href: string,
 }
 
-const href = Astro.props;
+const {href} = Astro.props;
 
 ---
 
@@ -17,6 +17,6 @@ const href = Astro.props;
     <div class="h-full">
         <slot name="icon" />
     </div>
-    
+
     <slot/>
 </a>
