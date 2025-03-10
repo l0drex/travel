@@ -7,11 +7,11 @@ import {z} from "astro:content";
 import path from "node:path";
 import type {GeoJSON} from "geojson";
 
-export function parseGpx(code: string) {
+export async function parseGpx(code: string) {
   const xml = new DOMParser().parseFromString(code, "text/xml");
-  const geoJson = gpxToJson(xml);
+  const geoJson = gpxToJson(xml as any);
 
-  return geoJson;
+  return { data: geoJson };
 }
 
 async function loadGpxFiles(directory: string, context: LoaderContext) {
@@ -36,13 +36,13 @@ async function updateFile(filePath: string, context: LoaderContext) {
   const fileName = path.basename(filePath).replace(/\.gpx$/, "");
   // path to file relative to project root
   const relativePath = filePath.replace(fileURLToPath(context.config.root), "");
-
+  
   fs.readFile(filePath, {encoding: "utf-8"}, async (err, data) => {
     if (err) throw err;
         
     const parsedData = await context.parseData({
       id: fileName,
-      data: parseGpx(data),
+      data: await parseGpx(data),
       filePath: relativePath
     });
     const digest = context.generateDigest(parsedData);

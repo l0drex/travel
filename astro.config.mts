@@ -14,5 +14,10 @@ export default defineConfig({
   }), icon()],
   vite: {
     plugins: [tailwindcss()]
+  },
+  image: {
+    domains: [
+        'hoffmanns.cloud'
+    ]
   }
 });

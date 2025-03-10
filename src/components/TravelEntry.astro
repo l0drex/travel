@@ -11,11 +11,10 @@ interface Props {
 }
 
 const { journey } = Astro.props;
-const previewAlt = getPreviewAlt(journey);
 ---
 
 <li>
-    <a href={Astro.url + "/" + journey.slug} class="flex items-center gap-4 group
+    <a href={Astro.url + "/" + journey.id} class="flex items-center gap-4 group
     backdrop-filter backdrop-blur-md transition-colors duration-300
     bg-bg/50 dark:bg-bg-dark/50 
     border-2 border-bg-2 dark:border-bg-2-dark focus:border-primary focus:outline-none
@@ -24,7 +23,7 @@ const previewAlt = getPreviewAlt(journey);
     visited:text-fg-inactive dark:visited:text-fg-inactive-dark
     rounded-2xl px-4 py-3 
     decoration-none select-none">
-        <Image src={journey.data.image} alt={previewAlt} width={64} height={64} class="rounded-xl object-cover w-16 h-16 sepia group-hover:sepia-0 transition-all" loading="eager"/>
+        <Image src={journey.data.image} alt={journey.data.alt} width={64} height={64} class="rounded-xl object-cover w-16 h-16 sepia group-hover:sepia-0 transition-all" loading="eager"/>
         <div>
             <h2 class="font-bold text-xl inline-flex mr-2 items-baseline">
                 {journey.data.title} <Icon name="mdi:chevron-right" />

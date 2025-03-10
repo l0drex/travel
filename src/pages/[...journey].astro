@@ -1,11 +1,12 @@
 ---
-import { getCollection, getEntry, type CollectionEntry } from "astro:content";
+import type {InferGetStaticParamsType, InferGetStaticPropsType} from "astro";
+import { getCollection, getEntry, render, type CollectionEntry } from "astro:content";
 import Layout from "@layouts/BaseLayout.astro";
 import TrackView from "@components/track/TrackView.vue";
 import authors from "src/authors.json";
 import {journeyTypes} from "../utils/types";
 import JourneyType from "../components/TypeIcon.astro";
-import {dateFormatter, getPreviewAlt} from "../utils/general";
+import {dateFormatter} from "../utils/general";
 import {getImage} from "astro:assets";
 import JourneyContent from "@components/JourneyContent.astro";
 import Button from "@components/Button.astro";
@@ -16,17 +17,16 @@ export async function getStaticPaths() {
     const posts: CollectionEntry<'posts'>[] = await getCollection("posts");
 
     return posts.map((entry) => ({
-        params: { slug: entry.slug },
+        params: { journey: entry.id },
         props: { entry },
     }));
 }
 
-interface Props {
-    entry: CollectionEntry<"posts">;
-}
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { entry } = Astro.props;
-const { Content, headings } = await entry.render();
+const { Content, headings } = await render(entry);
 
 const geoJson = await getEntry(entry.data.gpx);
 const author = authors[entry.data.author];
@@ -43,7 +43,6 @@ const ogImage = await getImage({
     format: "webp",
 });
 
-const ogAlt = getPreviewAlt(entry);
 ---
 
 <Layout title={entry.data.title}>
@@ -68,7 +67,7 @@ const ogAlt = getPreviewAlt(entry);
         <meta property="og:image:width" content={`${ogImage.options.width}`}/>
         <meta property="og:image:height" content={`${ogImage.options.height}`}/>
         <meta property="og:image:format" content={ogImage.options.format}/>
-        <meta property="og:image:alt" content={ogAlt}/>
+        <meta property="og:image:alt" content={entry.data.alt}/>
     </Fragment>
 
     <section class="w-full m-auto pt-10 pb-4 bg-bg-2 dark:bg-bg-2-dark">
