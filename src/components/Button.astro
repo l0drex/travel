@@ -1,14 +1,14 @@
 ---
 
 interface Props {
-    href: string,
+    href: string | URL,
 }
 
 const {href} = Astro.props;
 
 ---
 
-<a href={import.meta.env.BASE_URL} class="
+<a href={href} class="
         flex items-center gap-1 px-2 py-1 my-5 first:mt-0 last:mb-0 h-min w-max
         border-2 rounded-lg border-fg dark:border-fg-dark
         bg-bg dark:bg-bg-dark
