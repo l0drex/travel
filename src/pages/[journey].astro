@@ -1,5 +1,5 @@
 ---
-import type {InferGetStaticParamsType, InferGetStaticPropsType} from "astro";
+import type {GetStaticPaths, InferGetStaticParamsType, InferGetStaticPropsType} from "astro";
 import { getCollection, getEntry, render, type CollectionEntry } from "astro:content";
 import Layout from "@layouts/BaseLayout.astro";
 import TrackView from "@components/track/TrackView.vue";
@@ -13,14 +13,14 @@ import Button from "@components/Button.astro";
 import { Icon } from "astro-icon/components";
 import TitleNav from "@components/TitlesNav.astro";
 
-export async function getStaticPaths() {
+export const getStaticPaths = (async () => {
     const posts: CollectionEntry<'posts'>[] = await getCollection("posts");
 
     return posts.map((entry) => ({
-        params: { journey: entry.id },
+        params: { journey: entry.id.replace(/.md$/, "") },
         props: { entry },
     }));
-}
+}) satisfies GetStaticPaths;
 
 type Params = InferGetStaticParamsType<typeof getStaticPaths>;
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
