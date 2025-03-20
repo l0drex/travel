@@ -91,7 +91,11 @@ const ogImage = await getImage({
     </div>
 
     <div class="mx-auto max-w-5xl">
-      <TrackView client:only="vue" geoJson={geoJson.data} />
+      <TrackView
+        client:only="vue"
+        geoJson={geoJson.data}
+        journeyType={journeyType}
+      />
     </div>
   </section>
 
