@@ -68,34 +68,32 @@ const links: Link[] = [
   </head>
 
   <body
-    class="-z-50 flex h-screen flex-col justify-between bg-bg font-sans text-fg selection:bg-primary selection:text-bg dark:bg-bg-dark dark:text-fg-dark"
+    class="-z-50 flex h-screen bg-bg font-sans text-fg selection:bg-primary selection:text-bg dark:bg-bg-dark dark:text-fg-dark"
   >
     <div class="absolute top-0 left-0 -z-40 h-screen w-screen">
       <slot name="background" />
     </div>
 
-    <div class="flex">
-      <aside>
-        <slot name="aside" />
-      </aside>
+    <aside>
+      <slot name="aside" />
+    </aside>
 
-      <div class="grow">
-        <main class="flex flex-col items-center overflow-auto">
-          <slot />
-        </main>
+    <div class="flex h-full grow flex-col">
+      <main class="grow overflow-auto">
+        <slot />
+      </main>
 
-        <footer
-          class="m-2 flex justify-center gap-8 text-fg-inactive dark:text-fg-inactive-dark"
-        >
-          {
-            links.map((l) => (
-              <a href={l.href} class="hover:underline">
-                {l.text}
-              </a>
-            ))
-          }
-        </footer>
-      </div>
+      <footer
+        class="m-2 flex justify-center gap-8 text-fg-inactive dark:text-fg-inactive-dark"
+      >
+        {
+          links.map((l) => (
+            <a href={l.href} class="hover:underline">
+              {l.text}
+            </a>
+          ))
+        }
+      </footer>
     </div>
   </body>
 </html>

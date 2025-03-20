@@ -42,7 +42,7 @@ const journeys = await getJourneys();
     Discover my Adventures!
   </h1>
 
-  <ul id="blogs" class="flex flex-col gap-3">
+  <ul id="blogs" class="m-auto flex w-max flex-col gap-3">
     {posts.map((p) => <BlogListEntry journey={p} />)}
   </ul>
 </Layout>
