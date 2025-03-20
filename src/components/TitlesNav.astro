@@ -41,13 +41,7 @@ function subheaders(heading: MarkdownHeading) {
       {headings
         .filter((h) => h.depth === depth)
         .map((heading) => (
-          <li
-            class={
-              depth === 1
-                ? "navelement not-last:mb-2"
-                : "navelement not-last:mb-1"
-            }
-          >
+          <li class={depth === 1 ? "not-last:mb-2" : "not-last:mb-1"}>
             <a href={"#" + heading.slug} class="hover:text-primary">
               {heading.text}
             </a>
@@ -62,9 +56,13 @@ function subheaders(heading: MarkdownHeading) {
 }
 
 <script>
-  const elements = document.querySelectorAll(".navelement a");
+  const elements = document.querySelectorAll("nav a");
 
-  function refreshElements(hash: string) {
+  // style current heading in nav
+
+  function refreshElements(url: string) {
+    const hash = decodeURI(new URL(url).hash);
+
     if (hash === "") {
       for (let e of elements) {
         e.classList.remove("text-primary");
@@ -74,7 +72,7 @@ function subheaders(heading: MarkdownHeading) {
     }
 
     for (const e of elements) {
-      if (e.getAttribute("href")?.includes(hash)) {
+      if (e.getAttribute("href") === hash) {
         e.classList.add("text-primary");
       } else {
         e.classList.remove("text-primary");
@@ -82,10 +80,8 @@ function subheaders(heading: MarkdownHeading) {
     }
   }
 
-  refreshElements(decodeURI(new URL(document.URL).hash));
-  window.addEventListener("hashchange", (e) =>
-    decodeURI(new URL(e.newURL).hash),
-  );
+  refreshElements(document.URL);
+  window.addEventListener("hashchange", (e) => refreshElements(e.newURL));
 
   // put current element in url
 
@@ -93,23 +89,25 @@ function subheaders(heading: MarkdownHeading) {
 
   function updateHash() {
     let visible: Element | null = null;
-    headers.forEach((header) => {
-      if (visible != null) {
-        return;
-      }
-
+    for (const header of headers) {
       const pos = header.getBoundingClientRect();
 
-      if (pos.top > 0 && pos.bottom <= window.innerHeight) {
+      if (pos.top > 0 && pos.bottom <= window.innerHeight / 2) {
         visible = header;
+        break;
       }
-    });
+    }
 
     if (visible != null) {
-      // TODO this works, but no hashchange event is sent. use vue state instead? or update on scroll?
-      history.replaceState(undefined, "", "#" + visible.id);
-      refreshElements(visible.id);
+      // just style the nav bar, no change in url here
+      // avoids unwanted scrolling done by browser
+
+      // we construct a url to put a hash in there
+      const url = new URL(document.URL);
+      url.hash = visible.id;
+      refreshElements(url.href);
     }
   }
-  window.addEventListener("scrollend", updateHash);
+
+  document.querySelector("main")!.addEventListener("scrollend", updateHash);
 </script>
