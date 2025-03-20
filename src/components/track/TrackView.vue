@@ -28,14 +28,22 @@ const currentFeature = computed(() => {
 });
 
 const showGraph = computed(() => {
-  if (journeyType.id === "roadtrip") {
+  /*
+   * roadtrip is expected to be a collection of small unconnected hiking tracks and points,
+   * therefore elevation data makes no sense here
+   */
+  if (journeyType.id === "roadtrip" && currentUrlTitle.value == null) {
     return false;
   }
 
-  if (currentFeature.value.type == "Feature") {
-    if (currentFeature.value.geometry.type == "Point") {
-      return false;
-    }
+  /*
+   * Points have no elevation data either
+   */
+  if (
+    currentFeature.value.type == "Feature" &&
+    currentFeature.value.geometry.type == "Point"
+  ) {
+    return false;
   }
 
   return true;
