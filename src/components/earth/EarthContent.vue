@@ -3,6 +3,7 @@ import { computed, shallowRef } from "vue";
 import {
   DataTexture,
   Euler,
+  LinearSRGBColorSpace,
   MeshLambertMaterial,
   Quaternion,
   RGBAFormat,
@@ -21,6 +22,8 @@ import { getColorPropertyArray } from "@utils/color.ts";
 const { onBeforeRender } = useLoop();
 const prefersDark = usePreferredDark();
 
+const bg1 = getColorPropertyArray("bg");
+const bg1Dark = getColorPropertyArray("bg-dark");
 const bg2 = getColorPropertyArray("bg-2");
 const bg2Dark = getColorPropertyArray("bg-2-dark");
 
@@ -28,16 +31,18 @@ const bg2Dark = getColorPropertyArray("bg-2-dark");
 
 function getEarthMaterial() {
   const earthTexture = new TextureLoader().load(color.src);
-  const bg = prefersDark.value ? bg2Dark : bg2;
+  const bg = prefersDark.value ? bg1Dark : bg1;
   const earth = prefersDark.value ? bg2Dark : bg2;
 
   // colors should be vec4
   const gradientData = new Uint8Array(
-    [...bg.value, ...earth.value].map((c) => c * 255.0),
+    [...bg.value, ...earth.value].map((c) => c * 255),
   );
 
   const gradientTexture = new DataTexture(gradientData, 2, 1, RGBAFormat);
   gradientTexture.needsUpdate = true;
+  gradientTexture.colorSpace = LinearSRGBColorSpace;
+  gradientTexture.anisotropy = 8;
 
   // we patch the existing lambert material for our use case
   // we use the bw earth texture to map to foreground and background color
@@ -62,12 +67,13 @@ function getEarthMaterial() {
       // language=Glsl
       const fragmentShader = `
         #include <dithering_fragment>
-
+        
         vec4 bwColor = texture2D(map, vMapUv);
-        float intensity = bwColor.r;  // assuming the texture is grayscale
-        vec4 gradientColor = texture2D(gradientTexture, vec2(intensity, 0.5));
-        gradientColor.a = reflectedLight.directDiffuse.r * intensity;
-        gl_FragColor = gradientColor;
+        float intensity = bwColor.r * reflectedLight.directDiffuse.r;  // assuming the texture is grayscale
+        
+        vec4 bg = texture2D(gradientTexture, vec2(0.0, 0.5));
+        vec4 fg = texture2D(gradientTexture, vec2(1.0, 0.5));
+        gl_FragColor = mix(bg, fg, intensity);
       `;
       shader.fragmentShader = shader.fragmentShader.replace(
         "#include <map_fragment>",
@@ -150,5 +156,3 @@ const { journeys } = defineProps<{
     <JourneyPoint v-for="j in journeys" :location="j.location" />
   </TresGroup>
 </template>
-
-<style scoped></style>
