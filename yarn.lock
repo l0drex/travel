@@ -9403,6 +9403,7 @@ __metadata:
     chart.js: "npm:^4.4.7"
     colorjs.io: "npm:^0.5.2"
     eslint: "npm:^9.9.0"
+    github-slugger: "npm:^2.0.0"
     leaflet: "npm:^1.9.4"
     prettier: "npm:3.5.3"
     prettier-plugin-astro: "npm:0.14.1"

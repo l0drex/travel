@@ -31,6 +31,7 @@
     "astro-icon": "^1.1.0",
     "chart.js": "^4.4.7",
     "colorjs.io": "^0.5.2",
+    "github-slugger": "^2.0.0",
     "leaflet": "^1.9.4",
     "rollup": "^4.20.0",
     "rollup-pluginutils": "^2.8.2",
