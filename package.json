@@ -22,6 +22,7 @@
     "@tmcw/togeojson": "^6.0.0",
     "@tresjs/cientos": "^4.0.3",
     "@tresjs/core": "^4.2.5",
+    "@turf/turf": "^7.2.0",
     "@types/geojson": "^7946.0.14",
     "@types/xmldom": "^0.1.34",
     "@vue-leaflet/vue-leaflet": "^0.10.1",

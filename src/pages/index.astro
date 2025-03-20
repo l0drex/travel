@@ -5,7 +5,7 @@ import Layout from "@layouts/BaseLayout.astro";
 import EarthOverview from "@components/earth/EarthOverview.vue";
 import BlogListEntry from "@components/TravelEntry.astro";
 import type { Journey } from "@utils/types";
-import { getPoints } from "@utils/geoJson";
+import { coordAll } from "@turf/turf";
 
 const posts: CollectionEntry<"posts">[] = (await getCollection("posts")).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
@@ -17,7 +17,7 @@ async function getJourneys() {
   for (let p of posts) {
     const entry = await getEntry(p.data.gpx);
     const geoJson = entry.data;
-    const points = getPoints(geoJson);
+    const points = coordAll(geoJson);
     const coordinates = points[points.length - 1];
     // longitude, latitude
     const loc: [number, number] = [coordinates[1], coordinates[0]];

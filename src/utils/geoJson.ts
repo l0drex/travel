@@ -1,65 +1,32 @@
 import { MathUtils, Vector3 } from "three";
 import type { GeoJSON, Position } from "geojson";
-import { degToRad } from "three/src/math/MathUtils";
-
-export function getPoints(geoJson: GeoJSON): Position[] {
-  if (geoJson.type === "FeatureCollection") {
-    return geoJson.features.map((f) => getPoints(f)).flat(1);
-  }
-
-  if (geoJson.type === "Feature") {
-    return getPoints(geoJson.geometry);
-  }
-
-  switch (geoJson.type) {
-    case "LineString":
-      return geoJson.coordinates;
-    case "MultiLineString":
-      return geoJson.coordinates.flat(1);
-    default:
-      return [];
-  }
-}
+import { coordAll, flatten } from "@turf/turf";
 
 export function getFeatureByName(
   name: string,
   geoJson: GeoJSON,
-): GeoJSON | undefined {
-  if (geoJson.type === "FeatureCollection") {
-    return geoJson.features
-      .map((f) => getFeatureByName(name, f))
-      .flat(1)
-      .find((f) => f != null);
+): GeoJSON | null {
+  // types are not compatible somehow
+  for (const f of flatten(geoJson as any).features) {
+    if (f.properties == null) {
+      continue;
+    }
+
+    if (f.properties["name"] === name) {
+      return f;
+    }
   }
 
-  if (geoJson.type === "Feature") {
-    if (geoJson.properties["name"] !== name) {
-      return undefined;
-    }
-    return geoJson;
-  }
+  return null;
 }
 
 export function getPointsOf(name: string, geoJson: GeoJSON): Position[] {
-  if (geoJson.type === "FeatureCollection") {
-    return geoJson.features.map((f) => getPointsOf(name, f)).flat(1);
+  const f = getFeatureByName(name, geoJson);
+  if (f == null) {
+    return [];
   }
 
-  if (geoJson.type === "Feature") {
-    if (geoJson.properties["name"] !== name) {
-      return [];
-    }
-    return getPoints(geoJson.geometry);
-  }
-
-  switch (geoJson.type) {
-    case "LineString":
-      return geoJson.coordinates;
-    case "MultiLineString":
-      return geoJson.coordinates.flat(1);
-    default:
-      return [];
-  }
+  return coordAll(f);
 }
 
 export function reduceSize<T extends { y: number }>(
@@ -75,29 +42,6 @@ export function reduceSize<T extends { y: number }>(
     last = v;
   }
   return filtered;
-}
-
-export function getDistance(a: Position, b: Position) {
-  if (a == null || b == null) return 0;
-
-  const lat1 = a[0];
-  const lon1 = a[1];
-  const lat2 = b[0];
-  const lon2 = b[1];
-
-  const R = 6371; // Radius of the earth in km
-  const dLat = degToRad(lat2 - lat1); // deg2rad below
-  const dLon = degToRad(lon2 - lon1);
-  const a_ =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(degToRad(lat1)) *
-      Math.cos(degToRad(lat2)) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2);
-  const c = 2 * Math.atan2(Math.sqrt(a_), Math.sqrt(1 - a_));
-  const d = R * c; // Distance in km
-
-  return d;
 }
 
 export function positionAtCoordinate(

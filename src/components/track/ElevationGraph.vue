@@ -1,12 +1,7 @@
 <script setup lang="ts">
 import { LineChart } from "vue-chart-3";
-import { computed, ref } from "vue";
-import {
-  getDistance,
-  getPoints,
-  getPointsOf,
-  reduceSize,
-} from "@utils/geoJson.ts";
+import { computed } from "vue";
+import { getPointsOf, reduceSize } from "@utils/geoJson.ts";
 import type { GeoJSON, Position } from "geojson";
 import {
   type CartesianScaleOptions,
@@ -19,6 +14,7 @@ import { usePreferredDark } from "@vueuse/core";
 import type { _DeepPartialObject } from "chart.js/types/utils";
 import { getColorPropertyString } from "@utils/color.ts";
 import { useUrlTitle } from "@utils/title.ts";
+import { coordAll, distance } from "@turf/turf";
 
 const fgInactive = getColorPropertyString("fg-inactive");
 const fgInactiveDark = getColorPropertyString("fg-inactive-dark");
@@ -34,7 +30,7 @@ const { geoJson } = defineProps<{
 }>();
 
 // collect coordinates in geo json
-const coordinates = getPoints(geoJson);
+const coordinates = coordAll(geoJson);
 // convert to types for chart
 const elevationData = toData(coordinates);
 // reduce size
@@ -42,6 +38,10 @@ const elevationReduced = reduceSize(elevationData, 10);
 
 const title = useUrlTitle();
 const elevationTodayReduced = computed(() => {
+  if (title.value == null) {
+    return [];
+  }
+
   const coords = getPointsOf(title.value, geoJson);
   const startIndex = coordinates.findIndex((c) => coords[0] === c);
   const endIndex = coordinates.findIndex(
@@ -54,8 +54,11 @@ const elevationTodayReduced = computed(() => {
   return reduceSize(elev, 10);
 });
 
-function toData(points: Position[], includeStart = false) {
-  let distances = points.map((k, i) => getDistance(k, points[i - 1]));
+function toData(points: Position[]) {
+  let distances = points.map((k, i) => {
+    if (i === 0) return 0;
+    return distance(k, points[i - 1], { units: "kilometers" });
+  });
 
   // accumulate distances
   let lastProgress = 0;

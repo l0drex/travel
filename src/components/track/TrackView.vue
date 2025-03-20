@@ -5,7 +5,7 @@ import MapView from "@components/track/MapView.vue";
 import { computed } from "vue";
 import { getFeatureByName } from "@utils/geoJson.ts";
 import { useUrlTitle } from "@utils/title.ts";
-import { type JourneyType, journeyTypes } from "@utils/types.ts";
+import { type JourneyType } from "@utils/types.ts";
 
 const { geoJson, journeyType } = defineProps<{
   geoJson: GeoJSON;
@@ -36,9 +36,7 @@ const showGraph = computed(() => {
     return false;
   }
 
-  /*
-   * Points have no elevation data either
-   */
+  // Points have no elevation data either
   if (
     currentFeature.value.type == "Feature" &&
     currentFeature.value.geometry.type == "Point"
