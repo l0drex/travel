@@ -14,7 +14,7 @@ article {
     }
 
     p {
-        @apply my-2 text-justify hyphens-auto text-pretty;
+        @apply my-2 text-justify hyphens-auto text-pretty font-serif;
     }
 
     a {
