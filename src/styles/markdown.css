@@ -1,31 +1,31 @@
 @reference "./global.css";
 
 article {
-    * {
-        @apply first:mt-8;
-    }
-    
-    h1 {
-        @apply text-3xl mt-16 font-extrabold;
-    }
+  * {
+    @apply first:mt-8;
+  }
 
-    h2 {
-        @apply text-xl mt-4 italic font-bold;
-    }
+  h1 {
+    @apply mt-16 text-3xl font-extrabold;
+  }
 
-    p {
-        @apply my-2 text-justify hyphens-auto text-pretty font-serif;
-    }
+  h2 {
+    @apply mt-4 text-xl font-bold italic;
+  }
 
-    a {
-        @apply text-primary hover:underline;
-    }
+  p {
+    @apply my-2 text-justify font-serif text-pretty hyphens-auto;
+  }
 
-    blockquote {
-        @apply border-l-4 border-fg bg-bg-2 dark:border-fg-dark dark:bg-bg-2-dark py-0.5 pl-4;
-    }
+  a {
+    @apply text-primary hover:underline;
+  }
 
-    img {
-        @apply object-contain max-w-min max-h-min w-full h-fit block mx-auto my-4 shadow-md rounded-lg;
-    }
+  blockquote {
+    @apply border-l-4 border-fg bg-bg-2 py-0.5 pl-4 dark:border-fg-dark dark:bg-bg-2-dark;
+  }
+
+  img {
+    @apply mx-auto my-4 block h-fit max-h-min w-full max-w-min rounded-lg object-contain shadow-md;
+  }
 }

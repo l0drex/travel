@@ -1,21 +1,21 @@
 @import "tailwindcss";
 
 @theme inline {
-    --color-bg: var(--color-orange-100);
-    --color-bg-dark: var(--color-stone-950);
-    --color-bg-2: var(--color-orange-200);
-    --color-bg-2-dark: var(--color-stone-900);
-    --color-bg-3: var(--color-orange-50);
-    --color-bg-3-dark: var(--color-stone-700);
-    
-    --color-fg: var(--color-orange-900);
-    --color-fg-dark: var(--color-orange-200);
-    --color-fg-inactive: var(--color-stone-500);
-    --color-fg-inactive-dark: var(--color-stone-500);
-    
-    --color-primary: var(--color-red-600);
-    --color-secondary: var(--color-yellow-600);
-    
-    --color-line: var(--color-stone-800);
-    --color-line-dark: var(--color-stone-300);
+  --color-bg: var(--color-orange-100);
+  --color-bg-dark: var(--color-stone-950);
+  --color-bg-2: var(--color-orange-200);
+  --color-bg-2-dark: var(--color-stone-900);
+  --color-bg-3: var(--color-orange-50);
+  --color-bg-3-dark: var(--color-stone-700);
+
+  --color-fg: var(--color-orange-900);
+  --color-fg-dark: var(--color-orange-200);
+  --color-fg-inactive: var(--color-stone-500);
+  --color-fg-inactive-dark: var(--color-stone-500);
+
+  --color-primary: var(--color-red-600);
+  --color-secondary: var(--color-yellow-600);
+
+  --color-line: var(--color-stone-800);
+  --color-line-dark: var(--color-stone-300);
 }

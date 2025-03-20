@@ -7,82 +7,95 @@ interface Props {
   dark?: string;
 }
 
-const {title} = Astro.props;
+const { title } = Astro.props;
 
 const themeColor = {
-    light: Astro.props.light ?? '#FEECD3',
-    dark: Astro.props.dark ?? '#0A0807'
-}
+  light: Astro.props.light ?? "#FEECD3",
+  dark: Astro.props.dark ?? "#0A0807",
+};
 
 const rssLink = new URL(`${import.meta.env.BASE_URL}/rss.xml`, Astro.site);
 
 interface Link {
-    href: URL;
-    text: string;
+  href: URL;
+  text: string;
 }
 
-const links: Link[] = [{
-        href: new URL("https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"),
-        text: "Datenschutz",
-    }, {
-        href: rssLink,
-        text: 'RSS'
-}]
-
+const links: Link[] = [
+  {
+    href: new URL(
+      "https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement",
+    ),
+    text: "Datenschutz",
+  },
+  {
+    href: rssLink,
+    text: "RSS",
+  },
+];
 ---
 
 <!doctype html>
 <html lang="de-de" prefix="og: https://ogp.me/ns#">
-<head>
-    <meta charset="UTF-8"/>
+  <head>
+    <meta charset="UTF-8" />
     <meta property="og:locale" content="de_DE" />
-    <meta name="viewport" content="width=device-width"/>
-    <link rel="icon" type="image/svg+xml" href="/travel/favicon.svg"/>
-    <meta name="generator" content={Astro.generator}/>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/travel/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
     <!-- this is a quickfix, maybe there is a better way though -->
-    <meta name="theme-color" content={themeColor.light} media="(prefers-color-scheme: light)"/>
-    <meta name="theme-color" content={themeColor.dark} media="(prefers-color-scheme: dark)"/>
+    <meta
+      name="theme-color"
+      content={themeColor.light}
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content={themeColor.dark}
+      media="(prefers-color-scheme: dark)"
+    />
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta property="og:title" content={title} />
     <meta property="og:url" content={Astro.url} />
     <meta property="og:site_name" content="Lorenz Reiseberichte" />
     <slot name="meta">
-        <meta name="description" content="Reiseblog von Lorenz Hoffmann"/>
-        <meta property="og:description" content="Reiseblog von Lorenz Hoffmann"/>
-        <meta property="og:type" content="website" />
+      <meta name="description" content="Reiseblog von Lorenz Hoffmann" />
+      <meta property="og:description" content="Reiseblog von Lorenz Hoffmann" />
+      <meta property="og:type" content="website" />
     </slot>
-    <link rel="alternate" type="application/rss+xml" href={rssLink}/>
-</head>
+    <link rel="alternate" type="application/rss+xml" href={rssLink} />
+  </head>
 
+  <body
+    class="-z-50 flex h-screen flex-col justify-between bg-bg font-sans text-fg selection:bg-primary selection:text-bg dark:bg-bg-dark dark:text-fg-dark"
+  >
+    <div class="absolute top-0 left-0 -z-40 h-screen w-screen">
+      <slot name="background" />
+    </div>
 
-<body class="flex flex-col justify-between h-screen font-sans 
-text-fg bg-bg dark:text-fg-dark dark:bg-bg-dark
-selection:bg-primary selection:text-bg
- -z-50">
-
-<div class="absolute top-0 left-0 w-screen h-screen -z-40">
-    <slot name="background"/>
-</div>
-
-<div class="flex">
-    <aside>
+    <div class="flex">
+      <aside>
         <slot name="aside" />
-    </aside>
-    
-    <div class="grow">
+      </aside>
+
+      <div class="grow">
         <main class="flex flex-col items-center overflow-auto">
-            <slot/>
+          <slot />
         </main>
 
-        <footer class="flex justify-center gap-8 m-2 text-fg-inactive dark:text-fg-inactive-dark">
-            {links.map(l => (
-                    <a href={l.href} class="hover:underline">{l.text}</a>
-            ))}
+        <footer
+          class="m-2 flex justify-center gap-8 text-fg-inactive dark:text-fg-inactive-dark"
+        >
+          {
+            links.map((l) => (
+              <a href={l.href} class="hover:underline">
+                {l.text}
+              </a>
+            ))
+          }
         </footer>
+      </div>
     </div>
-</div>
-
-
-</body>
+  </body>
 </html>

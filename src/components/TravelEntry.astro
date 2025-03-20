@@ -1,39 +1,42 @@
 ---
-import {dateFormatter, getPreviewAlt} from "@utils/general";
+import { dateFormatter, getPreviewAlt } from "@utils/general";
 import { Icon } from "astro-icon/components";
 import JourneyIcon from "@components/TypeIcon.astro";
-import {journeyTypes} from "../utils/types";
-import { Image } from 'astro:assets';
-import {type CollectionEntry} from "astro:content";
+import { journeyTypes } from "../utils/types";
+import { Image } from "astro:assets";
+import { type CollectionEntry } from "astro:content";
 import AstroConfig from "../../astro.config.mjs";
 
 interface Props {
-    journey: CollectionEntry<"posts">,
+  journey: CollectionEntry<"posts">;
 }
 
 const { journey } = Astro.props;
 ---
 
 <li>
-    <a href={new URL(`${import.meta.env.BASE_URL}/${journey.id}`, Astro.url)} class="flex items-center gap-4 group
-    backdrop-filter backdrop-blur-md transition-colors duration-300
-    bg-bg/50 dark:bg-bg-dark/50 
-    border-2 border-bg-2 dark:border-bg-2-dark focus:border-primary focus:outline-none
-    hover:bg-bg-3 dark:hover:bg-bg-2-dark dark:hover:border-bg-3-dark
-    active:bg-primary active:text-bg
-    visited:text-fg-inactive dark:visited:text-fg-inactive-dark
-    rounded-2xl px-4 py-3 
-    decoration-none select-none">
-        <Image src={journey.data.image} alt={journey.data.alt} width={64} height={64} class="rounded-xl object-cover w-16 h-16 sepia group-hover:sepia-0 transition-all" loading="eager"/>
-        <div>
-            <h2 class="font-bold text-xl inline-flex mr-2 items-baseline">
-                {journey.data.title} <Icon name="mdi:chevron-right" />
-            </h2>
-            <div class="flex gap-2">
-                <JourneyIcon type={journeyTypes[journey.data.type]} />
-                <div>·</div>
-                {dateFormatter(journey.data.date, Astro.currentLocale)}
-            </div>
-        </div>
-    </a>
+  <a
+    href={new URL(`${import.meta.env.BASE_URL}/${journey.id}`, Astro.url)}
+    class="group decoration-none flex items-center gap-4 rounded-2xl border-2 border-bg-2 bg-bg/50 px-4 py-3 backdrop-blur-md backdrop-filter transition-colors duration-300 select-none visited:text-fg-inactive hover:bg-bg-3 focus:border-primary focus:outline-none active:bg-primary active:text-bg dark:border-bg-2-dark dark:bg-bg-dark/50 dark:visited:text-fg-inactive-dark dark:hover:border-bg-3-dark dark:hover:bg-bg-2-dark"
+  >
+    <Image
+      src={journey.data.image}
+      alt={journey.data.alt}
+      width={64}
+      height={64}
+      class="h-16 w-16 rounded-xl object-cover sepia transition-all group-hover:sepia-0"
+      loading="eager"
+    />
+    <div>
+      <h2 class="mr-2 inline-flex items-baseline text-xl font-bold">
+        {journey.data.title}
+        <Icon name="mdi:chevron-right" />
+      </h2>
+      <div class="flex gap-2">
+        <JourneyIcon type={journeyTypes[journey.data.type]} />
+        <div>·</div>
+        {dateFormatter(journey.data.date, Astro.currentLocale)}
+      </div>
+    </div>
+  </a>
 </li>

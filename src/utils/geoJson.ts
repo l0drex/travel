@@ -1,9 +1,6 @@
 import { MathUtils, Vector3 } from "three";
-import type {
-  GeoJSON,
-  Position,
-} from "geojson";
-import {degToRad} from "three/src/math/MathUtils";
+import type { GeoJSON, Position } from "geojson";
+import { degToRad } from "three/src/math/MathUtils";
 
 export function getPoints(geoJson: GeoJSON): Position[] {
   if (geoJson.type === "FeatureCollection") {
@@ -24,46 +21,53 @@ export function getPoints(geoJson: GeoJSON): Position[] {
   }
 }
 
-export function getFeatureByName(name: string, geoJson: GeoJSON): GeoJSON | undefined {
-    if (geoJson.type === "FeatureCollection") {
-        return geoJson.features.map((f) => 
-            getFeatureByName(name, f))
-            .flat(1).find(f => f != null);
-    }
+export function getFeatureByName(
+  name: string,
+  geoJson: GeoJSON,
+): GeoJSON | undefined {
+  if (geoJson.type === "FeatureCollection") {
+    return geoJson.features
+      .map((f) => getFeatureByName(name, f))
+      .flat(1)
+      .find((f) => f != null);
+  }
 
-    if (geoJson.type === "Feature") {
-        if (geoJson.properties['name'] !== name) {
-            return undefined;
-        }
-        return geoJson;
+  if (geoJson.type === "Feature") {
+    if (geoJson.properties["name"] !== name) {
+      return undefined;
     }
+    return geoJson;
+  }
 }
 
 export function getPointsOf(name: string, geoJson: GeoJSON): Position[] {
-    if (geoJson.type === "FeatureCollection") {
-        return geoJson.features.map((f) => getPointsOf(name, f)).flat(1);
-    }
+  if (geoJson.type === "FeatureCollection") {
+    return geoJson.features.map((f) => getPointsOf(name, f)).flat(1);
+  }
 
-    if (geoJson.type === "Feature") {
-        if (geoJson.properties['name'] !== name) {
-            return [];
-        }
-        return getPoints(geoJson.geometry);
+  if (geoJson.type === "Feature") {
+    if (geoJson.properties["name"] !== name) {
+      return [];
     }
+    return getPoints(geoJson.geometry);
+  }
 
-    switch (geoJson.type) {
-        case "LineString":
-            return geoJson.coordinates;
-        case "MultiLineString":
-            return geoJson.coordinates.flat(1);
-        default:
-            return [];
-    }
+  switch (geoJson.type) {
+    case "LineString":
+      return geoJson.coordinates;
+    case "MultiLineString":
+      return geoJson.coordinates.flat(1);
+    default:
+      return [];
+  }
 }
 
-export function reduceSize<T extends {y: number}>(array: T[], precision: number) {
-  const filtered = [array[0]]
-  
+export function reduceSize<T extends { y: number }>(
+  array: T[],
+  precision: number,
+) {
+  const filtered = [array[0]];
+
   let last = array[0];
   for (const v of array) {
     if (Math.abs(v.y - last.y) < precision) continue;

@@ -2,12 +2,12 @@
 import type { GeoJSON } from "geojson";
 import ElevationGraph from "@components/track/ElevationGraph.vue";
 import MapView from "@components/track/MapView.vue";
-import {computed} from "vue";
-import {getFeatureByName} from "@utils/geoJson.ts";
-import {useUrlTitle} from "@utils/title.ts";
+import { computed } from "vue";
+import { getFeatureByName } from "@utils/geoJson.ts";
+import { useUrlTitle } from "@utils/title.ts";
 
-const {geoJson} = defineProps<{
-  geoJson: GeoJSON
+const { geoJson } = defineProps<{
+  geoJson: GeoJSON;
 }>();
 
 // show feature currently selected
@@ -24,7 +24,6 @@ const currentFeature = computed(() => {
   }
   return feature;
 });
-
 </script>
 
 <template>

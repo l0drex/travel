@@ -1,20 +1,16 @@
 ---
-
 interface Props {
-    href: string | URL,
+  href: string | URL;
 }
 
-const {href} = Astro.props;
-
+const { href } = Astro.props;
 ---
 
-<a href={href} class="
-        flex items-center gap-1 px-2 py-1 my-5 first:mt-0 last:mb-0 h-min w-max
-        border-2 rounded-lg border-fg dark:border-fg-dark
-        bg-bg dark:bg-bg-dark
-        hover:bg-fg hover:text-bg hover:dark:bg-fg-dark hover:dark:text-bg-dark
-        ">
-    <slot name="icon" />
+<a
+  href={href}
+  class="my-5 flex h-min w-max items-center gap-1 rounded-lg border-2 border-fg bg-bg px-2 py-1 first:mt-0 last:mb-0 hover:bg-fg hover:text-bg dark:border-fg-dark dark:bg-bg-dark hover:dark:bg-fg-dark hover:dark:text-bg-dark"
+>
+  <slot name="icon" />
 
-    <slot/>
+  <slot />
 </a>

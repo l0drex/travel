@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { positionAtCoordinate } from "@utils/geoJson.ts";
-import {getColorPropertyArray} from "@utils/color.ts";
+import { getColorPropertyArray } from "@utils/color.ts";
 
 const primary = getColorPropertyArray("primary");
 
@@ -13,7 +13,7 @@ const dotLook = positionAtCoordinate(location[0], location[1], 1);
 
 <template>
   <TresMesh :position="dotPos" :look-at="dotLook">
-    <TresCircleGeometry :args="[.005, 32]" />
+    <TresCircleGeometry :args="[0.005, 32]" />
     <TresMeshStandardMaterial :color="primary" />
   </TresMesh>
 </template>

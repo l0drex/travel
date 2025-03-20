@@ -1,11 +1,11 @@
-import { DOMParser } from '@xmldom/xmldom';
-import { gpx as gpxToJson } from '@tmcw/togeojson';
-import type {Loader, LoaderContext} from "astro/loaders";
+import { DOMParser } from "@xmldom/xmldom";
+import { gpx as gpxToJson } from "@tmcw/togeojson";
+import type { Loader, LoaderContext } from "astro/loaders";
 import fs from "node:fs";
-import {fileURLToPath} from "node:url";
-import {z} from "astro:content";
+import { fileURLToPath } from "node:url";
+import { z } from "astro:content";
 import path from "node:path";
-import type {GeoJSON} from "geojson";
+import type { GeoJSON } from "geojson";
 
 export async function parseGpx(code: string) {
   const xml = new DOMParser().parseFromString(code, "text/xml");
@@ -15,10 +15,10 @@ export async function parseGpx(code: string) {
 }
 
 async function loadGpxFiles(directory: string, context: LoaderContext) {
-  fs.readdir(directory, {withFileTypes: true}, (err, files) => {
+  fs.readdir(directory, { withFileTypes: true }, (err, files) => {
     if (err) throw err;
 
-    files.forEach(f => {
+    files.forEach((f) => {
       if (!f.isFile()) {
         return;
       }
@@ -28,7 +28,7 @@ async function loadGpxFiles(directory: string, context: LoaderContext) {
 
       updateFile(path, context);
     });
-  })
+  });
 }
 
 async function updateFile(filePath: string, context: LoaderContext) {
@@ -36,14 +36,14 @@ async function updateFile(filePath: string, context: LoaderContext) {
   const fileName = path.basename(filePath).replace(/\.gpx$/, "");
   // path to file relative to project root
   const relativePath = filePath.replace(fileURLToPath(context.config.root), "");
-  
-  fs.readFile(filePath, {encoding: "utf-8"}, async (err, data) => {
+
+  fs.readFile(filePath, { encoding: "utf-8" }, async (err, data) => {
     if (err) throw err;
-        
+
     const parsedData = await context.parseData({
       id: fileName,
       data: await parseGpx(data),
-      filePath: relativePath
+      filePath: relativePath,
     });
     const digest = context.generateDigest(parsedData);
 
@@ -51,7 +51,7 @@ async function updateFile(filePath: string, context: LoaderContext) {
       id: fileName,
       data: parsedData,
       digest,
-      filePath: relativePath
+      filePath: relativePath,
     });
   });
 }
@@ -76,7 +76,7 @@ export function gpxLoader(options: { url: string }): Loader {
         if (!changedPath.startsWith(filePath)) {
           return;
         }
-        
+
         context.logger.info("Updating file " + changedPath);
         await updateFile(changedPath, context);
       });
@@ -86,6 +86,6 @@ export function gpxLoader(options: { url: string }): Loader {
     // It will be overridden by user-defined schema.
     schema: async () => {
       return z.custom<GeoJSON>();
-    }
+    },
   };
 }

@@ -4,43 +4,45 @@ import type { CollectionEntry } from "astro:content";
 import Layout from "@layouts/BaseLayout.astro";
 import EarthOverview from "@components/earth/EarthOverview.vue";
 import BlogListEntry from "@components/TravelEntry.astro";
-import type {Journey} from "@utils/types";
-import {getPoints} from "@utils/geoJson";
+import type { Journey } from "@utils/types";
+import { getPoints } from "@utils/geoJson";
 
-
-const posts: CollectionEntry<"posts">[] = (await getCollection("posts"))
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const posts: CollectionEntry<"posts">[] = (await getCollection("posts")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
 
 async function getJourneys() {
-    const journeys: Journey[] = [];
+  const journeys: Journey[] = [];
 
-    for (let p of posts) {
-        const entry = await getEntry(p.data.gpx);
-        const geoJson = entry.data;
-        const points = getPoints(geoJson);
-        const coordinates = points[points.length - 1];
-        // longitude, latitude
-        const loc: [number, number] = [coordinates[1], coordinates[0]];
+  for (let p of posts) {
+    const entry = await getEntry(p.data.gpx);
+    const geoJson = entry.data;
+    const points = getPoints(geoJson);
+    const coordinates = points[points.length - 1];
+    // longitude, latitude
+    const loc: [number, number] = [coordinates[1], coordinates[0]];
 
-        journeys.push({
-            location: loc
-        });
-    }
+    journeys.push({
+      location: loc,
+    });
+  }
 
-    return journeys;
+  return journeys;
 }
 
 const journeys = await getJourneys();
 ---
 
 <Layout title="/travel">
-    <EarthOverview client:only="vue" journeys={journeys} slot="background" />
-    
-    <h1 class="text-5xl font-extrabold mb-20 mt-30 text-center mx-5 sm:text-6xl text-primary">
-        Discover my Adventures!
-    </h1>
-    
-    <ul id="blogs" class="flex flex-col gap-3">
-        {posts.map(p => <BlogListEntry journey={p} />)}
-    </ul>
+  <EarthOverview client:only="vue" journeys={journeys} slot="background" />
+
+  <h1
+    class="mx-5 mt-30 mb-20 text-center text-5xl font-extrabold text-primary sm:text-6xl"
+  >
+    Discover my Adventures!
+  </h1>
+
+  <ul id="blogs" class="flex flex-col gap-3">
+    {posts.map((p) => <BlogListEntry journey={p} />)}
+  </ul>
 </Layout>

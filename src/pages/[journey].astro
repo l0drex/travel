@@ -1,25 +1,34 @@
 ---
-import type {GetStaticPaths, InferGetStaticParamsType, InferGetStaticPropsType} from "astro";
-import { getCollection, getEntry, render, type CollectionEntry } from "astro:content";
+import type {
+  GetStaticPaths,
+  InferGetStaticParamsType,
+  InferGetStaticPropsType,
+} from "astro";
+import {
+  getCollection,
+  getEntry,
+  render,
+  type CollectionEntry,
+} from "astro:content";
 import Layout from "@layouts/BaseLayout.astro";
 import TrackView from "@components/track/TrackView.vue";
 import authors from "src/authors.json";
-import {journeyTypes} from "../utils/types";
+import { journeyTypes } from "../utils/types";
 import JourneyType from "../components/TypeIcon.astro";
-import {dateFormatter} from "../utils/general";
-import {getImage} from "astro:assets";
+import { dateFormatter } from "../utils/general";
+import { getImage } from "astro:assets";
 import JourneyContent from "@components/JourneyContent.astro";
 import Button from "@components/Button.astro";
 import { Icon } from "astro-icon/components";
 import TitleNav from "@components/TitlesNav.astro";
 
 export const getStaticPaths = (async () => {
-    const posts: CollectionEntry<'posts'>[] = await getCollection("posts");
+  const posts: CollectionEntry<"posts">[] = await getCollection("posts");
 
-    return posts.map((entry) => ({
-        params: { journey: entry.id.replace(/.md$/, "") },
-        props: { entry },
-    }));
+  return posts.map((entry) => ({
+    params: { journey: entry.id.replace(/.md$/, "") },
+    props: { entry },
+  }));
 }) satisfies GetStaticPaths;
 
 type Params = InferGetStaticParamsType<typeof getStaticPaths>;
@@ -37,69 +46,73 @@ const machineDate = jsDate.toISOString();
 const humanDate = dateFormatter(jsDate, Astro.currentLocale);
 
 const ogImage = await getImage({
-    src: entry.data.image,
-    width: 1200,
-    height: 630,
-    format: "webp",
+  src: entry.data.image,
+  width: 1200,
+  height: 630,
+  format: "webp",
 });
-
 ---
 
 <Layout title={entry.data.title}>
-    <Fragment slot="meta">
-        <meta property="og:type" content="article" />
-        <meta property="article:section" content="travel"/>
-        <meta property="article:section" content={entry.data.type} />
-        <meta property="article:tag" content="travel" />
-        <meta property="article:tag" content={entry.data.type} />
-        
-        <meta name="date" content={machineDate} />
-        <meta property="article:published_time" content={machineDate} />
-        
-        <meta name="author" content={author.name}/>
-        <meta name="fediverse:creator" content={author.fediverse}/>
-        <meta property="article:author" content={author.name}/>
-        
-        <meta name="description" content={entry.data.description} />
-        <meta property="og:description" content={entry.data.description} />
-        
-        <meta property="og:image" content={ogImage.src}/>
-        <meta property="og:image:width" content={`${ogImage.options.width}`}/>
-        <meta property="og:image:height" content={`${ogImage.options.height}`}/>
-        <meta property="og:image:format" content={ogImage.options.format}/>
-        <meta property="og:image:alt" content={entry.data.alt}/>
-    </Fragment>
+  <Fragment slot="meta">
+    <meta property="og:type" content="article" />
+    <meta property="article:section" content="travel" />
+    <meta property="article:section" content={entry.data.type} />
+    <meta property="article:tag" content="travel" />
+    <meta property="article:tag" content={entry.data.type} />
 
-    <section class="w-full m-auto pt-10 pb-4 bg-bg-2 dark:bg-bg-2-dark">
-        <h1 class="font-bold text-4xl sm:text-5xl0 mt-8 md:mt-0 mb-4 text-center">{entry.data.title}</h1>
-        <div class="text-center text-2xl mb-8 flex align-baseline gap-2 justify-center">
-            {(<JourneyType type={journeyType} />)}
-            <span>·</span>
-            <time datetime={jsDate.toISOString()}>{humanDate}</time>
-        </div>
+    <meta name="date" content={machineDate} />
+    <meta property="article:published_time" content={machineDate} />
 
-        <div class="max-w-5xl mx-auto">
-            <TrackView client:only="vue" geoJson={geoJson.data}/>
-        </div>
-    </section>
+    <meta name="author" content={author.name} />
+    <meta name="fediverse:creator" content={author.fediverse} />
+    <meta property="article:author" content={author.name} />
 
-    <JourneyContent>
-        <Content />
-    </JourneyContent>
-    
-    <nav slot="aside" class="w-max h-screen sticky top-0 hidden md:flex flex-col justify-between px-5 py-10 items-center dark:bg-bg-2-dark overflow-y-auto">
+    <meta name="description" content={entry.data.description} />
+    <meta property="og:description" content={entry.data.description} />
 
-        <Button href={import.meta.env.BASE_URL}>
-            <Icon name="mdi:chevron-left" slot="icon"/>
-            Zurück zur Übersicht
-        </Button>
-        
-        <TitleNav headings={headings} />
+    <meta property="og:image" content={ogImage.src} />
+    <meta property="og:image:width" content={`${ogImage.options.width}`} />
+    <meta property="og:image:height" content={`${ogImage.options.height}`} />
+    <meta property="og:image:format" content={ogImage.options.format} />
+    <meta property="og:image:alt" content={entry.data.alt} />
+  </Fragment>
 
-        <Button href={Astro.url}>
-            <Icon name="mdi:chevron-up" slot="icon"/>
-            Zurück nach oben
-        </Button>
-        
-    </nav>
+  <section class="m-auto w-full bg-bg-2 pt-10 pb-4 dark:bg-bg-2-dark">
+    <h1 class="sm:text-5xl0 mt-8 mb-4 text-center text-4xl font-bold md:mt-0">
+      {entry.data.title}
+    </h1>
+    <div
+      class="mb-8 flex justify-center gap-2 text-center align-baseline text-2xl"
+    >
+      {(<JourneyType type={journeyType} />)}
+      <span>·</span>
+      <time datetime={jsDate.toISOString()}>{humanDate}</time>
+    </div>
+
+    <div class="mx-auto max-w-5xl">
+      <TrackView client:only="vue" geoJson={geoJson.data} />
+    </div>
+  </section>
+
+  <JourneyContent>
+    <Content />
+  </JourneyContent>
+
+  <nav
+    slot="aside"
+    class="sticky top-0 hidden h-screen w-max flex-col items-center justify-between overflow-y-auto px-5 py-10 md:flex dark:bg-bg-2-dark"
+  >
+    <Button href={import.meta.env.BASE_URL}>
+      <Icon name="mdi:chevron-left" slot="icon" />
+      Zurück zur Übersicht
+    </Button>
+
+    <TitleNav headings={headings} />
+
+    <Button href={Astro.url}>
+      <Icon name="mdi:chevron-up" slot="icon" />
+      Zurück nach oben
+    </Button>
+  </nav>
 </Layout>

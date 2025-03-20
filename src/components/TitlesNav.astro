@@ -1,96 +1,115 @@
 ---
-import {type MarkdownHeading} from "astro";
+import { type MarkdownHeading } from "astro";
 
 interface Props {
-    headings: Array<MarkdownHeading>,
-    depth?: number
+  headings: Array<MarkdownHeading>;
+  depth?: number;
 }
 
-const {headings} = Astro.props;
-let {depth} = Astro.props;
+const { headings } = Astro.props;
+let { depth } = Astro.props;
 depth ??= 1;
 
 function subheaders(heading: MarkdownHeading) {
-    const index = headings.indexOf(heading);
-    
-    if (index < 0) {
-        throw new Error("Could not find heading " + heading.text);
-    }
-    
-    const followings = headings.slice(index + 1);
-    let nextIndex = followings.findIndex(h => h.depth === 1);
+  const index = headings.indexOf(heading);
 
-    if (nextIndex < 0) {
-        nextIndex = headings.length - 1;
-    }
-    
-    followings.length = nextIndex;
-    return followings;
+  if (index < 0) {
+    throw new Error("Could not find heading " + heading.text);
+  }
+
+  const followings = headings.slice(index + 1);
+  let nextIndex = followings.findIndex((h) => h.depth === 1);
+
+  if (nextIndex < 0) {
+    nextIndex = headings.length - 1;
+  }
+
+  followings.length = nextIndex;
+  return followings;
 }
-
 ---
 
-{(headings.length > 0) && 
-<ol class={depth === 1 ? "font-bold text-lg list-decimal ml-8" : "font-normal text-base"}>
-    {
-        headings.filter(h => h.depth === depth).map((heading) =>
-                <li class={depth === 1 ? "not-last:mb-2 navelement" : "not-last:mb-1 navelement"}>
-                    <a href={"#" + heading.slug} class="hover:text-primary">{heading.text}</a>
+{
+  headings.length > 0 && (
+    <ol
+      class={
+        depth === 1
+          ? "ml-8 list-decimal text-lg font-bold"
+          : "text-base font-normal"
+      }
+    >
+      {headings
+        .filter((h) => h.depth === depth)
+        .map((heading) => (
+          <li
+            class={
+              depth === 1
+                ? "navelement not-last:mb-2"
+                : "navelement not-last:mb-1"
+            }
+          >
+            <a href={"#" + heading.slug} class="hover:text-primary">
+              {heading.text}
+            </a>
 
-                    {depth === 1 && 
-                            <Astro.self headings={subheaders(heading)} depth={2}/>
-                    }
-                </li>)
-    }
-</ol>}
+            {depth === 1 && (
+              <Astro.self headings={subheaders(heading)} depth={2} />
+            )}
+          </li>
+        ))}
+    </ol>
+  )
+}
 
 <script>
-    const elements = document.querySelectorAll(".navelement a");
+  const elements = document.querySelectorAll(".navelement a");
 
-    function refreshElements(hash: string) {        
-        if (hash === "") {
-            for (let e of elements) {
-                e.classList.remove("text-primary");
-            }
-            
-            return;
-        }
-        
-        for (const e of elements) {
-            if (e.getAttribute("href")?.includes(hash)) {
-                e.classList.add("text-primary");
-            } else {
-                e.classList.remove("text-primary");
-            }
-        }
+  function refreshElements(hash: string) {
+    if (hash === "") {
+      for (let e of elements) {
+        e.classList.remove("text-primary");
+      }
+
+      return;
     }
-    
-    refreshElements(decodeURI(new URL(document.URL).hash));
-    window.addEventListener("hashchange", e => decodeURI(new URL(e.newURL).hash));
-    
-    // put current element in url
-    
-    const headers = document.querySelectorAll("article h1, article h2");
-    
-    function updateHash() {
-        let visible: Element | null = null;
-        headers.forEach(header => {
-            if (visible != null) {
-                return;
-            }
 
-            const pos = header.getBoundingClientRect();
-            
-            if (pos.top > 0 && pos.bottom <= window.innerHeight) {
-                visible = header;
-            }
-        })
-
-        if (visible != null) {
-            // TODO this works, but no hashchange event is sent. use vue state instead? or update on scroll?
-            history.replaceState(undefined,  '', '#' + visible.id);
-            refreshElements(visible.id);
-        }
+    for (const e of elements) {
+      if (e.getAttribute("href")?.includes(hash)) {
+        e.classList.add("text-primary");
+      } else {
+        e.classList.remove("text-primary");
+      }
     }
-    window.addEventListener("scrollend", updateHash);
+  }
+
+  refreshElements(decodeURI(new URL(document.URL).hash));
+  window.addEventListener("hashchange", (e) =>
+    decodeURI(new URL(e.newURL).hash),
+  );
+
+  // put current element in url
+
+  const headers = document.querySelectorAll("article h1, article h2");
+
+  function updateHash() {
+    let visible: Element | null = null;
+    headers.forEach((header) => {
+      if (visible != null) {
+        return;
+      }
+
+      const pos = header.getBoundingClientRect();
+
+      if (pos.top > 0 && pos.bottom <= window.innerHeight) {
+        visible = header;
+      }
+    });
+
+    if (visible != null) {
+      // TODO this works, but no hashchange event is sent. use vue state instead? or update on scroll?
+      history.replaceState(undefined, "", "#" + visible.id);
+      refreshElements(visible.id);
+    }
+  }
+  window.addEventListener("scrollend", updateHash);
 </script>
