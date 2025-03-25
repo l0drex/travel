@@ -38,7 +38,7 @@ To learn more about the folder structure of an Astro project, refer to [our guid
 All commands are run from the root of the project, from a terminal:
 
 | Command                    | Action                                           |
-|:---------------------------| :----------------------------------------------- |
+| :------------------------- | :----------------------------------------------- |
 | `yarn install`             | Installs dependencies                            |
 | `yarn run dev`             | Starts local dev server at `localhost:4321`      |
 | `yarn run build`           | Build your production site to `./dist/`          |

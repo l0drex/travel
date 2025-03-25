@@ -9,15 +9,16 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   site: "https://l0drex.github.io",
   base: "/travel",
-  integrations: [vue({
-      ...templateCompilerOptions
-  }), icon()],
+  integrations: [
+    vue({
+      ...templateCompilerOptions,
+    }),
+    icon(),
+  ],
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
   },
   image: {
-    domains: [
-        'hoffmanns.cloud'
-    ]
-  }
+    domains: ["hoffmanns.cloud"],
+  },
 });
