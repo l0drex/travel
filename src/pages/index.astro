@@ -36,13 +36,15 @@ const journeys = await getJourneys();
 <Layout title="/travel">
   <EarthOverview client:only="vue" journeys={journeys} slot="background" />
 
-  <h1
-    class="mx-5 mt-30 mb-20 text-center text-5xl font-extrabold text-primary sm:text-6xl"
-  >
-    Discover my Adventures!
-  </h1>
+  <div class="flex min-h-full flex-col place-content-center items-center">
+    <h1
+      class="mx-5 mt-5 mb-10 text-center text-5xl font-extrabold text-primary sm:text-6xl"
+    >
+      Discover my Adventures!
+    </h1>
 
-  <ul id="blogs" class="m-auto flex w-max flex-col gap-3">
-    {posts.map((p) => <BlogListEntry journey={p} />)}
-  </ul>
+    <ul id="blogs" class="flex w-max flex-col gap-3">
+      {posts.map((p) => <BlogListEntry journey={p} />)}
+    </ul>
+  </div>
 </Layout>
