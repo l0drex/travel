@@ -6,49 +6,51 @@ import {
   LinearSRGBColorSpace,
   MeshLambertMaterial,
   Quaternion,
-  RGBAFormat,
   Spherical,
   TextureLoader,
   Vector3,
 } from "three";
 import { type TresInstance, useLoop } from "@tresjs/core";
-import color from "@assets/earth/2k_earth_bw.jpg";
+import waterMap from "@assets/earth/2k_earth_bw.jpg";
 import JourneyPoint from "./JourneyPoint.vue";
 import { usePreferredDark } from "@vueuse/core";
 import { toRadians } from "chart.js/helpers";
 import type { Journey } from "@utils/types.ts";
 import { getColorProperty } from "@utils/color.ts";
 
+const { journeys } = defineProps<{
+  journeys: Journey[];
+}>();
+
 const { onBeforeRender } = useLoop();
 const prefersDark = usePreferredDark();
-
-const bg1 = getColorProperty("bg");
-const bg1Dark = getColorProperty("bg-dark");
-const bg2 = getColorProperty("bg-2");
-const bg2Dark = getColorProperty("bg-2-dark");
 
 // the earth
 
 function getEarthMaterial() {
-  const earthTexture = new TextureLoader().load(color.src);
-  const bg = prefersDark.value ? bg1Dark : bg1;
-  const earth = prefersDark.value ? bg2Dark : bg2;
+  // create gradient texture based on bg colors
+  const bg = getColorProperty(
+    prefersDark.value ? "bg-dark" : "bg",
+  ).value.toJSON().coords;
+  const earth = getColorProperty(
+    prefersDark.value ? "bg-2-dark" : "bg-2",
+  ).value.toJSON().coords;
 
-  // colors should be vec4
+  // colors must be vec4 (rgba)
   const gradientData = new Uint8Array(
-    [...bg.value.toJSON().coords, 1, ...earth.value.toJSON().coords, 1].map(
-      (c) => Math.trunc(c * 255),
-    ),
+    [...bg, 1, ...earth, 1].map((c) => Math.trunc(c * 255)),
   );
 
-  const gradientTexture = new DataTexture(gradientData, 2, 1, RGBAFormat);
+  const gradientTexture = new DataTexture(gradientData, 2, 1);
   gradientTexture.needsUpdate = true;
   // TODO colorjs is in srgb, but explicitly setting linear srgb here seems to be correct??
   gradientTexture.colorSpace = LinearSRGBColorSpace; //bg.value.spaceId;
 
+  // black-white texture for water vs land
+  const earthTexture = new TextureLoader().load(waterMap.src);
+
   // we patch the existing lambert material for our use case
-  // we use the bw earth texture to map to foreground and background color
-  // and set the lighting color to the alpha
+  // we map the bw water texture multiplied with shadows to the gradient
   return new MeshLambertMaterial({
     map: earthTexture,
     onBeforeCompile: (shader) => {
@@ -69,10 +71,10 @@ function getEarthMaterial() {
       // language=Glsl
       const fragmentShader = `
         #include <dithering_fragment>
-        
+
         vec4 bwColor = texture2D(map, vMapUv);
-        float intensity = bwColor.r * reflectedLight.directDiffuse.r;  // assuming the texture is grayscale
-        
+        float intensity = bwColor.r * reflectedLight.directDiffuse.r;
+
         vec4 bg = texture2D(gradientTexture, vec2(0.0, 0.5));
         vec4 fg = texture2D(gradientTexture, vec2(1.0, 0.5));
         gl_FragColor = mix(bg, fg, intensity);
@@ -101,7 +103,7 @@ const cameraPosSpherical = new Spherical(
 );
 const cameraPos = new Vector3().setFromSpherical(cameraPosSpherical);
 
-// light that follows the camera position
+// directional light
 
 const lightPos = new Vector3();
 lightPos.setFromSphericalCoords(
@@ -136,10 +138,6 @@ onBeforeRender(({ delta, elapsed }) => {
 
   earthRef.value.rotation.setFromQuaternion(rotation);
 });
-
-const { journeys } = defineProps<{
-  journeys: Journey[];
-}>();
 </script>
 
 <template>
