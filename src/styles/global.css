@@ -1,5 +1,11 @@
 @import "tailwindcss";
+@config "../../tailwind.config.mts";
 
+/* use tailwind config in typescript, since this does not really work inside scripts 
+ * (variables are optimized away and no longer accessible) 
+ */
+
+/*
 @theme inline {
   --color-bg: var(--color-orange-100);
   --color-bg-dark: var(--color-stone-950);
@@ -19,3 +25,4 @@
   --color-line: var(--color-stone-800);
   --color-line-dark: var(--color-stone-300);
 }
+*/
