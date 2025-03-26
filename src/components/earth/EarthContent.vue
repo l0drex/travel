@@ -17,15 +17,15 @@ import JourneyPoint from "./JourneyPoint.vue";
 import { usePreferredDark } from "@vueuse/core";
 import { toRadians } from "chart.js/helpers";
 import type { Journey } from "@utils/types.ts";
-import { getColorPropertyArray } from "@utils/color.ts";
+import { getColorProperty } from "@utils/color.ts";
 
 const { onBeforeRender } = useLoop();
 const prefersDark = usePreferredDark();
 
-const bg1 = getColorPropertyArray("bg");
-const bg1Dark = getColorPropertyArray("bg-dark");
-const bg2 = getColorPropertyArray("bg-2");
-const bg2Dark = getColorPropertyArray("bg-2-dark");
+const bg1 = getColorProperty("bg");
+const bg1Dark = getColorProperty("bg-dark");
+const bg2 = getColorProperty("bg-2");
+const bg2Dark = getColorProperty("bg-2-dark");
 
 // the earth
 
@@ -36,13 +36,15 @@ function getEarthMaterial() {
 
   // colors should be vec4
   const gradientData = new Uint8Array(
-    [...bg.value, ...earth.value].map((c) => c * 255),
+    [...bg.value.toJSON().coords, 1, ...earth.value.toJSON().coords, 1].map(
+      (c) => Math.trunc(c * 255),
+    ),
   );
 
   const gradientTexture = new DataTexture(gradientData, 2, 1, RGBAFormat);
   gradientTexture.needsUpdate = true;
-  gradientTexture.colorSpace = LinearSRGBColorSpace;
-  gradientTexture.anisotropy = 8;
+  // TODO colorjs is in srgb, but explicitly setting linear srgb here seems to be correct??
+  gradientTexture.colorSpace = LinearSRGBColorSpace; //bg.value.spaceId;
 
   // we patch the existing lambert material for our use case
   // we use the bw earth texture to map to foreground and background color

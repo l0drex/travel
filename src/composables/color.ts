@@ -28,7 +28,7 @@ function getColorFromConfig(name: string): Color {
     throw new Error("Could not find color");
   }
 
-  return color.to("srgb");
+  return color.to("srgb").toGamut();
 }
 
 export function getColorProperty(name: string) {
@@ -43,7 +43,7 @@ export function getColorProperty(name: string) {
       return;
     }
 
-    color.value = new Color(prop).to("srgb");
+    color.value = new Color(prop).to("srgb").toGamut();
   });
 
   return color;
@@ -61,7 +61,6 @@ export function getColorPropertyArray(name: string) {
   return computed(() => {
     let c = color.value.toJSON();
     const colors = c.coords;
-    colors.push(1);
 
     return colors;
   });
