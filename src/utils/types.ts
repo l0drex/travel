@@ -13,21 +13,21 @@ export const journeyTypes: { [i: string]: JourneyType } = {
     name: {
       de: "Fahrrad",
     },
-    icon: "mdi:bike",
+    icon: "material-symbols:directions-bike-rounded",
   },
   hiking: {
     id: "hiking",
     name: {
       de: "Wandern",
     },
-    icon: "mdi:hiking",
+    icon: "material-symbols:hiking-rounded",
   },
   roadtrip: {
     id: "roadtrip",
     name: {
       de: "Roadtrip",
     },
-    icon: "mdi:car",
+    icon: "material-symbols:directions-car-rounded",
   },
 };
 

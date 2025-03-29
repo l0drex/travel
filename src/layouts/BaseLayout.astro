@@ -1,6 +1,7 @@
 ---
 import "@styles/global.css";
 import twconfig from "tailwind.config.mjs";
+import { Icon } from "astro-icon/components";
 
 interface Props {
   title: string;
@@ -20,6 +21,7 @@ const rssLink = new URL(`${import.meta.env.BASE_URL}/rss.xml`, Astro.site);
 interface Link {
   href: URL;
   text: string;
+  icon: string;
 }
 
 const links: Link[] = [
@@ -28,10 +30,12 @@ const links: Link[] = [
       "https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement",
     ),
     text: "Datenschutz",
+    icon: "material-symbols:lock-sharp",
   },
   {
     href: rssLink,
     text: "RSS",
+    icon: "material-symbols:rss-feed",
   },
 ];
 ---
@@ -88,7 +92,8 @@ const links: Link[] = [
       >
         {
           links.map((l) => (
-            <a href={l.href} class="hover:underline">
+            <a href={l.href} class="flex items-center gap-1 hover:underline">
+              <Icon name={l.icon} />
               {l.text}
             </a>
           ))
