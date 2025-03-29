@@ -1,4 +1,5 @@
 import colors from "tailwindcss/colors";
+import defaultTheme from "tailwindcss/defaultTheme";
 
 // this is still here for reliable access to variables outside of css
 
@@ -37,6 +38,10 @@ export default {
           DEFAULT: colors.stone["600"],
           dark: colors.stone["300"],
         },
+      },
+      fontFamily: {
+        sans: ["Noto Sans", ...defaultTheme.fontFamily.sans],
+        serif: ["Noto Serif", ...defaultTheme.fontFamily.serif],
       },
     },
   },

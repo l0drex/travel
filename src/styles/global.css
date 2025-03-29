@@ -3,6 +3,54 @@
 @config "../../tailwind.config.mts";
 @plugin "@tailwindcss/typography";
 
+/* Add custom fonts */
+
+@font-face {
+  font-family: "Noto Sans";
+  src:
+    local("Noto Sans"),
+    url("/travel/fonts/NotoSans-VariableFont_wdth,wght.ttf") format("truetype");
+  font-stretch: 62.5% 100%;
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Sans";
+  src:
+    local("Noto Sans"),
+    url("/travel/fonts/NotoSans-Italic-VariableFont_wdth,wght.ttf")
+      format("truetype");
+  font-stretch: 62.5% 100%;
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Serif";
+  src:
+    local("Noto Serif"),
+    url("/travel/fonts/NotoSerif-VariableFont_wdth,wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-stretch: 62.5% 100%;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Serif";
+  src:
+    local("Noto Serif"),
+    url("/travel/fonts/NotoSerif-Italic-VariableFont_wdth,wght.ttf")
+      format("truetype");
+  font-weight: 100 900;
+  font-stretch: 62.5% 100%;
+  font-style: italic;
+  font-display: swap;
+}
+
 /* use tailwind config in typescript, since this does not really work inside scripts 
  * (variables are optimized away and no longer accessible) 
  */
