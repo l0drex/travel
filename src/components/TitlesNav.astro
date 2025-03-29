@@ -42,7 +42,10 @@ function subheaders(heading: MarkdownHeading) {
         .filter((h) => h.depth === depth)
         .map((heading) => (
           <li class={depth === 1 ? "not-last:mb-2" : "not-last:mb-1"}>
-            <a href={"#" + heading.slug} class="hover:text-primary">
+            <a
+              href={"#" + heading.slug}
+              class="hover:text-primary focus:bg-primary focus:text-bg focus:outline-none"
+            >
               {heading.text}
             </a>
 
