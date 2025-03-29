@@ -2,7 +2,7 @@ import type { Loader } from "astro/loaders";
 import { createClient, type FileStat } from "webdav";
 import type { AstroConfig } from "astro";
 import type { RenderedContent } from "astro:content";
-import { getSecret } from "astro:env/server";
+import { NC_HOST, NC_TOKEN } from "astro:env/server";
 import {
   createMarkdownProcessor,
   parseFrontmatter,
@@ -24,21 +24,19 @@ const lastModifiedKey = "lastModified";
 // only for development
 const forceRerender = false;
 
-export const ncHost = getSecret("NC_HOST");
-export const ncToken = getSecret("NC_TOKEN");
-export const ncPath = `public.php/dav/files/${ncToken}/`;
+export const ncPath = `public.php/dav/files/${NC_TOKEN}/`;
 
 export function nextcloudLoader(options: WebDavOptions): Loader {
   return {
     name: "WebDAV Loader",
     load: async (context) => {
-      if (!ncHost) {
+      if (!NC_HOST) {
         throw new Error(
           "No host provided. Make sure that all necessary environment variables are set.",
         );
       }
 
-      const client = createClient(ncHost);
+      const client = createClient(NC_HOST);
 
       // check if data is already stored and update if necessary
 
@@ -147,7 +145,7 @@ export async function parseMarkdown(
   const path = filePath.split("/");
   path.pop();
   const directory = path.join("/");
-  const absolutePath = `${ncHost}${directory}/`;
+  const absolutePath = `${NC_HOST}${directory}/`;
 
   if (data.frontmatter.image) {
     data.frontmatter.image = new URL(data.frontmatter.image, absolutePath).href;
