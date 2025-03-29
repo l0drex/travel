@@ -17,11 +17,6 @@ export default {
             DEFAULT: colors.orange["200"],
             dark: colors.stone["900"],
           },
-          // 3rd lvl: hover state of journey list
-          3: {
-            DEFAULT: colors.orange["50"],
-            dark: colors.stone["700"],
-          },
         },
         // foreground (text)
         fg: {
