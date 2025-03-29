@@ -39,7 +39,10 @@ const { entry } = Astro.props;
 const { Content, headings } = await render(entry);
 
 const geoJson = await getEntry(entry.data.gpx);
-const author = authors[entry.data.author];
+const author = authors.find((a) => a.id === entry.data.author);
+if (author == null) {
+  throw new Error("No author found for this journey!");
+}
 const journeyType = journeyTypes[entry.data.type];
 
 const jsDate: Date = entry.data.date;
@@ -55,7 +58,7 @@ const ogImage = await getImage({
 ---
 
 <Layout
-  title={entry.data.title}
+  title={`${entry.data.title} – ${journeyType.name.de} von ${author.name}`}
   light={twconfig.theme.extend.colors.bg["2"].DEFAULT}
   dark={twconfig.theme.extend.colors.bg["2"].dark}
 >

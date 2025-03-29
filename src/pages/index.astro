@@ -6,6 +6,7 @@ import EarthOverview from "@components/earth/EarthOverview.vue";
 import BlogListEntry from "@components/TravelEntry.astro";
 import type { Journey } from "@utils/types";
 import { coordAll } from "@turf/turf";
+import authors from "src/authors.json";
 
 const posts: CollectionEntry<"posts">[] = (await getCollection("posts")).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
@@ -31,9 +32,11 @@ async function getJourneys() {
 }
 
 const journeys = await getJourneys();
+
+const mainAuthor = authors[0].name;
 ---
 
-<Layout title="/travel">
+<Layout title={`Reiseblog von ${mainAuthor}`}>
   <EarthOverview client:only="vue" journeys={journeys} slot="background" />
 
   <div class="flex min-h-full flex-col place-content-center items-center">
