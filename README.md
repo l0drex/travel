@@ -68,6 +68,8 @@ NC_HOST=https://example.com
 NC_TOKEN=secretToken
 ```
 
+Also set the host in `astro.config.mts` in image domains for image optimizations.
+
 You can get the token from the share url in Nextcloud, e.g. `https://example.com/s/secretToken`.
 
 Images can be referenced locally to the document. Otherwise, file structure doesn't matter, since the files are fetched by type.
