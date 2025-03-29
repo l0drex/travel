@@ -17,7 +17,7 @@ const { journey } = Astro.props;
 <li>
   <a
     href={new URL(`${import.meta.env.BASE_URL}/${journey.id}`, Astro.url)}
-    class="group decoration-none dark:hover:border-bg-3-dark flex items-center gap-4 rounded-2xl border-2 border-bg-2 border-line bg-bg/50 px-4 py-3 backdrop-blur-md backdrop-filter transition-colors duration-300 select-none visited:text-fg-inactive hover:border-primary hover:bg-bg focus:border-line focus:outline-none active:border-primary active:bg-primary active:text-bg dark:border-bg-2-dark dark:bg-bg-dark/50 dark:visited:text-fg-inactive-dark dark:hover:bg-bg-2-dark"
+    class="group decoration-none dark:hover:border-bg-3-dark flex items-center gap-4 rounded-2xl border-2 border-bg-2 border-line bg-bg/50 px-4 py-3 backdrop-blur-md backdrop-filter transition-colors duration-300 select-none visited:text-fg-inactive hover:border-primary hover:bg-bg-2 focus:border-line focus:outline-none active:border-primary active:bg-primary active:text-bg dark:border-line-dark dark:bg-bg-dark/50 dark:visited:text-fg-inactive-dark dark:hover:bg-bg-2-dark"
   >
     <Image
       src={journey.data.image}

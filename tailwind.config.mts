@@ -35,8 +35,8 @@ export default {
         secondary: colors.yellow["600"],
         // grid lines and borders
         line: {
-          DEFAULT: colors.stone["600"],
-          dark: colors.stone["300"],
+          DEFAULT: colors.stone["500"],
+          dark: colors.stone["500"],
         },
       },
       fontFamily: {
