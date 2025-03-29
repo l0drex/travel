@@ -10,11 +10,11 @@ export default {
       colors: {
         // background colors
         bg: {
-          DEFAULT: colors.orange["100"],
+          DEFAULT: colors.orange["50"],
           dark: colors.stone["950"],
           // 2nd lvl: citations, globe
           2: {
-            DEFAULT: colors.orange["200"],
+            DEFAULT: colors.orange["100"],
             dark: colors.stone["900"],
           },
         },
@@ -34,7 +34,7 @@ export default {
         secondary: colors.yellow["600"],
         // grid lines and borders
         line: {
-          DEFAULT: colors.stone["800"],
+          DEFAULT: colors.stone["600"],
           dark: colors.stone["300"],
         },
       },

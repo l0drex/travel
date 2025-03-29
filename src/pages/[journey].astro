@@ -21,6 +21,7 @@ import JourneyContent from "@components/MarkdownContent.astro";
 import Button from "@components/Button.astro";
 import { Icon } from "astro-icon/components";
 import TitleNav from "@components/TitlesNav.astro";
+import twconfig from "tailwind.config.mjs";
 
 export const getStaticPaths = (async () => {
   const posts: CollectionEntry<"posts">[] = await getCollection("posts");
@@ -53,7 +54,11 @@ const ogImage = await getImage({
 });
 ---
 
-<Layout title={entry.data.title}>
+<Layout
+  title={entry.data.title}
+  light={twconfig.theme.extend.colors.bg["2"].DEFAULT}
+  dark={twconfig.theme.extend.colors.bg["2"].dark}
+>
   <Fragment slot="meta">
     <meta property="og:type" content="article" />
     <meta property="article:section" content="travel" />
@@ -78,8 +83,10 @@ const ogImage = await getImage({
     <meta property="og:image:alt" content={entry.data.alt} />
   </Fragment>
 
-  <section class="m-auto w-full bg-bg-2 pt-10 pb-4 dark:bg-bg-2-dark">
-    <h1 class="sm:text-5xl0 mt-8 mb-4 text-center text-4xl font-bold md:mt-0">
+  <section class="w-fill m-auto bg-bg-2 pt-10 pb-4 dark:bg-bg-2-dark">
+    <h1
+      class="mt-8 mb-4 text-center font-serif text-4xl font-bold sm:text-5xl md:mt-0"
+    >
       {entry.data.title}
     </h1>
     <div

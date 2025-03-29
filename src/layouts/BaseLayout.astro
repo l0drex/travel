@@ -1,5 +1,6 @@
 ---
 import "@styles/global.css";
+import twconfig from "tailwind.config.mjs";
 
 interface Props {
   title: string;
@@ -10,8 +11,8 @@ interface Props {
 const { title } = Astro.props;
 
 const themeColor = {
-  light: Astro.props.light ?? "#FEECD3",
-  dark: Astro.props.dark ?? "#0A0807",
+  light: Astro.props.light ?? twconfig.theme.extend.colors.bg.DEFAULT,
+  dark: Astro.props.dark ?? twconfig.theme.extend.colors.bg.dark,
 };
 
 const rssLink = new URL(`${import.meta.env.BASE_URL}/rss.xml`, Astro.site);
@@ -43,7 +44,6 @@ const links: Link[] = [
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/travel/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <!-- this is a quickfix, maybe there is a better way though -->
     <meta
       name="theme-color"
       content={themeColor.light}
@@ -74,7 +74,7 @@ const links: Link[] = [
       <slot name="background" />
     </div>
 
-    <aside>
+    <aside class="bg-bg-2">
       <slot name="aside" />
     </aside>
 
