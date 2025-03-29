@@ -1,31 +1,24 @@
 @reference "./global.css";
 
 article {
-  * {
-    @apply first:mt-8;
-  }
-
-  h1 {
-    @apply mt-16 text-3xl font-extrabold;
-  }
-
-  h2 {
-    @apply mt-4 text-xl font-bold italic;
-  }
-
-  p {
-    @apply my-2 text-justify font-serif text-pretty hyphens-auto;
-  }
-
-  a {
-    @apply text-primary hover:underline;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif;
   }
 
   blockquote {
-    @apply border-l-4 border-fg bg-bg-2 py-0.5 pl-4 dark:border-fg-dark dark:bg-bg-2-dark;
+    @apply prose-lg border-line;
+
+    p {
+      @apply py-2 font-serif;
+    }
   }
 
   img {
-    @apply mx-auto my-4 block h-fit max-h-min w-full max-w-min rounded-lg object-contain shadow-md;
+    @apply mx-auto rounded-lg shadow-md;
   }
 }

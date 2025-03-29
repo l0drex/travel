@@ -26,7 +26,7 @@ export default {
         // foreground (text)
         fg: {
           DEFAULT: colors.stone["800"],
-          dark: colors.orange["200"],
+          dark: colors.stone["200"],
           // eg visited links
           inactive: {
             DEFAULT: colors.stone["500"],

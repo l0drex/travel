@@ -1,5 +1,7 @@
 @import "tailwindcss";
+
 @config "../../tailwind.config.mts";
+@plugin "@tailwindcss/typography";
 
 /* use tailwind config in typescript, since this does not really work inside scripts 
  * (variables are optimized away and no longer accessible) 
