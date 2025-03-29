@@ -4,9 +4,9 @@ import L from "leaflet";
 import { getColorPropertyString } from "@utils/color.ts";
 import { useUrlTitle } from "@utils/title.ts";
 import { computed } from "vue";
-import LeafletMap from "src/leaflet/components/LeafletMap.vue";
-import TileLayer from "src/leaflet/components/TileLayer.vue";
-import GeoJsonLayer from "src/leaflet/components/GeoJsonLayer.vue";
+import LeafletMap from "@components/leaflet/components/LeafletMap.vue";
+import TileLayer from "@components/leaflet/components/TileLayer.vue";
+import GeoJsonLayer from "@components/leaflet/components/GeoJsonLayer.vue";
 import Slugger from "github-slugger";
 
 const { geoJson } = defineProps<{
