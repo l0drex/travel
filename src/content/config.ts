@@ -1,13 +1,16 @@
 import { z, defineCollection, reference } from "astro:content";
 import type { GeoJSON } from "geojson";
 import { nextcloudLoader, parseMarkdown } from "@utils/nextcloudLoader.ts";
-import { parseGpx } from "@utils/gpxLoader.ts";
+import { gpxLoader, parseGpx } from "@utils/gpxLoader.ts";
+import { glob } from "astro/loaders";
 
 const blogCollection = defineCollection({
   loader: nextcloudLoader({
     fileType: "md",
     parser: parseMarkdown,
   }),
+  // NOTE: remove the loader defined above if you want to use this local loader
+  // loader: glob({ pattern: "*.md", base: "./src/content/posts" }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -32,6 +35,8 @@ const gpxCollection = defineCollection({
     fileType: "gpx",
     parser: parseGpx,
   }),
+  // NOTE: remove the loader defined above if you want to use this local loader
+  //loader: gpxLoader({url: "./src/gpx"}),
   schema: z.custom<GeoJSON>(),
 });
 
