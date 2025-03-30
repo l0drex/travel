@@ -35,4 +35,8 @@ export default defineConfig({
   image: {
     domains: ["hoffmanns.cloud"],
   },
+  i18n: {
+    locales: ["de-de"],
+    defaultLocale: "de-de",
+  },
 });
