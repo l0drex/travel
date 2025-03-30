@@ -35,7 +35,7 @@ const links: Link[] = [
   {
     href: new URL("https://github.com/l0drex/travel"),
     text: "Source Code",
-    icon: "material-symbols:frame-source"
+    icon: "material-symbols:frame-source",
   },
   {
     href: rssLink,
@@ -87,8 +87,8 @@ const links: Link[] = [
       <slot name="aside" />
     </aside>
 
-    <div class="flex h-full grow flex-col">
-      <main class="grow overflow-auto">
+    <div class="flex min-h-full grow flex-col overflow-auto">
+      <main class="grow">
         <slot />
       </main>
 
