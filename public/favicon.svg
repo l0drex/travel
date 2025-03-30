@@ -1,21 +1,69 @@
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
- <circle id="bg" cx="16" cy="16" r="14" />
- <path id="needle" d="M 12,16 V 4 l 7.574779,10.199562 z" />
- <circle id="center" cx="16" cy="16" r="4" />
- <style>
-  #bg {
-   fill: #7B2D11;
-  }
-  
-  #center, #needle {
-   fill: #DC2525;
-  }
-  
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   viewBox="0 0 32 32"
+   id="svg1"
+   sodipodi:docname="favicon.svg"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="18.119611"
+     inkscape:cx="13.8248"
+     inkscape:cy="13.852394"
+     inkscape:window-width="1920"
+     inkscape:window-height="1028"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1">
+    <inkscape:grid
+       id="grid1"
+       units="px"
+       originx="0"
+       originy="0"
+       spacingx="1"
+       spacingy="1"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14902"
+       empspacing="4"
+       enabled="true"
+       visible="false" />
+  </sodipodi:namedview>
+  <circle
+     id="bg"
+     cx="16"
+     cy="16"
+     r="14"
+     style="stroke:#78706a;fill:#fef6ec;fill-opacity:1;stroke-opacity:1" />
+  <style
+     id="style1">
+ #bg {
+   fill: #FEECD5;
+ }
 
-  @media (prefers-color-scheme: dark) {
-   #bg { 
-     fill: #FED6AA;
-    }
-  }
- </style>
+ #center, #needle {
+   fill: #DC2525;
+ }
+</style>
+  <path
+     style="fill:#e63a11;fill-opacity:1;stroke:none;stroke-linecap:round;stroke-linejoin:round"
+     d="M 20,5 12.228764,14.666667 12,27.313708 20,17 Z"
+     id="path1"
+     sodipodi:nodetypes="ccccc" />
 </svg>
