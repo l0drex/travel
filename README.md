@@ -56,6 +56,35 @@ gpx: adventure
 ...
 ```
 
+You can create GPX files using [gpx.studio](https://gpx.studio) if you don't have any.
+If you give the groups the same name as the headings in your markdown, the map will highlight the corresponding track
+if you put it in the url.
+
+For example, take this GPX file (structure corresponds to file tree in gpx.studio):
+
+```
+journey
+    |- Start
+    |    |- Segment 1
+    |- End
+```
+
+With markdown like this:
+
+```md
+...
+
+# Start
+
+...
+
+# End
+
+....
+```
+
+Will highlight the corresponding section in the map with the url `.../travel/journey#Start`.
+
 ### Files on Nextcloud
 
 You can also host your markdown files, images and gpx files on Nextcloud.
@@ -84,6 +113,8 @@ root
 ```
 
 `post.md` would reference the image with `![alt](./image.jpg)`. This means that I also see the image in the preview on Nextcloud.
+
+Images are fetched and optimized at build time, so there is no increased load on you server and the token should be kept private.
 
 Read more in the [Astro documentation](https://docs.astro.build/en/guides/content-collections/).
 
