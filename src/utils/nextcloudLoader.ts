@@ -26,6 +26,8 @@ const forceRerender = false;
 
 export const ncPath = `public.php/dav/files/${NC_TOKEN}/`;
 
+const placeholderPath = "./src/content/posts/placeholder.md";
+
 export function nextcloudLoader(options: WebDavOptions): Loader {
   return {
     name: "WebDAV Loader",
@@ -110,12 +112,15 @@ export function nextcloudLoader(options: WebDavOptions): Loader {
           .catch((reason) => {
             throw reason;
           });
+
         context.store.set({
           id,
           data: parsedData,
           rendered,
           body: text,
           digest: lastChange.lastmod,
+          // important to resolve images correctly
+          filePath: placeholderPath,
         });
       });
 
@@ -143,14 +148,17 @@ export async function parseMarkdown(
 
   // do some magic to load images from nextcloud
   const path = filePath.split("/");
+  // remove markdown file name
   path.pop();
   const directory = path.join("/");
   const absolutePath = `${NC_HOST}${directory}/`;
 
+  // change preview image url
   if (data.frontmatter.image) {
     data.frontmatter.image = new URL(data.frontmatter.image, absolutePath).href;
   }
 
+  // change urls in markdown
   const markdownOptions = opts.markdown;
   markdownOptions.remarkPlugins.push([imgLinks, { absolutePath }]);
 
@@ -163,16 +171,21 @@ export async function parseMarkdown(
 
   const render = await processor.render(data.content, {
     frontmatter: data.frontmatter,
+    // @ts-expect-error not exposed in type of astro
+    fileURL: placeholderPath,
   });
+
+  const imagePaths = [
+    ...render.metadata.localImagePaths,
+    ...render.metadata.remoteImagePaths,
+  ];
 
   return {
     data: render.metadata.frontmatter,
     rendered: {
       html: render.code,
       metadata: {
-        imagePaths: render.metadata.localImagePaths.concat(
-          render.metadata.remoteImagePaths,
-        ),
+        imagePaths,
         headings: render.metadata.headings,
         frontmatter: render.metadata.frontmatter,
       },
