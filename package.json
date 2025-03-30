@@ -24,7 +24,6 @@
     "@tresjs/cientos": "^4.0.3",
     "@tresjs/core": "^4.2.5",
     "@turf/turf": "^7.2.0",
-    "@vue-leaflet/vue-leaflet": "^0.10.1",
     "@vueuse/core": "^12.4.0",
     "@xmldom/xmldom": "^0.9.5",
     "astro": "5.5.2",
