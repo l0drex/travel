@@ -76,7 +76,7 @@ const styles = {
 </script>
 
 <template>
-  <div class="rounded-lg border-2 border-fg dark:border-fg-dark">
+  <div class="rounded-lg border-2 border-line dark:border-fg-dark">
     <leaflet-map height="400px">
       <tile-layer :url-template="styles.default" :options="tileOptions" />
       <geo-json-layer :geo-json="geoJson" :options="geoJsonOptions" />
