@@ -13,7 +13,7 @@ import {
 import { type TresInstance, useLoop } from "@tresjs/core";
 import waterMap from "@assets/earth/2k_earth_bw.jpg";
 import JourneyPoint from "./JourneyPoint.vue";
-import { usePreferredDark } from "@vueuse/core";
+import { useMouse, usePreferredDark, useWindowSize } from "@vueuse/core";
 import { toRadians } from "chart.js/helpers";
 import type { Journey } from "@utils/types.ts";
 import { getColorProperty } from "@utils/color.ts";
@@ -24,6 +24,9 @@ const { journeys } = defineProps<{
 
 const { onBeforeRender } = useLoop();
 const prefersDark = usePreferredDark();
+
+// option for devs: moves light source with cursor
+const interactive = true;
 
 // the earth
 
@@ -105,6 +108,11 @@ const cameraPos = new Vector3().setFromSpherical(cameraPosSpherical);
 
 // directional light
 
+const { x, y } = useMouse();
+const { width, height } = useWindowSize();
+
+const light = shallowRef<TresInstance>();
+
 const lightPos = new Vector3();
 lightPos.setFromSphericalCoords(
   cameraPosSpherical.radius,
@@ -137,6 +145,22 @@ onBeforeRender(({ delta, elapsed }) => {
   rotation.multiply(day);
 
   earthRef.value.rotation.setFromQuaternion(rotation);
+
+  if (interactive) {
+    const lerp = (a: number, b: number, t: number) => a * (1 - t) + b * t;
+
+    // change a and b values in lerp call to change behaviour
+
+    const lightY =
+      lerp(-0.2, 0.2, y.value / height.value) + cameraPosSpherical.phi;
+
+    const deltaZ = lerp(-1, 0, x.value / width.value) * 0.33;
+    const lightZ = cameraPosSpherical.theta + deltaZ * Math.PI;
+
+    lightPos.setFromSphericalCoords(cameraPosSpherical.radius, lightY, lightZ);
+
+    light.value?.position.copy(lightPos);
+  }
 });
 </script>
 
@@ -146,6 +170,7 @@ onBeforeRender(({ delta, elapsed }) => {
     :intensity="5"
     :position="lightPos"
     :look-at="[0, 0, 0]"
+    ref="light"
   />
 
   <TresGroup ref="earthRef">

@@ -127,6 +127,8 @@ Unfortunately, the custom map icons cannot use css, therefore you have to manual
 The map style can be adjusted in `src/components/track/MapView.vue`. There are some predefined styles,
 but of course you can add your own. Be aware that you need to have a (free) account for some of them once deployed.
 
+The interactivity of the globe can be disabled by setting the `interactive` const in `src/components/earth/EarthContent.vue`.
+
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
