@@ -19,6 +19,6 @@ article {
   }
 
   img {
-    @apply mx-auto rounded-lg shadow-md;
+    @apply mx-auto rounded-lg border-2 border-line shadow-md;
   }
 }
