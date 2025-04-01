@@ -9,7 +9,7 @@ import type { GeoJSON } from "geojson";
 
 export async function parseGpx(code: string) {
   const xml = new DOMParser().parseFromString(code, "text/xml");
-  const geoJson = gpxToJson(xml as any);
+  const geoJson = gpxToJson(xml);
 
   return { data: geoJson };
 }
