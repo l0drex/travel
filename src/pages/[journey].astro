@@ -100,7 +100,7 @@ const ogImage = await getImage({
       <time datetime={jsDate.toISOString()}>{humanDate}</time>
     </div>
 
-    <div class="mx-auto max-w-5xl">
+    <div class="mx-auto min-h-[400px] max-w-5xl">
       <TrackView
         client:only="vue"
         geoJson={geoJson.data}
