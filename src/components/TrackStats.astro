@@ -1,0 +1,85 @@
+---
+import { Icon } from "astro-icon/components";
+import {
+  type JourneyType,
+  JourneyTypeIds,
+  journeyTypes,
+  type Stat,
+  statsPrototypes,
+} from "../utils/types";
+
+type Keys = keyof typeof statsPrototypes;
+
+interface Props {
+  stats: {
+    [K in Keys]?: number;
+  } & {
+    days: number;
+  };
+  journeyType: JourneyType;
+}
+
+const { stats: values, journeyType } = Astro.props;
+
+const stats: Stat[] = [];
+for (const valueKey in values) {
+  const stat = structuredClone<Stat>(statsPrototypes[valueKey]);
+  let value: string;
+
+  switch (valueKey) {
+    case "totalDistance":
+      value = values[valueKey]!.toFixed(0);
+      break;
+    case "totalTime":
+      const hours = Math.floor(values[valueKey]!);
+      const minutes = (60 * (values[valueKey]! % 1))
+        .toFixed(0)
+        .padStart(2, "0");
+      value = `${hours}:${minutes}`;
+      break;
+    default:
+      value = String(values[valueKey]);
+  }
+
+  stat.value = stat.value.replace("{}", value);
+  stats.push(stat);
+}
+
+// calculate kilometers per day
+if (
+  [JourneyTypeIds.hiking, JourneyTypeIds.bike].includes(journeyType.id) &&
+  "totalDistance" in values
+) {
+  const kmpDStat = structuredClone(statsPrototypes["kmPerDay"]);
+  const kmpD = (values.totalDistance! / values.days).toFixed(1);
+  kmpDStat.value = kmpDStat.value.replace("{}", kmpD);
+  stats.push(kmpDStat);
+}
+
+// calculate average speed
+if ("totalDistance" in values && "totalTime" in values) {
+  const avSpeedStat = structuredClone(statsPrototypes["averageSpeed"]);
+  const avSpeed = values["totalDistance"]! / values["totalTime"]!;
+  avSpeedStat.value = avSpeedStat.value.replace("{}", avSpeed.toFixed(1));
+  stats.push(avSpeedStat);
+}
+
+const statsNames = Object.values(statsPrototypes).map((s) => s.name);
+stats.sort((a, b) => statsNames.indexOf(a.name) - statsNames.indexOf(b.name));
+---
+
+<div class="w-full overflow-x-auto">
+  <div
+    class="mt-4 flex min-w-max justify-center gap-4 border-line text-fg-inactive dark:border-line-dark dark:text-fg-inactive-dark"
+  >
+    {
+      stats.map((stat) => (
+        <div class="flex grow-1 basis-0 flex-col items-center gap-1 rounded-lg border border-2 p-2">
+          <Icon name={stat.icon} size={40} />
+          <span class="text-center text-xs font-bold">{`${stat.name}:`}</span>
+          <span>{stat.value}</span>
+        </div>
+      ))
+    }
+  </div>
+</div>

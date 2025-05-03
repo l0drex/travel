@@ -44,6 +44,7 @@ description: Short description of your awesome adventure.
 
 # Your content starts here
 
+Every heading (no matter what depth) is a day.
 The data above is explained in the type definition in `src/content/config.ts`.
 ```
 
@@ -64,9 +65,9 @@ For example, take this GPX file (structure corresponds to file tree in gpx.studi
 
 ```
 journey
-    |- Start
+    |- First day
     |    |- Segment 1
-    |- End
+    |- Last day
 ```
 
 With markdown like this:
@@ -74,11 +75,11 @@ With markdown like this:
 ```md
 ...
 
-# Start
+# First day
 
 ...
 
-# End
+# Last day
 
 ....
 ```

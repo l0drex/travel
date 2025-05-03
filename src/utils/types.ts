@@ -40,3 +40,42 @@ export const journeyTypes: { [K in JourneyTypeIds]: JourneyType } = {
 export interface Journey {
   location: [number, number];
 }
+
+export interface Stat {
+  name: string;
+  icon: string;
+  value: string;
+}
+
+export const statsPrototypes: { [K: string]: Stat } = {
+  days: {
+    name: "Dauer",
+    icon: "material-symbols:date-range",
+    value: "{} Tage",
+  },
+  totalDistance: {
+    name: "Gesamtkilometer",
+    icon: "material-symbols:route",
+    value: "{} km",
+  },
+  kmPerDay: {
+    name: "Kilometer pro Tag",
+    icon: "material-symbols:linear-scale",
+    value: "{} km",
+  },
+  totalTime: {
+    name: "Zeit unterwegs",
+    icon: "material-symbols:timer",
+    value: "{} h",
+  },
+  averageSpeed: {
+    icon: "material-symbols:speed",
+    name: "Ø-Geschwindigkeit",
+    value: "{} km/h",
+  },
+  topSpeed: {
+    icon: "material-symbols:rocket-launch",
+    name: "Höchstgeschwindigkeit",
+    value: "{} km/h",
+  },
+};

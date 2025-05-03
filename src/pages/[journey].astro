@@ -13,7 +13,7 @@ import {
 import Layout from "@layouts/BaseLayout.astro";
 import TrackView from "@components/track/TrackView.vue";
 import authors from "src/authors.json";
-import { journeyTypes } from "../utils/types";
+import { JourneyTypeIds, journeyTypes, statsPrototypes } from "../utils/types";
 import JourneyType from "../components/TypeIcon.astro";
 import { dateFormatter } from "../utils/general";
 import { getImage } from "astro:assets";
@@ -22,6 +22,8 @@ import Button from "@components/Button.astro";
 import { Icon } from "astro-icon/components";
 import TitleNav from "@components/TitlesNav.astro";
 import twconfig from "tailwind.config.mjs";
+import TrackStats from "../components/TrackStats.astro";
+import { length } from "@turf/turf";
 
 export const getStaticPaths = (async () => {
   const posts: CollectionEntry<"posts">[] = await getCollection("posts");
@@ -55,6 +57,22 @@ const ogImage = await getImage({
   height: 630,
   format: "webp",
 });
+
+type StatsType = { [K in keyof typeof statsPrototypes]?: number } & {
+  days: number;
+  totalDistance: number;
+};
+
+const stats: StatsType = {
+  days: headings.length,
+  ...entry.data.stats,
+};
+
+console.log(journeyType.id, JourneyTypeIds.bike);
+
+if ([JourneyTypeIds.hiking, JourneyTypeIds.bike].includes(journeyType.id)) {
+  stats["totalDistance"] = length(geoJson.data);
+}
 ---
 
 <Layout
@@ -106,6 +124,7 @@ const ogImage = await getImage({
         geoJson={geoJson.data}
         journeyType={journeyType}
       />
+      <TrackStats stats={stats} journeyType={journeyType} />
     </div>
   </section>
 

@@ -28,6 +28,15 @@ const blogCollection = defineCollection({
       author: z.literal("lorenz"),
       // short description of the tour
       description: z.string(),
+      // statistics. every key here is optional, and you can omit the whole thing
+      stats: z.optional(
+        z
+          .object({
+            topSpeed: z.number().positive(),
+            totalTime: z.number().positive(),
+          })
+          .partial(),
+      ),
     }),
 });
 
