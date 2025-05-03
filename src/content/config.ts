@@ -3,6 +3,7 @@ import type { GeoJSON } from "geojson";
 import { nextcloudLoader, parseMarkdown } from "@utils/nextcloudLoader.ts";
 import { gpxLoader, parseGpx } from "@utils/gpxLoader.ts";
 import { glob } from "astro/loaders";
+import { JourneyTypeIds } from "@utils/types.ts";
 
 const blogCollection = defineCollection({
   loader: nextcloudLoader({
@@ -16,7 +17,7 @@ const blogCollection = defineCollection({
       title: z.string(),
       date: z.date(),
       // sync with utils/types/journeyTypes
-      type: z.literal("bike").or(z.literal("hiking")).or(z.literal("roadtrip")),
+      type: z.nativeEnum(JourneyTypeIds),
       // preview image used for open graph previews and the list on the home page
       image: image(),
       alt: z.string(),
