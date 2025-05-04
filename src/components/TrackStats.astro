@@ -70,18 +70,16 @@ const statsNames = Object.values(statsPrototypes).map((s) => s.name);
 stats.sort((a, b) => statsNames.indexOf(a.name) - statsNames.indexOf(b.name));
 ---
 
-<div class="w-full overflow-x-auto">
-  <div
-    class="mt-4 flex min-w-max justify-center gap-4 border-line text-fg-inactive dark:border-line-dark dark:text-fg-inactive-dark"
-  >
-    {
-      stats.map((stat) => (
-        <div class="flex grow-1 basis-0 flex-col items-center gap-1 rounded-lg border border-2 p-2">
-          <Icon name={stat.icon} size={40} />
-          <span class="text-center text-xs font-bold">{`${stat.name}:`}</span>
-          <span>{stat.value}</span>
-        </div>
-      ))
-    }
-  </div>
+<div
+  class="mt-4 box-border flex w-full max-w-max justify-start gap-4 overflow-x-auto border-line px-2 pb-4 text-fg-inactive dark:border-line-dark dark:text-fg-inactive-dark"
+>
+  {
+    stats.map((stat) => (
+      <div class="flex w-40 shrink-0 grow-0 flex-col items-center gap-1 rounded-lg border border-2 p-2">
+        <Icon name={stat.icon} size={40} />
+        <span class="text-center text-xs font-bold">{`${stat.name}:`}</span>
+        <span>{stat.value}</span>
+      </div>
+    ))
+  }
 </div>
