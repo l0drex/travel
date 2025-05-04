@@ -7,6 +7,7 @@ import {
   type Stat,
   statsPrototypes,
 } from "../utils/types";
+import { formatHours } from "../utils/general";
 
 type Keys = keyof typeof statsPrototypes;
 
@@ -33,11 +34,7 @@ for (const valueKey in values) {
       value = values[valueKey]!.toFixed(0);
       break;
     case "totalTime":
-      const hours = Math.floor(values[valueKey]!);
-      const minutes = (60 * (values[valueKey]! % 1))
-        .toFixed(0)
-        .padStart(2, "0");
-      value = `${hours}:${minutes}`;
+      value = formatHours(values[valueKey]!);
       break;
     default:
       value = String(values[valueKey]);
@@ -47,23 +44,31 @@ for (const valueKey in values) {
   stats.push(stat);
 }
 
-// calculate kilometers per day
-if (
-  [JourneyTypeIds.hiking, JourneyTypeIds.bike].includes(journeyType.id) &&
-  "totalDistance" in values
-) {
-  const kmpDStat = structuredClone(statsPrototypes["kmPerDay"]);
-  const kmpD = (values.totalDistance! / values.days).toFixed(1);
-  kmpDStat.value = kmpDStat.value.replace("{}", kmpD);
-  stats.push(kmpDStat);
-}
+if ([JourneyTypeIds.hiking, JourneyTypeIds.bike].includes(journeyType.id)) {
+  // calculate kilometers per day
+  if ("days" in values) {
+    if ("totalDistance" in values) {
+      const kmpDStat = structuredClone(statsPrototypes["kmPerDay"]);
+      const kmpD = (values.totalDistance! / values.days).toFixed(1);
+      kmpDStat.value = kmpDStat.value.replace("{}", kmpD);
+      stats.push(kmpDStat);
+    }
 
-// calculate average speed
-if ("totalDistance" in values && "totalTime" in values) {
-  const avSpeedStat = structuredClone(statsPrototypes["averageSpeed"]);
-  const avSpeed = values["totalDistance"]! / values["totalTime"]!;
-  avSpeedStat.value = avSpeedStat.value.replace("{}", avSpeed.toFixed(1));
-  stats.push(avSpeedStat);
+    if ("totalTime" in values) {
+      const timePDayStat = structuredClone(statsPrototypes["timePerDay"]);
+      const timePDay: string = formatHours(values.totalTime! / values.days!);
+      timePDayStat.value = timePDayStat.value.replace("{}", timePDay);
+      stats.push(timePDayStat);
+    }
+  }
+
+  // calculate average speed
+  if ("totalDistance" in values && "totalTime" in values) {
+    const avSpeedStat = structuredClone(statsPrototypes["averageSpeed"]);
+    const avSpeed = values["totalDistance"]! / values["totalTime"]!;
+    avSpeedStat.value = avSpeedStat.value.replace("{}", avSpeed.toFixed(1));
+    stats.push(avSpeedStat);
+  }
 }
 
 const statsNames = Object.values(statsPrototypes).map((s) => s.name);

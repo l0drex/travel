@@ -68,8 +68,6 @@ const stats: StatsType = {
   ...entry.data.stats,
 };
 
-console.log(journeyType.id, JourneyTypeIds.bike);
-
 if ([JourneyTypeIds.hiking, JourneyTypeIds.bike].includes(journeyType.id)) {
   stats["totalDistance"] = length(geoJson.data);
 

@@ -78,6 +78,11 @@ export const statsPrototypes: { [K: string]: Stat } = {
     icon: "material-symbols:timer",
     value: "{} h",
   },
+  timePerDay: {
+    name: "Zeit pro Tag",
+    icon: "material-symbols:avg-time",
+    value: "{} h",
+  },
   averageSpeed: {
     icon: "material-symbols:speed",
     name: "Ø-Geschwindigkeit",
