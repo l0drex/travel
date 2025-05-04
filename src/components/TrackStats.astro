@@ -28,6 +28,8 @@ for (const valueKey in values) {
 
   switch (valueKey) {
     case "totalDistance":
+    case "elevationUp":
+    case "elevationDown":
       value = values[valueKey]!.toFixed(0);
       break;
     case "totalTime":

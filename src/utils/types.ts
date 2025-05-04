@@ -63,6 +63,16 @@ export const statsPrototypes: { [K: string]: Stat } = {
     icon: "material-symbols:linear-scale",
     value: "{} km",
   },
+  elevationUp: {
+    name: "Bergauf",
+    icon: "material-symbols:trending-up",
+    value: "{} m",
+  },
+  elevationDown: {
+    name: "Bergab",
+    icon: "material-symbols:trending-down",
+    value: "{} m",
+  },
   totalTime: {
     name: "Zeit unterwegs",
     icon: "material-symbols:timer",
