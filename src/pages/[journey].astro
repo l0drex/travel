@@ -60,7 +60,7 @@ const ogImage = await getImage({
 
 type StatsType = { [K in keyof typeof statsPrototypes]?: number } & {
   days: number;
-  totalDistance: number;
+  totalDistance?: number;
 };
 
 const stats: StatsType = {
