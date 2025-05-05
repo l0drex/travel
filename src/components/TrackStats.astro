@@ -76,11 +76,11 @@ stats.sort((a, b) => statsNames.indexOf(a.name) - statsNames.indexOf(b.name));
 ---
 
 <div
-  class="mt-4 box-border flex w-full max-w-max justify-start gap-4 overflow-x-auto border-line px-2 pb-4 text-fg-inactive dark:border-line-dark dark:text-fg-inactive-dark"
+  class="mt-4 box-border flex w-full max-w-max justify-start gap-4 overflow-x-auto px-2 pb-4 text-fg-inactive dark:text-fg-inactive-dark"
 >
   {
     stats.map((stat) => (
-      <div class="flex w-40 shrink-0 grow-0 flex-col items-center gap-1 rounded-lg border border-2 p-2">
+      <div class="flex w-40 shrink-0 grow-0 flex-col items-center gap-1 rounded-lg border border-2 border-line p-2 dark:border-line-dark">
         <Icon name={stat.icon} size={40} />
         <span class="text-center text-xs font-bold">{`${stat.name}:`}</span>
         <span>{stat.value}</span>
