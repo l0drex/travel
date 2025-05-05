@@ -24,6 +24,7 @@ import TitleNav from "@components/TitlesNav.astro";
 import twconfig from "tailwind.config.mjs";
 import TrackStats from "../components/TrackStats.astro";
 import { coordEach, distance, length } from "@turf/turf";
+import { calculateStats } from "../utils/geoJson";
 
 export const getStaticPaths = (async () => {
   const posts: CollectionEntry<"posts">[] = await getCollection("posts");
@@ -68,36 +69,9 @@ const stats: StatsType = {
   ...entry.data.stats,
 };
 
-if ([JourneyTypeIds.hiking, JourneyTypeIds.bike].includes(journeyType.id)) {
-  stats["totalDistance"] = length(geoJson.data);
-
-  // calculate elevation gained and lost
-  // this is the height in meters above sea level, not the distance where elevation was gained or lost
-  const minDistance = 0.5; // kilometers
-  let elevationUp = 0;
-  let elevationDown = 0;
-  let lastCoordinate: number[];
-  coordEach(geoJson.data, (currentCoord) => {
-    if (!lastCoordinate) {
-      lastCoordinate = currentCoord;
-      return;
-    }
-
-    let elevationDelta = currentCoord[2] - lastCoordinate[2];
-    if (distance(lastCoordinate, currentCoord) < minDistance) {
-      return;
-    }
-
-    if (elevationDelta > 0) {
-      elevationUp += elevationDelta;
-    } else if (elevationDelta < 0) {
-      elevationDown -= elevationDelta;
-    }
-
-    lastCoordinate = currentCoord;
-  });
-  stats["elevationUp"] = elevationUp;
-  stats["elevationDown"] = elevationDown;
+if (journeyType.id !== JourneyTypeIds.roadtrip) {
+  // get relevant stats for bike and hiking journeys
+  const calculated = calculateStats(stats, geoJson.data);
 }
 ---
 
