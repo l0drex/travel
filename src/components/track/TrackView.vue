@@ -5,11 +5,10 @@ import MapView from "@components/track/MapView.vue";
 import { computed } from "vue";
 import { getFeatureByName } from "@utils/geoJson.ts";
 import { useUrlTitle } from "@utils/title.ts";
-import { type JourneyType } from "@utils/types.ts";
 
-const { geoJson, journeyType } = defineProps<{
+const { geoJson, isCollection } = defineProps<{
   geoJson: GeoJSON;
-  journeyType: JourneyType;
+  isCollection: boolean;
 }>();
 
 // show feature currently selected
@@ -32,7 +31,7 @@ const showGraph = computed(() => {
    * roadtrip is expected to be a collection of small unconnected hiking tracks and points,
    * therefore elevation data makes no sense here
    */
-  if (journeyType.id === "roadtrip" && currentUrlTitle.value == null) {
+  if (isCollection && currentUrlTitle.value == null) {
     return false;
   }
 

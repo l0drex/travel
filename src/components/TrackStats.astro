@@ -1,7 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import {
-  type JourneyType,
+  JourneyTypeId,
   type Stat,
   StatId,
   statsPrototypes,
@@ -10,10 +10,9 @@ import { formatHours } from "../utils/general";
 
 interface Props {
   stats: Partial<Record<StatId, number>>;
-  journeyType: JourneyType;
 }
 
-const { stats: values, journeyType } = Astro.props;
+const { stats: values } = Astro.props;
 
 const stats: Stat[] = [];
 for (const [valueKey, v] of Object.entries(values) as [StatId, number][]) {

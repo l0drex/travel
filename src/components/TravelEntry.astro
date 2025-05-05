@@ -33,7 +33,7 @@ const { journey } = Astro.props;
         <Icon name="material-symbols:chevron-right-rounded" />
       </h2>
       <div class="flex gap-2">
-        <JourneyIcon type={journeyTypes[journey.data.type]} />
+        <JourneyIcon typeId={journey.data.type} />
         <div>·</div>
         {dateFormatter(journey.data.date, Astro.currentLocale)}
       </div>

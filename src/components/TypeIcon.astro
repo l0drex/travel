@@ -1,15 +1,16 @@
 ---
 import { Icon } from "astro-icon/components";
-import { type JourneyType } from "@utils/types";
+import { JourneyTypeId, journeyTypes } from "@utils/types";
 
 interface Props {
-  type: JourneyType;
+  typeId: JourneyTypeId;
 }
 
-const { type } = Astro.props;
+const { typeId } = Astro.props;
+const type = journeyTypes[typeId];
 ---
 
 <span class="inline-flex items-center gap-1">
   <Icon name={type.icon} />
-  {type.name.de}
+  {type.name}
 </span>

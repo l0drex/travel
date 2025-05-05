@@ -13,12 +13,7 @@ import {
 import Layout from "@layouts/BaseLayout.astro";
 import TrackView from "@components/track/TrackView.vue";
 import authors from "src/authors.json";
-import {
-  JourneyTypeIds,
-  journeyTypes,
-  StatId,
-  statsPrototypes,
-} from "../utils/types";
+import { JourneyTypeId, journeyTypes, StatId } from "../utils/types";
 import JourneyType from "../components/TypeIcon.astro";
 import { dateFormatter } from "../utils/general";
 import { getImage } from "astro:assets";
@@ -51,7 +46,7 @@ const author = authors.find((a) => a.id === entry.data.author);
 if (author == null) {
   throw new Error("No author found for this journey!");
 }
-const journeyType = journeyTypes[entry.data.type];
+const journeyType = journeyTypes[entry.data.type].name;
 
 const jsDate: Date = entry.data.date;
 const machineDate = jsDate.toISOString();
@@ -71,14 +66,14 @@ let stats: StatsType = {
   ...entry.data.stats,
 };
 
-if (journeyType.id !== JourneyTypeIds.roadtrip) {
+if (entry.data.type !== JourneyTypeId.roadtrip) {
   // get relevant stats for bike and hiking journeys
   addCalculatedStats(stats, geoJson.data);
 }
 ---
 
 <Layout
-  title={`${entry.data.title} – ${journeyType.name.de} von ${author.name}`}
+  title={`${entry.data.title} – ${journeyType} von ${author.name}`}
   light={twconfig.theme.extend.colors.bg["2"].DEFAULT}
   dark={twconfig.theme.extend.colors.bg["2"].dark}
 >
@@ -115,7 +110,7 @@ if (journeyType.id !== JourneyTypeIds.roadtrip) {
     <div
       class="mb-8 flex justify-center gap-2 text-center align-baseline text-2xl"
     >
-      {(<JourneyType type={journeyType} />)}
+      {(<JourneyType typeId={entry.data.type} />)}
       <span>·</span>
       <time datetime={jsDate.toISOString()}>{humanDate}</time>
     </div>
@@ -124,9 +119,9 @@ if (journeyType.id !== JourneyTypeIds.roadtrip) {
       <TrackView
         client:only="vue"
         geoJson={geoJson.data}
-        journeyType={journeyType}
+        isCollection={entry.data.type === JourneyTypeId.roadtrip}
       />
-      <TrackStats stats={stats} journeyType={journeyType} />
+      <TrackStats stats={stats} />
     </div>
   </section>
 
