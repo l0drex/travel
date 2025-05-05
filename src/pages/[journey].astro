@@ -11,7 +11,8 @@ import {
   type CollectionEntry,
 } from "astro:content";
 import Layout from "@layouts/BaseLayout.astro";
-import TrackView from "@components/track/TrackView.vue";
+import MapView from "@components/track/MapView.vue";
+import ElevationGraph from "@components/track/ElevationGraph.vue";
 import authors from "src/authors.json";
 import { JourneyTypeId, journeyTypes, StatId } from "../utils/types";
 import JourneyType from "../components/TypeIcon.astro";
@@ -116,7 +117,8 @@ if (entry.data.type !== JourneyTypeId.roadtrip) {
     </div>
 
     <div class="mx-auto min-h-[400px] max-w-5xl">
-      <TrackView
+      <MapView client:only="vue" geoJson={geoJson.data} />
+      <ElevationGraph
         client:only="vue"
         geoJson={geoJson.data}
         isCollection={entry.data.type === JourneyTypeId.roadtrip}

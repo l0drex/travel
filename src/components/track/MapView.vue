@@ -8,10 +8,13 @@ import LeafletMap from "@components/leaflet/components/LeafletMap.vue";
 import TileLayer from "@components/leaflet/components/TileLayer.vue";
 import GeoJsonLayer from "@components/leaflet/components/GeoJsonLayer.vue";
 import Slugger from "github-slugger";
+import { useCurrentGeoFeature } from "@utils/currentGeoFeature.ts";
 
 const { geoJson } = defineProps<{
   geoJson: GeoJSON;
 }>();
+
+const currentFeature = useCurrentGeoFeature(geoJson);
 
 // style tracks
 
@@ -79,7 +82,7 @@ const styles = {
   <div class="rounded-lg border-2 border-line dark:border-fg-dark">
     <leaflet-map height="400px">
       <tile-layer :url-template="styles.default" :options="tileOptions" />
-      <geo-json-layer :geo-json="geoJson" :options="geoJsonOptions" />
+      <geo-json-layer :geo-json="currentFeature" :options="geoJsonOptions" />
     </leaflet-map>
   </div>
 </template>

@@ -15,6 +15,7 @@ import type { _DeepPartialObject } from "chart.js/types/utils";
 import { getColorPropertyString } from "@utils/color.ts";
 import { useUrlTitle } from "@utils/title.ts";
 import { coordAll, distance } from "@turf/turf";
+import { useCurrentGeoFeature } from "@utils/currentGeoFeature.ts";
 
 const fgInactive = getColorPropertyString("fg-inactive");
 const fgInactiveDark = getColorPropertyString("fg-inactive-dark");
@@ -25,12 +26,36 @@ const secondary = getColorPropertyString("secondary");
 
 Chart.register(...registerables);
 
-const { geoJson } = defineProps<{
+const { geoJson, isCollection } = defineProps<{
   geoJson: GeoJSON;
+  isCollection: boolean;
 }>();
 
+const currentUrlTitle = useUrlTitle();
+const currentFeature = useCurrentGeoFeature(geoJson);
+
+const showGraph = computed(() => {
+  /*
+   * roadtrip is expected to be a collection of small unconnected hiking tracks and points,
+   * therefore elevation data makes no sense here
+   */
+  if (isCollection && currentUrlTitle.value == null) {
+    return false;
+  }
+
+  // Points have no elevation data either
+  if (
+    currentFeature.value.type == "Feature" &&
+    currentFeature.value.geometry.type == "Point"
+  ) {
+    return false;
+  }
+
+  return true;
+});
+
 // collect coordinates in geo json
-const coordinates = coordAll(geoJson);
+const coordinates = coordAll(currentFeature.value);
 // convert to types for chart
 const elevationData = toData(coordinates);
 // reduce size
@@ -42,7 +67,7 @@ const elevationTodayReduced = computed(() => {
     return [];
   }
 
-  const coords = getPointsOf(title.value, geoJson);
+  const coords = getPointsOf(title.value, currentFeature.value);
   const startIndex = coordinates.findIndex((c) => coords[0] === c);
   const endIndex = coordinates.findIndex(
     (c) => coords[coords.length - 1] === c,
@@ -144,7 +169,12 @@ const options = computed<ChartOptions<"line">>(() => {
 </script>
 
 <template>
-  <LineChart :chart-data="data" :options="options" :height="200" />
+  <LineChart
+    v-if="showGraph"
+    :chart-data="data"
+    :options="options"
+    :height="200"
+  />
 </template>
 
 <style scoped></style>
