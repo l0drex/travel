@@ -71,6 +71,8 @@ if (entry.data.type !== JourneyTypeId.roadtrip) {
   // get relevant stats for bike and hiking journeys
   addCalculatedStats(stats, geoJson.data);
 }
+
+const isCollection = entry.data.type === JourneyTypeId.roadtrip;
 ---
 
 <Layout
@@ -116,13 +118,22 @@ if (entry.data.type !== JourneyTypeId.roadtrip) {
       <time datetime={jsDate.toISOString()}>{humanDate}</time>
     </div>
 
-    <div class="mx-auto min-h-[400px] max-w-5xl">
-      <MapView client:only="vue" geoJson={geoJson.data} />
-      <ElevationGraph
-        client:only="vue"
-        geoJson={geoJson.data}
-        isCollection={entry.data.type === JourneyTypeId.roadtrip}
-      />
+    <div class="mx-auto max-w-5xl">
+      {
+        // we wrap vue components in a static div with a fixed height to prevent layout shifts.
+        // collections only show the elevation graph occasionally,
+        // therefore we cannot prevent the layout shift
+      }
+      <div class="min-h-[404px]">
+        <MapView client:only="vue" geoJson={geoJson.data} />
+      </div>
+      <div class={isCollection ? "" : "min-h-[200px]"}>
+        <ElevationGraph
+          client:only="vue"
+          geoJson={geoJson.data}
+          isCollection={isCollection}
+        />
+      </div>
       <TrackStats stats={stats} />
     </div>
   </section>
