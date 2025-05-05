@@ -47,48 +47,60 @@ export interface Stat {
   value: string;
 }
 
-export const statsPrototypes: { [K: string]: Stat } = {
-  days: {
+export enum StatId {
+  days = "days",
+  totalDistance = "totalDistance",
+  kmPerDay = "kmPerDay",
+  elevationUp = "elevationUp",
+  elevationDown = "elevationDown",
+  totalTime = "totalTime",
+  timePerDay = "timePerDay",
+  averageSpeed = "averageSpeed",
+  topSpeed = "topSpeed",
+}
+
+export const statsPrototypes: Record<StatId, Stat> = {
+  [StatId.days]: {
     name: "Dauer",
     icon: "material-symbols:date-range",
     value: "{} Tage",
   },
-  totalDistance: {
+  [StatId.totalDistance]: {
     name: "Gesamtkilometer",
     icon: "material-symbols:route",
     value: "{} km",
   },
-  kmPerDay: {
+  [StatId.kmPerDay]: {
     name: "Kilometer pro Tag",
     icon: "material-symbols:linear-scale",
     value: "{} km",
   },
-  elevationUp: {
+  [StatId.elevationUp]: {
     name: "Bergauf",
     icon: "material-symbols:trending-up",
     value: "{} m",
   },
-  elevationDown: {
+  [StatId.elevationDown]: {
     name: "Bergab",
     icon: "material-symbols:trending-down",
     value: "{} m",
   },
-  totalTime: {
+  [StatId.totalTime]: {
     name: "Zeit unterwegs",
     icon: "material-symbols:timer",
     value: "{} h",
   },
-  timePerDay: {
+  [StatId.timePerDay]: {
     name: "Zeit pro Tag",
     icon: "material-symbols:avg-time",
     value: "{} h",
   },
-  averageSpeed: {
+  [StatId.averageSpeed]: {
     icon: "material-symbols:speed",
     name: "Ø-Geschwindigkeit",
     value: "{} km/h",
   },
-  topSpeed: {
+  [StatId.topSpeed]: {
     icon: "material-symbols:rocket-launch",
     name: "Höchstgeschwindigkeit",
     value: "{} km/h",

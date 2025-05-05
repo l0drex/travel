@@ -1,7 +1,7 @@
 import { MathUtils, Vector3 } from "three";
 import type { GeoJSON, Position } from "geojson";
 import { coordAll, coordEach, distance, flatten, length } from "@turf/turf";
-import { statsPrototypes } from "@utils/types.ts";
+import { StatId, statsPrototypes } from "@utils/types.ts";
 
 export function getFeatureByName(
   name: string,
@@ -58,10 +58,10 @@ export function positionAtCoordinate(
   return vec;
 }
 
-type StatsType = { [K in keyof typeof statsPrototypes]?: number };
-export function calculateStats(stats: StatsType, geoJson: GeoJSON): StatsType {
+type StatsType = Partial<Record<StatId, number>>;
+export function addCalculatedStats(stats: StatsType, geoJson: GeoJSON) {
   // trip length
-  stats["totalDistance"] = length(geoJson as any);
+  stats[StatId.totalDistance] = length(geoJson as any);
 
   // calculate elevation gained and lost
   // this is the height in meters above sea level,
@@ -89,24 +89,24 @@ export function calculateStats(stats: StatsType, geoJson: GeoJSON): StatsType {
 
     lastCoordinate = currentCoord;
   });
-  stats["elevationUp"] = elevationUp;
-  stats["elevationDown"] = elevationDown;
+  stats[StatId.elevationUp] = elevationUp;
+  stats[StatId.elevationDown] = elevationDown;
 
   // calculate kilometers and time per day
-  if ("days" in stats) {
-    if ("totalDistance" in stats) {
-      stats["kilometerPerDay"] = stats.totalDistance / stats.days!;
+  if (StatId.days in stats) {
+    if (StatId.totalDistance in stats) {
+      stats[StatId.kmPerDay] =
+        stats[StatId.totalDistance] / stats[StatId.days]!;
     }
 
-    if ("totalTime" in stats) {
-      stats["timePerDay"] = stats.totalTime! / stats.days!;
+    if (StatId.totalTime in stats) {
+      stats[StatId.timePerDay] = stats[StatId.totalTime]! / stats[StatId.days]!;
     }
   }
 
   // calculate average speed
-  if ("totalDistance" in stats && "totalTime" in stats) {
-    stats["averageSpeed"] = stats["totalDistance"]! / stats["totalTime"]!;
+  if (StatId.totalDistance in stats && StatId.totalTime in stats) {
+    stats[StatId.averageSpeed] =
+      stats[StatId.totalDistance] / stats[StatId.totalTime]!;
   }
-
-  return stats;
 }

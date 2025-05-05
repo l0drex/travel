@@ -2,46 +2,40 @@
 import { Icon } from "astro-icon/components";
 import {
   type JourneyType,
-  JourneyTypeIds,
-  journeyTypes,
   type Stat,
+  StatId,
   statsPrototypes,
 } from "../utils/types";
 import { formatHours } from "../utils/general";
 
-type Keys = keyof typeof statsPrototypes;
-
 interface Props {
-  stats: {
-    [K in Keys]?: number;
-  } & {
-    days: number;
-  };
+  stats: Partial<Record<StatId, number>>;
   journeyType: JourneyType;
 }
 
 const { stats: values, journeyType } = Astro.props;
 
 const stats: Stat[] = [];
-for (const valueKey in values) {
+for (const [valueKey, v] of Object.entries(values) as [StatId, number][]) {
   const stat = structuredClone<Stat>(statsPrototypes[valueKey]);
   let value: string;
 
   switch (valueKey) {
-    case "elevationUp":
-    case "elevationDown":
-      value = values[valueKey]!.toFixed(0);
+    case StatId.elevationUp:
+    case StatId.elevationDown:
+      value = v.toFixed(0);
       break;
-    case "totalDistance":
-    case "kilometerPerDay":
-    case "averageSpeed":
-      value = values[valueKey]!.toFixed(1);
-    case "totalTime":
-    case "timePerDay":
-      value = formatHours(values[valueKey]!);
+    case StatId.totalDistance:
+    case StatId.kmPerDay:
+    case StatId.averageSpeed:
+      value = v.toFixed(1);
+      break;
+    case StatId.totalTime:
+    case StatId.timePerDay:
+      value = formatHours(v);
       break;
     default:
-      value = String(values[valueKey]);
+      value = String(v);
   }
 
   stat.value = stat.value.replace("{}", value);

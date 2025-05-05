@@ -3,7 +3,7 @@ import type { GeoJSON } from "geojson";
 import { nextcloudLoader, parseMarkdown } from "@utils/nextcloudLoader.ts";
 import { gpxLoader, parseGpx } from "@utils/gpxLoader.ts";
 import { glob } from "astro/loaders";
-import { JourneyTypeIds } from "@utils/types.ts";
+import { JourneyTypeIds, StatId } from "@utils/types.ts";
 
 const blogCollection = defineCollection({
   loader: nextcloudLoader({
@@ -29,14 +29,13 @@ const blogCollection = defineCollection({
       // short description of the tour
       description: z.string(),
       // statistics. every key here is optional, and you can omit the whole thing
-      stats: z.optional(
-        z
-          .object({
-            topSpeed: z.number().positive(),
-            totalTime: z.number().positive(),
-          })
-          .partial(),
-      ),
+      stats: z
+        .object({
+          [StatId.topSpeed]: z.number().positive(),
+          [StatId.totalTime]: z.number().positive(),
+        })
+        .partial()
+        .optional(),
     }),
 });
 
