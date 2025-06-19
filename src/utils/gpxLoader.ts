@@ -23,7 +23,11 @@ async function loadGpxFiles(directory: string, context: LoaderContext) {
         return;
       }
 
-      const path = f.parentPath + f.name;
+      if (!f.name.endsWith(".gpx")) {
+        return;
+      }
+
+      const path = f.parentPath + "/" + f.name;
       context.logger.info("Found file " + path);
 
       updateFile(path, context);
@@ -42,7 +46,7 @@ async function updateFile(filePath: string, context: LoaderContext) {
 
     const parsedData = await context.parseData({
       id: fileName,
-      data: await parseGpx(data),
+      data: (await parseGpx(data)).data,
       filePath: relativePath,
     });
     const digest = context.generateDigest(parsedData);
