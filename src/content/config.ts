@@ -33,6 +33,7 @@ const blogCollection = defineCollection({
         .object({
           [StatId.topSpeed]: z.number().positive(),
           [StatId.totalTime]: z.number().positive(),
+          [StatId.totalDistance]: z.number().positive(),
         })
         .partial()
         .optional(),
