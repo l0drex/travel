@@ -24,16 +24,20 @@ import { Icon } from "astro-icon/components";
 import TitleNav from "@components/TitlesNav.astro";
 import twconfig from "tailwind.config.mjs";
 import TrackStats from "../components/TrackStats.astro";
-import { coordEach, distance, length } from "@turf/turf";
 import { addCalculatedStats } from "../utils/geoJson";
 
 export const getStaticPaths = (async () => {
   const posts: CollectionEntry<"posts">[] = await getCollection("posts");
 
-  return posts.map((entry) => ({
-    params: { journey: entry.id.replace(/.md$/, "") },
-    props: { entry },
-  }));
+  return posts.map((entry) => {
+    const idParts = entry.id.split("/");
+    const journeyId = idParts[idParts.length - 1];
+
+    return {
+      params: { journey: journeyId.replace(/.md$/, "") },
+      props: { entry },
+    };
+  });
 }) satisfies GetStaticPaths;
 
 type Params = InferGetStaticParamsType<typeof getStaticPaths>;

@@ -20,6 +20,9 @@ async function loadGpxFiles(directory: string, context: LoaderContext) {
 
     files.forEach((f) => {
       if (!f.isFile()) {
+        if (f.isDirectory()) {
+          loadGpxFiles(directory + "/" + f.name, context);
+        }
         return;
       }
 
