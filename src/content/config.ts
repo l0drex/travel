@@ -11,7 +11,7 @@ const blogCollection = defineCollection({
     parser: parseMarkdown,
   }),
   // NOTE: remove the loader defined above if you want to use this local loader
-  // loader: glob({ pattern: "*.md", base: "./src/content/posts" }),
+  // loader: glob({ pattern: "**/*.md", base: "./src/content/posts" }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -46,7 +46,7 @@ const gpxCollection = defineCollection({
     parser: parseGpx,
   }),
   // NOTE: remove the loader defined above if you want to use this local loader
-  //loader: gpxLoader({url: "./src/gpx"}),
+  // loader: gpxLoader({ url: "./posts" }),
   schema: z.custom<GeoJSON>(),
 });
 
