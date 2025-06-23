@@ -33,6 +33,7 @@ export interface Stat {
   name: string;
   icon: string;
   value: string;
+  unit: string;
 }
 
 export enum StatId {
@@ -51,46 +52,55 @@ export const statsPrototypes: Record<StatId, Stat> = {
   [StatId.days]: {
     name: "Dauer",
     icon: "material-symbols:date-range",
-    value: "{} Tage",
+    value: "",
+    unit: "Tage",
   },
   [StatId.totalDistance]: {
     name: "Gesamtkilometer",
     icon: "material-symbols:route",
-    value: "{} km",
+    value: "",
+    unit: "km",
   },
   [StatId.kmPerDay]: {
-    name: "Kilometer pro Tag",
+    name: "Tagesstrecke",
     icon: "material-symbols:linear-scale",
-    value: "{} km",
+    value: "",
+    unit: "km",
   },
   [StatId.elevationUp]: {
     name: "Bergauf",
     icon: "material-symbols:trending-up",
-    value: "{} m",
+    value: "",
+    unit: "m",
   },
   [StatId.elevationDown]: {
     name: "Bergab",
     icon: "material-symbols:trending-down",
-    value: "{} m",
+    value: "",
+    unit: "m",
   },
   [StatId.totalTime]: {
     name: "Zeit unterwegs",
     icon: "material-symbols:timer",
-    value: "{} h",
+    value: "",
+    unit: "h",
   },
   [StatId.timePerDay]: {
     name: "Zeit pro Tag",
     icon: "material-symbols:avg-time",
-    value: "{} h",
+    value: "",
+    unit: "h",
   },
   [StatId.averageSpeed]: {
     icon: "material-symbols:speed",
     name: "Ø-Geschwindigkeit",
-    value: "{} km/h",
+    value: "",
+    unit: "km/h",
   },
   [StatId.topSpeed]: {
     icon: "material-symbols:rocket-launch",
     name: "Höchstgeschwindigkeit",
-    value: "{} km/h",
+    value: "",
+    unit: "km/h",
   },
 };

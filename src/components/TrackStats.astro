@@ -1,12 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
-import {
-  JourneyTypeId,
-  type Stat,
-  StatId,
-  statsPrototypes,
-} from "../utils/types";
-import { formatHours } from "../utils/general";
+import { type Stat, StatId, statsPrototypes } from "@utils/types";
+import { formatHours } from "@utils/general";
 
 interface Props {
   stats: Partial<Record<StatId, number>>;
@@ -17,27 +12,25 @@ const { stats: values } = Astro.props;
 const stats: Stat[] = [];
 for (const [valueKey, v] of Object.entries(values) as [StatId, number][]) {
   const stat = structuredClone<Stat>(statsPrototypes[valueKey]);
-  let value: string;
 
   switch (valueKey) {
     case StatId.elevationUp:
     case StatId.elevationDown:
-      value = v.toFixed(0);
+      stat.value = v.toFixed(0);
       break;
     case StatId.totalDistance:
     case StatId.kmPerDay:
     case StatId.averageSpeed:
-      value = v.toFixed(1);
+      stat.value = v.toFixed(1);
       break;
     case StatId.totalTime:
     case StatId.timePerDay:
-      value = formatHours(v);
+      stat.value = formatHours(v);
       break;
     default:
-      value = String(v);
+      stat.value = String(v);
   }
 
-  stat.value = stat.value.replace("{}", value);
   stats.push(stat);
 }
 
@@ -50,10 +43,16 @@ stats.sort((a, b) => statsNames.indexOf(a.name) - statsNames.indexOf(b.name));
 >
   {
     stats.map((stat) => (
-      <div class="flex w-40 shrink-0 grow-0 flex-col items-center gap-1 rounded-lg border border-2 border-line p-2 dark:border-line-dark">
-        <Icon name={stat.icon} size={40} />
-        <span class="text-center text-xs font-bold">{`${stat.name}:`}</span>
-        <span>{stat.value}</span>
+      <div class="flex w-40 shrink-0 grow-0 flex-col items-center gap-2 rounded-lg border border-2 border-line p-2 dark:border-line-dark">
+        <div class="grow font-serif font-bold">
+          <span class="text-2xl">{stat.value}</span>
+          <span class="">{stat.unit}</span>
+        </div>
+
+        <span class="inline-flex gap-1 align-middle text-xs">
+          <Icon name={stat.icon} size={20} />
+          <span>{stat.name}</span>
+        </span>
       </div>
     ))
   }
