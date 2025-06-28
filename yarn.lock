@@ -4123,6 +4123,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/leaflet.fullscreen@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "@types/leaflet.fullscreen@npm:3.0.2"
+  dependencies:
+    "@types/leaflet": "npm:*"
+  checksum: 10c0/4a879e0d6c8b3583150bd5292c91c64bc115422a5b04c6a9f1ac46d2dc0c66b83eae99cf31755922b26f594fcb8883832e0f23b41a950a9ad6c86bc981c067e6
+  languageName: node
+  linkType: hard
+
+"@types/leaflet@npm:*":
+  version: 1.9.19
+  resolution: "@types/leaflet@npm:1.9.19"
+  dependencies:
+    "@types/geojson": "npm:*"
+  checksum: 10c0/09a32f19d05a28b4c6478c7830af049a14573e78e5652947723b6416b20b3080970da88b6c43991d81fed156b94a7da3f2261d5ffe430b61c4ec6467fc94a54f
+  languageName: node
+  linkType: hard
+
 "@types/leaflet@npm:^1.9.18":
   version: 1.9.18
   resolution: "@types/leaflet@npm:1.9.18"
@@ -8771,6 +8789,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"leaflet.fullscreen@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "leaflet.fullscreen@npm:4.0.0"
+  checksum: 10c0/6c99b4a7fbc587d47ee78a7b7f996aa42408d581f25f89d718b84b63fa3062db6810e7c30e5d94f1268f09cee779e1a4f17e0b12f788e2d8a827c3ef2060e4ed
+  languageName: node
+  linkType: hard
+
 "leaflet@npm:^1.9.4":
   version: 1.9.4
   resolution: "leaflet@npm:1.9.4"
@@ -12441,6 +12466,7 @@ __metadata:
     "@types/eslint__js": "npm:^9.14.0"
     "@types/geojson": "npm:^7946.0.16"
     "@types/leaflet": "npm:^1.9.18"
+    "@types/leaflet.fullscreen": "npm:^3.0.2"
     "@types/three": "npm:^0.177.0"
     "@types/xmldom": "npm:^0.1.34"
     "@vueuse/core": "npm:^13.4.0"
@@ -12452,6 +12478,7 @@ __metadata:
     eslint: "npm:^9.29.0"
     github-slugger: "npm:^2.0.0"
     leaflet: "npm:^1.9.4"
+    leaflet.fullscreen: "npm:^4.0.0"
     prettier: "npm:3.6.0"
     prettier-plugin-astro: "npm:0.14.1"
     prettier-plugin-tailwindcss: "npm:^0.6.13"

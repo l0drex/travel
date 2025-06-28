@@ -76,11 +76,15 @@ const styles = {
   watercolor:
     "https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.jpg",
 };
+
+const mapOptions: L.MapOptions = {
+  fullscreenControl: true,
+};
 </script>
 
 <template>
   <div class="rounded-lg border-2 border-line dark:border-fg-dark">
-    <leaflet-map height="400px">
+    <leaflet-map height="400px" :options="mapOptions">
       <tile-layer :url-template="styles.default" :options="tileOptions" />
       <geo-json-layer :geo-json="currentFeature" :options="geoJsonOptions" />
     </leaflet-map>

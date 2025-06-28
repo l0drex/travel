@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import L from "leaflet";
+import "leaflet.fullscreen";
 import { useLeaflet } from "../composables/leaflet.ts";
 import { onMounted } from "vue";
 
@@ -23,6 +24,7 @@ onMounted(() => {
 
 <style>
 @import "leaflet/dist/leaflet.css";
+@import "leaflet.fullscreen/Control.FullScreen.css";
 
 #map {
   height: v-bind("height");
