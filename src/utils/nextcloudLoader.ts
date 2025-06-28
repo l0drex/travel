@@ -1,4 +1,4 @@
-import type { Loader } from "astro/loaders";
+import type { Loader, LoaderContext } from "astro/loaders";
 import { createClient, type FileStat } from "webdav";
 import type { AstroConfig } from "astro";
 import type { RenderedContent } from "astro:content";
@@ -14,7 +14,7 @@ interface WebDavOptions {
   parser: (
     text: string,
     filePath: string,
-    config: AstroConfig,
+    context: LoaderContext,
   ) => Promise<{ rendered?: RenderedContent; data: any }>;
   // list of file endings
   fileType: string;
@@ -99,7 +99,7 @@ export function nextcloudLoader(options: WebDavOptions): Loader {
           })) as string;
 
         const { rendered, data } = await options
-          .parser(text, f.filename, context.config)
+          .parser(text, f.filename, context)
           .catch((reason) => {
             throw reason;
           });
@@ -140,37 +140,58 @@ function getId(filename: string): string {
 export async function parseMarkdown(
   code: string,
   filePath: string,
-  opts: AstroConfig,
+  context: LoaderContext,
 ) {
+  // do some magic to load images from nextcloud
+
+  // remove markdown file name
+  const path = filePath.split("/");
+  path.pop();
+  const directory = path.join("/");
+
+  const absolutePath = `${NC_HOST}${directory}/`;
+
+  // copy context because this is async
+  const c = { ...context };
+
+  // add remark plugin to change relative urls in markdown
+  c.config.markdown.remarkPlugins.push([imgLinks, { absolutePath }]);
+
+  // parse frontmatter (custom metadata)
   const data = parseFrontmatter(code, {
     frontmatter: "empty-with-spaces",
   });
-
-  // do some magic to load images from nextcloud
-  const path = filePath.split("/");
-  // remove markdown file name
-  path.pop();
-  const directory = path.join("/");
-  const absolutePath = `${NC_HOST}${directory}/`;
 
   // change preview image url
   if (data.frontmatter.image) {
     data.frontmatter.image = new URL(data.frontmatter.image, absolutePath).href;
   }
 
-  // change urls in markdown
-  const markdownOptions = opts.markdown;
-  markdownOptions.remarkPlugins.push([imgLinks, { absolutePath }]);
+  // render markdown content
+  const render = await renderMarkdown(data.content, c.config);
+  // this does not work, as the config in the context is not used by the md renderer in the same context object
+  // await c.renderMarkdown(data.content);
 
-  // process the markdown file
+  // add frontmatter data
+  render.metadata ??= { imagePaths: [] };
+  render.metadata.frontmatter = data.frontmatter;
 
+  return {
+    data: render.metadata.frontmatter,
+    rendered: render,
+  };
+}
+
+async function renderMarkdown(
+  code: string,
+  opts: AstroConfig,
+): Promise<RenderedContent> {
   const processor = await createMarkdownProcessor({
     image: opts.image,
-    ...markdownOptions,
+    ...opts.markdown,
   });
 
-  const render = await processor.render(data.content, {
-    frontmatter: data.frontmatter,
+  const render = await processor.render(code, {
     // @ts-expect-error not exposed in type of astro
     fileURL: placeholderPath,
   });
@@ -181,14 +202,10 @@ export async function parseMarkdown(
   ];
 
   return {
-    data: render.metadata.frontmatter,
-    rendered: {
-      html: render.code,
-      metadata: {
-        imagePaths,
-        headings: render.metadata.headings,
-        frontmatter: render.metadata.frontmatter,
-      },
+    html: render.code,
+    metadata: {
+      imagePaths,
+      headings: render.metadata.headings,
     },
   };
 }
