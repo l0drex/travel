@@ -131,7 +131,7 @@ const isCollection = entry.data.type === JourneyTypeId.roadtrip;
       <div class="min-h-[404px]">
         <MapView client:only="vue" geoJson={geoJson.data} />
       </div>
-      <div class={isCollection ? "" : "min-h-[200px]"}>
+      <div class={isCollection ? "" : "min-h-[150px]"}>
         <ElevationGraph
           client:only="vue"
           geoJson={geoJson.data}

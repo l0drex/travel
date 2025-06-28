@@ -16,6 +16,7 @@ import { getColorPropertyString } from "@utils/color.ts";
 import { useUrlTitle } from "@utils/title.ts";
 import { coordAll, distance } from "@turf/turf";
 import { useCurrentGeoFeature } from "@utils/currentGeoFeature.ts";
+import type { Item } from "tinyqueue";
 
 const fgInactive = getColorPropertyString("fg-inactive");
 const fgInactiveDark = getColorPropertyString("fg-inactive-dark");
@@ -123,7 +124,7 @@ const options = computed<ChartOptions<"line">>(() => {
 
   const axisConf: _DeepPartialObject<CartesianScaleOptions> = {
     grid: {
-      color: lineColor,
+      display: false,
     },
     ticks: {
       color: labelColor,
@@ -144,6 +145,18 @@ const options = computed<ChartOptions<"line">>(() => {
       },
       legend: {
         display: false,
+      },
+      tooltip: {
+        intersect: false,
+        callbacks: {
+          title(tooltipItems: Item[]): string | string[] | void {
+            return `Distanz: ${tooltipItems[0].label} km`;
+          },
+          label(tooltipItem: Item): string | string[] | void {
+            console.debug(tooltipItem);
+            return `Höhe: ${tooltipItem.formattedValue} m`;
+          },
+        },
       },
     },
     scales: {
@@ -173,7 +186,7 @@ const options = computed<ChartOptions<"line">>(() => {
     v-if="showGraph"
     :chart-data="data"
     :options="options"
-    :height="200"
+    :height="150"
   />
 </template>
 
