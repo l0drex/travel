@@ -153,7 +153,6 @@ const options = computed<ChartOptions<"line">>(() => {
             return `Distanz: ${tooltipItems[0].label} km`;
           },
           label(tooltipItem: Item): string | string[] | void {
-            console.debug(tooltipItem);
             return `Höhe: ${tooltipItem.formattedValue} m`;
           },
         },
