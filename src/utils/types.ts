@@ -26,7 +26,7 @@ export const journeyTypes: Record<JourneyTypeId, JourneyType> = {
 } as const;
 
 export interface Journey {
-  location: [number, number];
+  points: [number, number][];
 }
 
 export interface Stat {

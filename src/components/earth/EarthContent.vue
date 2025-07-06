@@ -178,6 +178,6 @@ onBeforeRender(({ delta, elapsed }) => {
       <TresSphereGeometry :args="[earthRadius, 64, 64]" />
     </TresMesh>
 
-    <JourneyPoint v-for="j in journeys" :location="j.location" />
+    <JourneyPoint v-for="j in journeys" v-bind="j" />
   </TresGroup>
 </template>

@@ -4,8 +4,8 @@ import type { CollectionEntry } from "astro:content";
 import Layout from "@layouts/BaseLayout.astro";
 import EarthOverview from "@components/earth/EarthOverview.vue";
 import BlogListEntry from "@components/TravelEntry.astro";
-import type { Journey } from "@utils/types";
-import { coordAll } from "@turf/turf";
+import { type Journey, JourneyTypeId } from "@utils/types";
+import { coordAll, lineString, simplify } from "@turf/turf";
 import authors from "src/authors.json";
 import { type CountryData } from "country-codes-list";
 import { getVisitedCountries } from "../utils/geoJson";
@@ -20,14 +20,22 @@ const countries = new Set<CountryData>();
 for (let p of posts) {
   const entry = await getEntry(p.data.gpx);
   const geoJson = entry.data;
-  const points = coordAll(geoJson);
-  const coordinates = points[points.length - 1];
-  // longitude, latitude
-  const loc: [number, number] = [coordinates[1], coordinates[0]];
+  const points = simplify(lineString(coordAll(geoJson)), { tolerance: 0.2 })
+    .geometry.coordinates;
 
-  journeys.push({
-    location: loc,
-  });
+  function fromPoint(p: number[]): [number, number] {
+    return [p[1], p[0]];
+  }
+
+  if (p.data.type === JourneyTypeId.roadtrip) {
+    journeys.push({
+      points: [fromPoint(points[0])],
+    });
+  } else {
+    journeys.push({
+      points: points.map(fromPoint),
+    });
+  }
 
   getVisitedCountries(geoJson).forEach((c) => countries.add(c));
 }
