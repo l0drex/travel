@@ -1,7 +1,18 @@
 import { MathUtils, Vector3 } from "three";
-import type { GeoJSON, Position } from "geojson";
-import { coordAll, coordEach, distance, flatten, length } from "@turf/turf";
-import { StatId, statsPrototypes } from "@utils/types.ts";
+import type { FeatureCollection, GeoJSON, Position } from "geojson";
+import {
+  booleanIntersects,
+  coordAll,
+  coordEach,
+  distance,
+  featureEach,
+  flatten,
+  length,
+  lineString,
+  simplify,
+} from "@turf/turf";
+import { StatId } from "@utils/types.ts";
+import countryCodes from "country-codes-list";
 
 export function getFeatureByName(
   name: string,
@@ -111,4 +122,69 @@ export function addCalculatedStats(stats: StatsType, geoJson: GeoJSON) {
     stats[StatId.averageSpeed] =
       stats[StatId.totalDistance] / stats[StatId.totalTime]!;
   }
+}
+
+function formatName(name: string) {
+  // src: https://github.com/georgique/world-geojson/blob/develop/index.ts
+  if (!name) throw new Error("missing parameter for formatName");
+
+  return name
+    .replace(/ /g, "_")
+    .replace(/\./g, "")
+    .replace(/&/g, "and")
+    .toLowerCase();
+}
+
+export function getVisitedCountries(track: GeoJSON) {
+  // import country data
+  const countryModules = import.meta.glob(
+    "../../node_modules/world-geojson/countries/*.json",
+    {
+      eager: true,
+    },
+  ) as Record<string, FeatureCollection>;
+
+  // make sure we have a single feature.
+  // todo assumes track is a line.
+  const simpleTrack = simplify(lineString(coordAll(track)), {
+    tolerance: 0.1,
+  });
+
+  const countries = countryCodes.all().filter((country) => {
+    // get country data
+
+    let countryModule = Object.entries(countryModules).find(([path, data]) => {
+      const formattedName = formatName(country.countryNameEn);
+      return path.endsWith(`${formattedName}.json`);
+    });
+
+    if (countryModule == null) {
+      console.warn(`No data for country ${country.countryNameEn}`);
+      return false;
+    }
+    let geoData = countryModule[1];
+
+    // check if track passes through the country
+
+    let visitsCountry = false;
+    try {
+      featureEach(geoData, (f) => {
+        if (visitsCountry) {
+          return;
+        }
+
+        if (booleanIntersects(f, simpleTrack)) {
+          visitsCountry = true;
+        }
+      });
+    } catch (e) {
+      console.error(`Error while checking for ${country.countryNameEn}`);
+      console.error(e);
+      return false;
+    }
+
+    return visitsCountry;
+  });
+
+  return countries;
 }

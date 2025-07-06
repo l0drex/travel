@@ -24,7 +24,7 @@ import { Icon } from "astro-icon/components";
 import TitleNav from "@components/TitlesNav.astro";
 import twconfig from "tailwind.config.mjs";
 import TrackStats from "../components/track/TrackStats.astro";
-import { addCalculatedStats } from "../utils/geoJson";
+import { addCalculatedStats, getVisitedCountries } from "../utils/geoJson";
 
 export const getStaticPaths = (async () => {
   const posts: CollectionEntry<"posts">[] = await getCollection("posts");
@@ -77,6 +77,8 @@ if (entry.data.type !== JourneyTypeId.roadtrip) {
 }
 
 const isCollection = entry.data.type === JourneyTypeId.roadtrip;
+
+const countries = getVisitedCountries(geoJson.data);
 ---
 
 <Layout
@@ -115,14 +117,17 @@ const isCollection = entry.data.type === JourneyTypeId.roadtrip;
       {entry.data.title}
     </h1>
     <div
-      class="mb-8 flex justify-center gap-2 text-center align-baseline text-2xl"
+      class="mb-4 flex justify-center gap-2 text-center align-baseline text-2xl"
     >
       {(<JourneyType typeId={entry.data.type} />)}
       <span>·</span>
       <time datetime={jsDate.toISOString()}>{humanDate}</time>
     </div>
+    <div class="flex justify-center gap-2 text-xl text-fg-inactive">
+      {countries.map((c) => <span title={c.countryNameLocal}>{c.flag}</span>)}
+    </div>
 
-    <div class="mx-auto max-w-5xl">
+    <div class="mx-auto mt-8 max-w-5xl">
       {
         // we wrap vue components in a static div with a fixed height to prevent layout shifts.
         // collections only show the elevation graph occasionally,

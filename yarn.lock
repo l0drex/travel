@@ -4973,6 +4973,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"acorn@npm:^8.12.1, acorn@npm:^8.15.0":
+  version: 8.15.0
+  resolution: "acorn@npm:8.15.0"
+  bin:
+    acorn: bin/acorn
+  checksum: 10c0/dec73ff59b7d6628a01eebaece7f2bdb8bb62b9b5926dcad0f8931f2b8b79c2be21f6c68ac095592adb5adb15831a3635d9343e6a91d028bbe85d564875ec3ec
+  languageName: node
+  linkType: hard
+
 "acorn@npm:^8.14.0":
   version: 8.14.0
   resolution: "acorn@npm:8.14.0"
@@ -4988,15 +4997,6 @@ __metadata:
   bin:
     acorn: bin/acorn
   checksum: 10c0/dbd36c1ed1d2fa3550140000371fcf721578095b18777b85a79df231ca093b08edc6858d75d6e48c73e431c174dcf9214edbd7e6fa5911b93bd8abfa54e47123
-  languageName: node
-  linkType: hard
-
-"acorn@npm:^8.15.0":
-  version: 8.15.0
-  resolution: "acorn@npm:8.15.0"
-  bin:
-    acorn: bin/acorn
-  checksum: 10c0/dec73ff59b7d6628a01eebaece7f2bdb8bb62b9b5926dcad0f8931f2b8b79c2be21f6c68ac095592adb5adb15831a3635d9343e6a91d028bbe85d564875ec3ec
   languageName: node
   linkType: hard
 
@@ -6061,6 +6061,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"country-codes-list@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "country-codes-list@npm:2.0.0"
+  checksum: 10c0/e6b3ad0ab881cf145389ce5248868e49e69fb7ecce83f8babd28b3219e6512ad99c6687f388bbdc5304b49f05fc7a306d9cd6b24b7232ef26b91daa731497cb9
+  languageName: node
+  linkType: hard
+
 "cross-fetch@npm:^3.0.4":
   version: 3.2.0
   resolution: "cross-fetch@npm:3.2.0"
@@ -6746,6 +6753,13 @@ __metadata:
   version: 1.3.0
   resolution: "es-errors@npm:1.3.0"
   checksum: 10c0/0a61325670072f98d8ae3b914edab3559b6caa980f08054a3b872052640d91da01d38df55df797fcc916389d77fc92b8d5906cf028f4db46d7e3003abecbca85
+  languageName: node
+  linkType: hard
+
+"es-module-lexer@npm:^1.5.4":
+  version: 1.7.0
+  resolution: "es-module-lexer@npm:1.7.0"
+  checksum: 10c0/4c935affcbfeba7fb4533e1da10fa8568043df1e3574b869385980de9e2d475ddc36769891936dbb07036edb3c3786a8b78ccf44964cd130dedc1f2c984b6c7b
   languageName: node
   linkType: hard
 
@@ -12475,6 +12489,7 @@ __metadata:
     astro-icon: "npm:^1.1.5"
     chart.js: "npm:^4.5.0"
     colorjs.io: "npm:^0.5.2"
+    country-codes-list: "npm:^2.0.0"
     eslint: "npm:^9.29.0"
     github-slugger: "npm:^2.0.0"
     leaflet: "npm:^1.9.4"
@@ -12491,9 +12506,11 @@ __metadata:
     typescript: "npm:^5.8.3"
     typescript-eslint: "npm:^8.34.1"
     vite: "npm:^6.3.5"
+    vite-plugin-commonjs: "npm:^0.10.4"
     vue: "npm:^3.5.17"
     vue-chart-3: "npm:^3.1.8"
     webdav: "npm:^5.8.0"
+    world-geojson: "npm:^3.3.0"
   languageName: unknown
   linkType: soft
 
@@ -13151,6 +13168,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"vite-plugin-commonjs@npm:^0.10.4":
+  version: 0.10.4
+  resolution: "vite-plugin-commonjs@npm:0.10.4"
+  dependencies:
+    acorn: "npm:^8.12.1"
+    magic-string: "npm:^0.30.11"
+    vite-plugin-dynamic-import: "npm:^1.6.0"
+  checksum: 10c0/074e0d7a1e8f20d605f1a02c53867706639ea5a9aac8657e8d90442f13cf86154a6ebc65de1f05eb62e1a98523422d5025f3b7ccaabe88c486bec12b45e5d136
+  languageName: node
+  linkType: hard
+
+"vite-plugin-dynamic-import@npm:^1.6.0":
+  version: 1.6.0
+  resolution: "vite-plugin-dynamic-import@npm:1.6.0"
+  dependencies:
+    acorn: "npm:^8.12.1"
+    es-module-lexer: "npm:^1.5.4"
+    fast-glob: "npm:^3.3.2"
+    magic-string: "npm:^0.30.11"
+  checksum: 10c0/049f953b404157346e06a729eb055bc5b3630ac990bf36d52e6c44b1b223ac8e1f22fa1c44cadea55e7621366a0666439860fd4572f09c87daa45affd5dd15b6
+  languageName: node
+  linkType: hard
+
 "vite-plugin-inspect@npm:0.8.9":
   version: 0.8.9
   resolution: "vite-plugin-inspect@npm:0.8.9"
@@ -13795,6 +13835,13 @@ __metadata:
   version: 1.2.5
   resolution: "word-wrap@npm:1.2.5"
   checksum: 10c0/e0e4a1ca27599c92a6ca4c32260e8a92e8a44f4ef6ef93f803f8ed823f486e0889fc0b93be4db59c8d51b3064951d25e43d434e95dc8c960cc3a63d65d00ba20
+  languageName: node
+  linkType: hard
+
+"world-geojson@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "world-geojson@npm:3.3.0"
+  checksum: 10c0/bf7b5edffc1b68fae8543e0c27526c02ad0e0949dfe1ca077997795b1de52cda9cd89d544a73f7ddb57fbaf7d5a848c3c50258d96bf507be7c6484ae1d9c1968
   languageName: node
   linkType: hard
 

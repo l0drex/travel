@@ -31,6 +31,7 @@
     "astro-icon": "^1.1.5",
     "chart.js": "^4.5.0",
     "colorjs.io": "^0.5.2",
+    "country-codes-list": "^2.0.0",
     "github-slugger": "^2.0.0",
     "leaflet": "^1.9.4",
     "leaflet.fullscreen": "^4.0.0",
@@ -43,7 +44,8 @@
     "vite": "^6.3.5",
     "vue": "^3.5.17",
     "vue-chart-3": "^3.1.8",
-    "webdav": "^5.8.0"
+    "webdav": "^5.8.0",
+    "world-geojson": "^3.3.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
