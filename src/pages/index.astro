@@ -52,9 +52,9 @@ const mainAuthor = authors[0].name;
     >
       Discover my Adventures!
     </h1>
-    <h2 class="mb-5 inline-flex gap-2 text-xl">
+    <div class="mb-5 inline-flex gap-2 text-xl">
       {Array.from(countries).map((c) => <span>{c.flag}</span>)}
-    </h2>
+    </div>
 
     <ul id="blogs" class="flex w-max flex-col gap-3">
       {posts.map((p) => <BlogListEntry journey={p} />)}
