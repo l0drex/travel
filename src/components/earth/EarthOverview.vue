@@ -30,8 +30,8 @@ const bg2Dark = getColorPropertyString("bg-2-dark");
     v-if="enableAnimatedEarth"
     id="canvas"
     window-size
-    alpha="true"
-    clearAlpha="0"
+    :alpha="true"
+    :clearAlpha="0"
   >
     <EarthContent :journeys="journeys" />
   </TresCanvas>
