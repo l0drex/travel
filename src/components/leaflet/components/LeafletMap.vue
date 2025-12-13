@@ -24,7 +24,7 @@ onMounted(() => {
 
 <style>
 @import "leaflet/dist/leaflet.css";
-@import "leaflet.fullscreen/Control.FullScreen.css";
+@import "leaflet.fullscreen/dist/Control.FullScreen.css";
 
 #map {
   height: v-bind("height");

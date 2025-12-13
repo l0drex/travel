@@ -5,7 +5,9 @@ import { usePreferredReducedMotion } from "@vueuse/core";
 import { getColorPropertyString } from "@utils/color.ts";
 import { defineAsyncComponent } from "vue";
 
-const TresCanvas = defineAsyncComponent(() => import("@tresjs/core").then(t => t.TresCanvas));
+const TresCanvas = defineAsyncComponent(() =>
+  import("@tresjs/core").then((t) => t.TresCanvas),
+);
 const EarthContent = defineAsyncComponent(() => import("./EarthContent.vue"));
 
 const reducedMotion = usePreferredReducedMotion();
@@ -24,7 +26,13 @@ const bg2Dark = getColorPropertyString("bg-2-dark");
 </script>
 
 <template>
-  <TresCanvas v-if="enableAnimatedEarth" id="canvas" window-size>
+  <TresCanvas
+    v-if="enableAnimatedEarth"
+    id="canvas"
+    window-size
+    alpha="true"
+    clearAlpha="0"
+  >
     <EarthContent :journeys="journeys" />
   </TresCanvas>
 

@@ -10,7 +10,7 @@ import {
   TextureLoader,
   Vector3,
 } from "three";
-import { type TresInstance, useLoop } from "@tresjs/core";
+import { type TresInstance, useLoop, useTres } from "@tresjs/core";
 import waterMap from "@assets/earth/2k_earth_bw.jpg";
 import JourneyPoint from "./JourneyPoint.vue";
 import { useMouse, usePreferredDark, useWindowSize } from "@vueuse/core";
