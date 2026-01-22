@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import type { GeoJSON } from "geojson";
 import L from "leaflet";
 import { getColorPropertyString } from "@utils/color.ts";
@@ -84,8 +84,8 @@ const mapOptions: L.MapOptions = {
 
 <template>
   <div class="rounded-lg border-2 border-line dark:border-fg-dark">
-    <leaflet-map height="400px" :options="mapOptions">
-      <tile-layer :url-template="styles.default" :options="tileOptions" />
+    <leaflet-map :options="mapOptions" height="400px">
+      <tile-layer :options="tileOptions" :url-template="styles.default" />
       <geo-json-layer :geo-json="currentFeature" :options="geoJsonOptions" />
     </leaflet-map>
   </div>

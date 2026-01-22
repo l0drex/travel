@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import WebGL from "three/examples/jsm/capabilities/WebGL";
 import type { Journey } from "@utils/types.ts";
 import { usePreferredReducedMotion } from "@vueuse/core";
@@ -29,36 +29,36 @@ const bg2Dark = getColorPropertyString("bg-2-dark");
   <TresCanvas
     v-if="enableAnimatedEarth"
     id="canvas"
-    window-size
     :alpha="true"
     :clearAlpha="0"
+    window-size
   >
     <EarthContent :journeys="journeys" />
   </TresCanvas>
 
   <svg
     v-else
+    class="h-screen w-screen"
     viewBox="0 5 100 90"
     xmlns="http://www.w3.org/2000/svg"
-    class="h-screen w-screen"
   >
     <defs>
       <linearGradient id="earthGradient">
-        <stop offset="0%" :stop-color="bg2"></stop>
-        <stop offset="100%" :stop-color="bg"></stop>
+        <stop :stop-color="bg2" offset="0%"></stop>
+        <stop :stop-color="bg" offset="100%"></stop>
       </linearGradient>
 
       <linearGradient id="earthGradientDark">
-        <stop offset="0%" :stop-color="bg2Dark"></stop>
-        <stop offset="100%" :stop-color="bgDark"></stop>
+        <stop :stop-color="bg2Dark" offset="0%"></stop>
+        <stop :stop-color="bgDark" offset="100%"></stop>
       </linearGradient>
     </defs>
 
     <circle
+      class="fill-[url(#earthGradient)] dark:fill-[url(#earthGradientDark)]"
       cx="50"
       cy="50"
       r="50"
-      class="fill-[url(#earthGradient)] dark:fill-[url(#earthGradientDark)]"
     ></circle>
   </svg>
 </template>

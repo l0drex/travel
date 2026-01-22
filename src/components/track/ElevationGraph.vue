@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { LineChart } from "vue-chart-3";
 import { computed } from "vue";
 import { getPointsOf, reduceSize } from "@utils/geoJson.ts";
@@ -184,8 +184,8 @@ const options = computed<ChartOptions<"line">>(() => {
   <LineChart
     v-if="showGraph"
     :chart-data="data"
-    :options="options"
     :height="150"
+    :options="options"
   />
 </template>
 

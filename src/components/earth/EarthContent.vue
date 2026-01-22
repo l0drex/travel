@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { computed, shallowRef } from "vue";
 import {
   DataTexture,
@@ -10,7 +10,7 @@ import {
   TextureLoader,
   Vector3,
 } from "three";
-import { type TresInstance, useLoop, useTres } from "@tresjs/core";
+import { type TresInstance, useLoop } from "@tresjs/core";
 import waterMap from "@assets/earth/2k_earth_bw.jpg";
 import JourneyPoint from "./JourneyPoint.vue";
 import { useMouse, usePreferredDark, useWindowSize } from "@vueuse/core";
@@ -165,12 +165,12 @@ onBeforeRender(({ delta, elapsed }) => {
 </script>
 
 <template>
-  <TresPerspectiveCamera :position="cameraPos" :look-at="[0, 0, 0]" />
+  <TresPerspectiveCamera :look-at="[0, 0, 0]" :position="cameraPos" />
   <TresDirectionalLight
-    :intensity="5"
-    :position="lightPos"
-    :look-at="[0, 0, 0]"
     ref="light"
+    :intensity="5"
+    :look-at="[0, 0, 0]"
+    :position="lightPos"
   />
 
   <TresGroup ref="earthRef">

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import L from "leaflet";
 import { useLeaflet } from "../composables/leaflet.ts";
 import type { GeoJsonObject } from "geojson";

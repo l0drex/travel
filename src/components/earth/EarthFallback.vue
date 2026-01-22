@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { getColorPropertyString } from "@utils/color.js";
 
 // tailwind colors
@@ -10,27 +10,27 @@ const bg2Dark = getColorPropertyString("bg-2-dark");
 
 <template>
   <svg
+    class="h-screen w-screen"
     viewBox="0 5 100 90"
     xmlns="http://www.w3.org/2000/svg"
-    class="h-screen w-screen"
   >
     <defs>
       <linearGradient id="earthGradient">
-        <stop offset="0%" :stop-color="bg2"></stop>
-        <stop offset="100%" :stop-color="bg"></stop>
+        <stop :stop-color="bg2" offset="0%"></stop>
+        <stop :stop-color="bg" offset="100%"></stop>
       </linearGradient>
 
       <linearGradient id="earthGradientDark">
-        <stop offset="0%" :stop-color="bg2Dark"></stop>
-        <stop offset="100%" :stop-color="bgDark"></stop>
+        <stop :stop-color="bg2Dark" offset="0%"></stop>
+        <stop :stop-color="bgDark" offset="100%"></stop>
       </linearGradient>
     </defs>
 
     <circle
+      class="fill-[url(#earthGradient)] dark:fill-[url(#earthGradientDark)]"
       cx="50"
       cy="50"
       r="50"
-      class="fill-[url(#earthGradient)] dark:fill-[url(#earthGradientDark)]"
     ></circle>
   </svg>
 </template>

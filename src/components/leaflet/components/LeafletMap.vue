@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import L from "leaflet";
 import "leaflet.fullscreen";
 import { useLeaflet } from "../composables/leaflet.ts";
