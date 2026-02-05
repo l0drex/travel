@@ -25,6 +25,7 @@ import TitleNav from "@components/TitlesNav.astro";
 import twconfig from "tailwind.config.mjs";
 import TrackStats from "../components/track/TrackStats.astro";
 import { addCalculatedStats, getVisitedCountries } from "../utils/geoJson";
+import Flags from "@components/Flags.astro";
 
 export const getStaticPaths = (async () => {
   const posts: CollectionEntry<"posts">[] = await getCollection("posts");
@@ -123,9 +124,7 @@ const countries = getVisitedCountries(geoJson.data);
       <span>·</span>
       <time datetime={jsDate.toISOString()}>{humanDate}</time>
     </div>
-    <div class="flex justify-center gap-2 text-xl text-fg-inactive">
-      {countries.map((c) => <span title={c.countryNameLocal}>{c.flag}</span>)}
-    </div>
+    <Flags countries={countries} />
 
     <div class="mx-auto mt-8 max-w-5xl">
       {

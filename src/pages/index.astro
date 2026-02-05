@@ -9,6 +9,7 @@ import { coordAll, lineString, simplify } from "@turf/turf";
 import authors from "src/authors.json";
 import { type CountryData } from "country-codes-list";
 import { getVisitedCountries } from "../utils/geoJson";
+import Flags from "@components/Flags.astro";
 
 const posts: CollectionEntry<"posts">[] = (await getCollection("posts")).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
@@ -52,11 +53,7 @@ const mainAuthor = authors[0].name;
     >
       Discover my Adventures!
     </h1>
-    <div
-      class="mb-5 inline-flex gap-2 border-t-2 border-b-2 border-neutral-600 px-2 text-xl"
-    >
-      {Array.from(countries).map((c) => <span>{c.flag}</span>)}
-    </div>
+    <Flags countries={Array.from(countries)} />
 
     <ul id="blogs" class="flex w-max flex-col gap-3">
       {posts.map((p) => <BlogListEntry journey={p} />)}

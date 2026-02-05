@@ -1,0 +1,15 @@
+---
+import type { CountryData } from "country-codes-list";
+
+interface Props {
+  countries: CountryData[];
+}
+
+const { countries } = Astro.props;
+---
+
+<div
+  class="mx-auto mb-5 flex w-min justify-center gap-2 border-t-2 border-b-2 border-neutral-600 px-2 text-xl"
+>
+  {countries.map((c) => <span>{c.flag}</span>)}
+</div>
