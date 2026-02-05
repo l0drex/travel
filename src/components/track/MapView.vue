@@ -10,9 +10,18 @@ import GeoJsonLayer from "@components/leaflet/components/GeoJsonLayer.vue";
 import Slugger from "github-slugger";
 import { useCurrentGeoFeature } from "@utils/currentGeoFeature.ts";
 
-const { geoJson } = defineProps<{
+const { geoJson, isBig, mapKey } = defineProps<{
   geoJson: GeoJSON;
+  height: number;
+  isBig: boolean;
+  mapKey: string;
 }>();
+
+if (!mapKey || mapKey.length == 0) {
+  throw new Error("mapKey is required");
+}
+
+const key = Symbol(mapKey);
 
 const currentFeature = useCurrentGeoFeature(geoJson);
 
@@ -78,15 +87,24 @@ const styles = {
 };
 
 const mapOptions: L.MapOptions = {
-  fullscreenControl: true,
+  fullscreenControl: isBig,
+  zoomControl: isBig,
 };
 </script>
 
 <template>
   <div class="rounded-lg border-2 border-line dark:border-fg-dark">
-    <leaflet-map :options="mapOptions" height="400px">
-      <tile-layer :options="tileOptions" :url-template="styles.default" />
-      <geo-json-layer :geo-json="currentFeature" :options="geoJsonOptions" />
+    <leaflet-map :options="mapOptions" :height="`${height}px`" :map-key="key">
+      <tile-layer
+        :options="tileOptions"
+        :url-template="styles.default"
+        :map-key="key"
+      />
+      <geo-json-layer
+        :geo-json="currentFeature"
+        :options="geoJsonOptions"
+        :map-key="key"
+      />
     </leaflet-map>
   </div>
 </template>

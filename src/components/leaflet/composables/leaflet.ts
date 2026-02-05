@@ -1,4 +1,4 @@
-import { ref, watch } from "vue";
+import { ref, watch, inject, provide, type Ref, type InjectionKey } from "vue";
 import L from "leaflet";
 import markerIconUrl from "@assets/marker.svg";
 import markerShadowUrl from "leaflet/dist/images/marker-shadow.png";
@@ -13,25 +13,39 @@ L.Icon.Default.prototype.options.shadowSize = [48, 48];
 L.Icon.Default.prototype.options.shadowAnchor = [48 / 2 - 6, 48];
 L.Icon.Default.imagePath = "";
 
-const map = ref<L.Map>();
+type OnMapReadyCallback = () => void;
 
-export function useLeaflet() {
-  const onMapReady = (callback: Function) => {
+export type LeafletContext = {
+  map: Ref<L.Map | undefined>;
+  onMapReady: (callback: OnMapReadyCallback) => void;
+};
+
+export function provideLeaflet(key: InjectionKey<LeafletContext>) {
+  const map = ref<L.Map>();
+
+  const onMapReady = (callback: OnMapReadyCallback) => {
     watch(
       map,
       () => {
-        if (map.value == null) {
-          return;
-        }
-
+        if (map.value == null) return;
         callback();
       },
       { immediate: true },
     );
   };
 
-  return {
-    map,
-    onMapReady,
-  };
+  const ctx: LeafletContext = { map, onMapReady };
+  provide(key, ctx);
+
+  return ctx;
+}
+
+export function useLeaflet(key: InjectionKey<LeafletContext>): LeafletContext {
+  const ctx = inject(key);
+  if (!ctx) {
+    throw new Error(
+      "useLeaflet() must be used inside a <LeafletMap> component.",
+    );
+  }
+  return ctx;
 }

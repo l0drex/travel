@@ -133,7 +133,13 @@ const countries = getVisitedCountries(geoJson.data);
         // therefore we cannot prevent the layout shift
       }
       <div class="min-h-[404px]">
-        <MapView client:only="vue" geoJson={geoJson.data} />
+        <MapView
+          client:only="vue"
+          geoJson={geoJson.data}
+          height={400}
+          isBig={true}
+          mapKey="BigMapIntro"
+        />
       </div>
       <div class={isCollection ? "" : "min-h-[150px]"}>
         <ElevationGraph
@@ -160,6 +166,16 @@ const countries = getVisitedCountries(geoJson.data);
     </Button>
 
     <TitleNav headings={headings} />
+
+    <div class="min-h-[204px] w-full">
+      <MapView
+        client:only="vue"
+        geoJson={geoJson.data}
+        height={200}
+        isBig={false}
+        mapKey="SmallMapNavBar"
+      />
+    </div>
 
     <Button href={Astro.url}>
       <Icon name="material-symbols:keyboard-arrow-up-rounded" slot="icon" />

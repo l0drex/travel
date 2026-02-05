@@ -1,23 +1,27 @@
 <script lang="ts" setup>
 import L from "leaflet";
 import "leaflet.fullscreen";
-import { useLeaflet } from "../composables/leaflet.ts";
-import { onMounted } from "vue";
+import { type InjectionKey, onMounted, ref } from "vue";
+import { type LeafletContext, provideLeaflet } from "../composables/leaflet.ts";
 
-const { height, options } = defineProps<{
+const { height, options, mapKey } = defineProps<{
   height: string;
   options?: L.MapOptions;
+  mapKey: InjectionKey<LeafletContext>;
 }>();
 
-const { map } = useLeaflet();
+const { map } = provideLeaflet(mapKey);
+
+const mapEl = ref<HTMLDivElement | null>(null);
 
 onMounted(() => {
-  map.value = L.map("map", options);
+  if (!mapEl.value) return;
+  map.value = L.map(mapEl.value, options);
 });
 </script>
 
 <template>
-  <div id="map">
+  <div ref="mapEl" class="leaflet-map">
     <slot />
   </div>
 </template>
@@ -26,7 +30,7 @@ onMounted(() => {
 @import "leaflet/dist/leaflet.css";
 @import "leaflet.fullscreen/dist/Control.FullScreen.css";
 
-#map {
+.leaflet-map {
   height: v-bind("height");
 }
 </style>
