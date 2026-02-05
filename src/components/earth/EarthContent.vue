@@ -43,7 +43,7 @@ function getEarthMaterial() {
 
   // colors must be vec4 (rgba)
   const gradientData = new Uint8Array(
-    [...bg, 1, ...earth, 1].map((c) => Math.trunc(c * 255)),
+    [...bg, 1, ...earth, 1].map((c) => Math.trunc((c ?? 0) * 255)),
   );
 
   const gradientTexture = new DataTexture(gradientData, 2, 1);
