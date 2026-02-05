@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { computed, shallowRef } from "vue";
 import {
   DataTexture,
@@ -165,7 +165,7 @@ onBeforeRender(({ delta, elapsed }) => {
 </script>
 
 <template>
-  <TresPerspectiveCamera :look-at="[0, 0, 0]" :position="cameraPos" />
+  <TresPerspectiveCamera :position="cameraPos" :look-at="[0, 0, 0]" />
   <TresDirectionalLight
     ref="light"
     :intensity="5"
