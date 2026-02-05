@@ -18,6 +18,8 @@ import { toRadians } from "chart.js/helpers";
 import type { Journey } from "@utils/types.ts";
 import { getColorProperty } from "@utils/color.ts";
 
+const overwriteShader = true;
+
 const { journeys } = defineProps<{
   journeys: Journey[];
 }>();
@@ -54,9 +56,11 @@ function getEarthMaterial() {
 
   // we patch the existing lambert material for our use case
   // we map the bw water texture multiplied with shadows to the gradient
-  return new MeshLambertMaterial({
+  const material = new MeshLambertMaterial({
     map: earthTexture,
-    onBeforeCompile: (shader) => {
+  });
+  if (overwriteShader) {
+    material.onBeforeCompile = (shader) => {
       shader.uniforms = {
         ...shader.uniforms,
         gradientTexture: { value: gradientTexture },
@@ -90,8 +94,10 @@ function getEarthMaterial() {
         "#include <dithering_fragment>",
         fragmentShader,
       );
-    },
-  });
+    };
+  }
+
+  return material;
 }
 
 const earthRadius = 0.5;
