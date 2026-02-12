@@ -1,5 +1,5 @@
 import { MathUtils, Vector3 } from "three";
-import type { FeatureCollection, GeoJSON, Position } from "geojson";
+import type { Feature, FeatureCollection, GeoJSON, Position } from "geojson";
 import {
   booleanIntersects,
   coordAll,
@@ -17,7 +17,7 @@ import countryCodes from "country-codes-list";
 export function getFeatureByName(
   name: string,
   geoJson: GeoJSON,
-): GeoJSON | null {
+): Feature | null {
   // types are not compatible somehow
   for (const f of flatten(geoJson as any).features) {
     if (f.properties == null) {

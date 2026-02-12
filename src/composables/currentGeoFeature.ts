@@ -1,9 +1,9 @@
-import { computed } from "vue";
+import { computed, type ComputedRef } from "vue";
 import { getFeatureByName } from "@utils/geoJson.ts";
 import { useUrlTitle } from "@utils/title.ts";
 import type { GeoJSON } from "geojson";
 
-export function useCurrentGeoFeature(geoJson: GeoJSON) {
+export function useCurrentGeoFeature(geoJson: GeoJSON): ComputedRef<GeoJSON> {
   const currentUrlTitle = useUrlTitle();
 
   const feature = computed(() => {
@@ -11,11 +11,11 @@ export function useCurrentGeoFeature(geoJson: GeoJSON) {
       return geoJson;
     }
 
-    const feature = getFeatureByName(currentUrlTitle.value, geoJson);
-    if (feature == null) {
+    const f = getFeatureByName(currentUrlTitle.value, geoJson);
+    if (f == null) {
       return geoJson;
     }
-    return feature;
+    return f;
   });
 
   return feature;

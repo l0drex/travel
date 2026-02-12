@@ -65,8 +65,21 @@ const styleFunction = computed<L.StyleFunction>(() => {
 // this might break in the future, since we are using the implementation 2 dependencies down...
 const slugger = new Slugger();
 
-const geoJsonOptions: L.GeoJSONOptions = {
+const inactiveGeoJsonOptions: L.GeoJSONOptions = {
   style: styleFunction.value,
+  onEachFeature: (feature, layer) => {
+    layer.bindPopup(
+      // link to heading in current markdown post with id of feature as name
+      `<a href="#${slugger.slug(feature.properties["name"])}">${feature.properties["name"]}</a>`,
+    );
+  },
+};
+
+const activeGeoJsonOptions: L.GeoJSONOptions = {
+  style: {
+    color: trackColors[0].value,
+    weight: 5,
+  },
   onEachFeature: (feature, layer) => {
     layer.bindPopup(
       // link to heading in current markdown post with id of feature as name
@@ -101,8 +114,13 @@ const mapOptions: L.MapOptions = {
         :map-key="key"
       />
       <geo-json-layer
+        :geo-json="geoJson"
+        :options="inactiveGeoJsonOptions"
+        :map-key="key"
+      />
+      <geo-json-layer
         :geo-json="currentFeature"
-        :options="geoJsonOptions"
+        :options="activeGeoJsonOptions"
         :map-key="key"
       />
     </leaflet-map>

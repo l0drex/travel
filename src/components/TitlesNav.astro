@@ -89,7 +89,6 @@ function subheaders(heading: MarkdownHeading) {
     refreshNavElements(document.URL),
   );
   window.addEventListener("popstate", (e) => {
-    console.debug(e);
-    refreshNavElements(e.state.newHash);
+    refreshNavElements(document.URL);
   });
 </script>
