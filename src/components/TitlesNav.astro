@@ -63,7 +63,7 @@ function subheaders(heading: MarkdownHeading) {
 
   // style current heading in nav
 
-  function refreshElements(url: string) {
+  function refreshNavElements(url: string) {
     const hash = decodeURI(new URL(url).hash);
 
     if (hash === "") {
@@ -83,34 +83,13 @@ function subheaders(heading: MarkdownHeading) {
     }
   }
 
-  refreshElements(document.URL);
-  window.addEventListener("hashchange", (e) => refreshElements(e.newURL));
-
-  // put current element in url
-
-  const headers = document.querySelectorAll("article h1, article h2");
-
-  function updateHash() {
-    let visible: Element | null = null;
-    for (const header of headers) {
-      const pos = header.getBoundingClientRect();
-
-      if (pos.top > 0 && pos.bottom <= window.innerHeight / 2) {
-        visible = header;
-        break;
-      }
-    }
-
-    if (visible != null) {
-      // just style the nav bar, no change in url here
-      // avoids unwanted scrolling done by browser
-
-      // we construct a url to put a hash in there
-      const url = new URL(document.URL);
-      url.hash = visible.id;
-      refreshElements(url.href);
-    }
-  }
-
-  document.querySelector("main")!.addEventListener("scrollend", updateHash);
+  refreshNavElements(document.URL);
+  window.addEventListener("hashchange", (e) => refreshNavElements(e.newURL));
+  window.addEventListener("silenthashchange", (e) =>
+    refreshNavElements(document.URL),
+  );
+  window.addEventListener("popstate", (e) => {
+    console.debug(e);
+    refreshNavElements(e.state.newHash);
+  });
 </script>

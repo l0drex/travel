@@ -183,3 +183,38 @@ const countries = getVisitedCountries(geoJson.data);
     </Button>
   </nav>
 </Layout>
+
+<script>
+  // update the hash of the url to the current heading
+  function updateHash() {
+    let visible: Element | null = null;
+    const headers = document.querySelectorAll("article h1, article h2");
+
+    for (const header of headers) {
+      const pos = header.getBoundingClientRect();
+
+      if (pos.top > 0 && pos.bottom <= window.innerHeight / 2) {
+        visible = header;
+        break;
+      }
+    }
+
+    if (visible != null) {
+      console.debug(`New section ${visible.textContent} reached`);
+
+      // just style the nav bar, no change in url here
+      // avoids unwanted scrolling done by browser
+
+      history.pushState({}, "", `#${visible.id}`);
+
+      // dispatch event to update other elements
+      const event = new CustomEvent("silenthashchange");
+      window.dispatchEvent(event);
+    }
+  }
+
+  updateHash();
+  document
+    .querySelector("main")!
+    .parentNode!.addEventListener("scrollend", updateHash);
+</script>

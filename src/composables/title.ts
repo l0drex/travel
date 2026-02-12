@@ -24,6 +24,7 @@ export function useUrlTitle(): Ref<string | null, string | null> {
 
   update();
   window.addEventListener("hashchange", update);
-
+  window.addEventListener("silenthashchange", update);
+  window.addEventListener("popstate", update);
   return title;
 }
