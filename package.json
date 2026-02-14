@@ -37,6 +37,7 @@
     "leaflet.fullscreen": "^5.3.0",
     "rollup": "^4.57.1",
     "rollup-pluginutils": "^2.8.2",
+    "sharp": "^0.34.5",
     "tailwind": "^4.0.0",
     "tailwindcss": "^4.1.18",
     "three": "^0.182.0",

@@ -11916,7 +11916,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sharp@npm:^0.34.0":
+"sharp@npm:^0.34.0, sharp@npm:^0.34.5":
   version: 0.34.5
   resolution: "sharp@npm:0.34.5"
   dependencies:
@@ -12780,6 +12780,7 @@ __metadata:
     prettier-plugin-tailwindcss: "npm:^0.7.2"
     rollup: "npm:^4.57.1"
     rollup-pluginutils: "npm:^2.8.2"
+    sharp: "npm:^0.34.5"
     tailwind: "npm:^4.0.0"
     tailwindcss: "npm:^4.1.18"
     three: "npm:^0.182.0"
