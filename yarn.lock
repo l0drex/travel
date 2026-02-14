@@ -119,7 +119,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@astrojs/markdown-remark@npm:6.3.10":
+"@astrojs/markdown-remark@npm:6.3.10, @astrojs/markdown-remark@npm:^6.3.10":
   version: 6.3.10
   resolution: "@astrojs/markdown-remark@npm:6.3.10"
   dependencies:
@@ -12744,6 +12744,7 @@ __metadata:
   resolution: "travel@workspace:."
   dependencies:
     "@astrojs/check": "npm:0.9.6"
+    "@astrojs/markdown-remark": "npm:^6.3.10"
     "@astrojs/rss": "npm:4.0.15"
     "@astrojs/ts-plugin": "npm:1.10.6"
     "@astrojs/vue": "npm:5.1.4"
