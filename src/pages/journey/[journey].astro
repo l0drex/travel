@@ -14,17 +14,17 @@ import Layout from "@layouts/BaseLayout.astro";
 import MapView from "@components/track/MapView.vue";
 import ElevationGraph from "@components/track/ElevationGraph.vue";
 import authors from "src/authors.json";
-import { JourneyTypeId, journeyTypes, StatId } from "../utils/types";
-import JourneyType from "../components/TypeIcon.astro";
-import { dateFormatter } from "../utils/general";
+import { JourneyTypeId, journeyTypes, StatId } from "@utils/types";
+import JourneyType from "@components/TypeIcon.astro";
+import { dateFormatter } from "@utils/general";
 import { getImage } from "astro:assets";
 import JourneyContent from "@components/MarkdownContent.astro";
 import Button from "@components/Button.astro";
 import { Icon } from "astro-icon/components";
 import TitleNav from "@components/TitlesNav.astro";
 import twconfig from "tailwind.config.mjs";
-import TrackStats from "../components/track/TrackStats.astro";
-import { addCalculatedStats, getVisitedCountries } from "../utils/geoJson";
+import TrackStats from "@components/track/TrackStats.astro";
+import { addCalculatedStats, getVisitedCountries } from "@utils/geoJson";
 import Flags from "@components/Flags.astro";
 
 export const getStaticPaths = (async () => {
