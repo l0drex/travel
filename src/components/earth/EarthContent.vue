@@ -17,11 +17,14 @@ import { useMouse, usePreferredDark, useWindowSize } from "@vueuse/core";
 import { toRadians } from "chart.js/helpers";
 import type { Journey } from "@utils/types.ts";
 import { getColorProperty } from "@utils/color.ts";
+import CountryShapes from "@components/earth/CountryShapes.vue";
+import type { CountryData } from "country-codes-list";
 
 const overwriteShader = true;
 
-const { journeys } = defineProps<{
+const { journeys, countries } = defineProps<{
   journeys: Journey[];
+  countries: Set<CountryData>;
 }>();
 
 const { onBeforeRender } = useLoop();
@@ -185,5 +188,7 @@ onBeforeRender(({ delta, elapsed }) => {
     </TresMesh>
 
     <JourneyPoint v-for="j in journeys" v-bind="j" />
+
+    <CountryShapes :countries="countries" />
   </TresGroup>
 </template>

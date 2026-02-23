@@ -45,7 +45,12 @@ const mainAuthor = authors[0].name;
 ---
 
 <Layout title={`Reiseblog von ${mainAuthor}`}>
-  <EarthOverview client:only="vue" journeys={journeys} slot="background" />
+  <EarthOverview
+    client:only="vue"
+    journeys={journeys}
+    countries={countries}
+    slot="background"
+  />
 
   <div class="flex min-h-full flex-col place-content-center items-center">
     <h1

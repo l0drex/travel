@@ -2,9 +2,9 @@
 import WebGL from "three/examples/jsm/capabilities/WebGL";
 import type { Journey } from "@utils/types.ts";
 import { usePreferredReducedMotion } from "@vueuse/core";
-import { getColorPropertyString } from "@utils/color.ts";
 import { defineAsyncComponent } from "vue";
 import EarthFallback from "@components/earth/EarthFallback.vue";
+import type { CountryData } from "country-codes-list";
 
 const TresCanvas = defineAsyncComponent(() =>
   import("@tresjs/core").then((t) => t.TresCanvas),
@@ -15,8 +15,9 @@ const reducedMotion = usePreferredReducedMotion();
 const enableAnimatedEarth: boolean =
   WebGL.isWebGL2Available() && reducedMotion.value != "reduce";
 
-const { journeys } = defineProps<{
+const { journeys, countries } = defineProps<{
   journeys: Journey[];
+  countries: Set<CountryData>;
 }>();
 </script>
 
@@ -28,7 +29,7 @@ const { journeys } = defineProps<{
     :clearAlpha="0"
     window-size
   >
-    <EarthContent :journeys="journeys" />
+    <EarthContent :journeys="journeys" :countries="countries" />
   </TresCanvas>
 
   <EarthFallback v-else />
