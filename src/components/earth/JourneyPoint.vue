@@ -27,7 +27,7 @@ const end = points[points.length - 1];
     :position="positionAtCoordinate(start[0], start[1])"
   >
     <TresRingGeometry :args="[0.003, 0.005, 16, 1]" />
-    <TresMeshStandardMaterial :color="primaryColor" />
+    <TresMeshBasicMaterial :color="primaryColor" />
   </TresMesh>
 
   <TresMesh
@@ -35,6 +35,6 @@ const end = points[points.length - 1];
     :position="positionAtCoordinate(end[0], end[1])"
   >
     <TresCircleGeometry :args="[0.004, 16]" />
-    <TresMeshStandardMaterial :color="primaryColor" />
+    <TresMeshBasicMaterial :color="primaryColor" />
   </TresMesh>
 </template>
