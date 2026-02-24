@@ -139,7 +139,7 @@ lightPos.setFromSphericalCoords(
 const earthRef = shallowRef<TresInstance | null>(null);
 
 onBeforeRender(({ delta, elapsed, renderer }) => {
-  console.debug("Triangle count:", renderer.info.render.triangles);
+  //console.debug("Triangle count:", renderer.info.render.triangles);
 
   if (earthRef.value == null) {
     return;
