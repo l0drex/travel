@@ -5,6 +5,7 @@ import { usePreferredReducedMotion } from "@vueuse/core";
 import { defineAsyncComponent } from "vue";
 import EarthFallback from "@components/earth/EarthFallback.vue";
 import type { CountryData } from "country-codes-list";
+import { NoToneMapping } from "three";
 
 const TresCanvas = defineAsyncComponent(() =>
   import("@tresjs/core").then((t) => t.TresCanvas),
@@ -25,8 +26,8 @@ const { journeys, countries } = defineProps<{
   <TresCanvas
     v-if="enableAnimatedEarth"
     id="canvas"
-    :alpha="true"
     :clearAlpha="0"
+    :toneMapping="NoToneMapping"
     window-size
   >
     <EarthContent :journeys="journeys" :countries="countries" />

@@ -1,25 +1,28 @@
 <script setup lang="ts">
 import { computed, shallowRef } from "vue";
 import {
+  Color,
   DataTexture,
   Euler,
-  LinearSRGBColorSpace,
   MeshLambertMaterial,
   Quaternion,
   Spherical,
   TextureLoader,
   Vector3,
 } from "three";
-import { type TresInstance, useLoop } from "@tresjs/core";
+import { type TresInstance, useLoop, useTres } from "@tresjs/core";
 import waterMap from "@assets/earth/2k_earth_bw.jpg";
 import JourneyPoint from "./JourneyPoint.vue";
 import { useMouse, usePreferredDark, useWindowSize } from "@vueuse/core";
 import { toRadians } from "chart.js/helpers";
 import type { Journey } from "@utils/types.ts";
 import { getColorProperty } from "@utils/color.ts";
-import CountryShapes from "@components/earth/CountryShapes.vue";
+import * as countryCodes from "country-codes-list";
 import type { CountryData } from "country-codes-list";
+import CountryShape from "@components/earth/CountryShape.vue";
 
+// option for devs: moves light source with cursor
+const interactive = true;
 const overwriteShader = true;
 
 const { journeys, countries } = defineProps<{
@@ -28,31 +31,32 @@ const { journeys, countries } = defineProps<{
 }>();
 
 const { onBeforeRender } = useLoop();
+const { scene } = useTres();
 const prefersDark = usePreferredDark();
 
-// option for devs: moves light source with cursor
-const interactive = true;
+const bgColor = getColorProperty(prefersDark.value ? "bg-dark" : "bg");
+const bg2Color = getColorProperty(prefersDark.value ? "bg-2-dark" : "bg-2");
 
-// the earth
+const bgColorLinear = computed(() => {
+  const c = new Color();
+  c.copySRGBToLinear(bgColor.value);
+  return c;
+});
+
+scene.value.background = bgColorLinear.value;
 
 function getEarthMaterial() {
   // create gradient texture based on bg colors
-  const bg = getColorProperty(
-    prefersDark.value ? "bg-dark" : "bg",
-  ).value.toJSON().coords;
-  const earth = getColorProperty(
-    prefersDark.value ? "bg-2-dark" : "bg-2",
-  ).value.toJSON().coords;
 
   // colors must be vec4 (rgba)
   const gradientData = new Uint8Array(
-    [...bg, 1, ...earth, 1].map((c) => Math.trunc((c ?? 0) * 255)),
+    [...bgColor.value.toArray(), 1, ...bg2Color.value.toArray(), 1].map((c) =>
+      Math.trunc((c ?? 0) * 255),
+    ),
   );
 
   const gradientTexture = new DataTexture(gradientData, 2, 1);
   gradientTexture.needsUpdate = true;
-  // TODO colorjs is in srgb, but explicitly setting linear srgb here seems to be correct??
-  gradientTexture.colorSpace = LinearSRGBColorSpace; //bg.value.spaceId;
 
   // black-white texture for water vs land
   const earthTexture = new TextureLoader().load(waterMap.src);

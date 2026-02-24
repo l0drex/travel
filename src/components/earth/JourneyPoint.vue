@@ -1,15 +1,10 @@
 <script lang="ts" setup>
 import { positionAtCoordinate } from "@utils/geoJson.ts";
 import { getColorProperty } from "@utils/color.ts";
-import { computed } from "vue";
-import { Color } from "three";
 import type { Journey } from "@utils/types.ts";
 import { Line2 } from "@tresjs/cientos";
 
-const primary = getColorProperty("primary");
-const primaryColor = computed(
-  () => new Color(primary.value.toString({ format: "hex" })),
-);
+const primaryColor = getColorProperty("primary");
 
 const { points } = defineProps<Journey>();
 const start = points[0];

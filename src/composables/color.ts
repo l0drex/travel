@@ -1,5 +1,6 @@
 import { computed, type ComputedRef, onMounted, ref } from "vue";
-import Color from "colorjs.io";
+import Colorjs from "colorjs.io";
+import { Color } from "three";
 import twconfig from "../../tailwind.config.mts";
 
 const colors = twconfig.theme.extend.colors;
@@ -23,12 +24,13 @@ function getColorFromConfig(name: string): Color {
   }
 
   if (typeof currentColor === "string") {
-    color = new Color(currentColor);
+    const colorjs = new Colorjs(currentColor).to("srgb");
+    color = new Color().setRGB(colorjs.r!, colorjs.g!, colorjs.b!);
   } else {
     throw new Error("Could not find color");
   }
 
-  return color.to("srgb").toGamut();
+  return color;
 }
 
 export function getColorProperty(name: string) {
@@ -43,7 +45,8 @@ export function getColorProperty(name: string) {
       return;
     }
 
-    color.value = new Color(prop).to("srgb").toGamut();
+    const colorjs = new Colorjs(prop).to("srgb");
+    color.value = new Color().setRGB(colorjs.r!, colorjs.g!, colorjs.b!);
   });
 
   return color;
@@ -59,9 +62,7 @@ export function getColorPropertyArray(name: string) {
   const color = getColorProperty(name);
 
   return computed(() => {
-    let c = color.value.toJSON();
-    const colors = c.coords;
-
-    return colors;
+    let c = color.value;
+    return c.toArray();
   });
 }
