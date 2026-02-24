@@ -9,7 +9,8 @@ const { countries } = Astro.props;
 ---
 
 <div
-  class="mx-auto mb-5 flex w-min justify-center gap-2 border-t-2 border-b-2 border-neutral-600 px-2 text-xl"
+  class="mx-auto mb-10 flex w-min justify-center gap-2 border-t-2 border-b-2 border-neutral-600 px-2 text-xl"
+  lang="en"
 >
-  {countries.map((c) => <span>{c.flag}</span>)}
+  {countries.map((c) => <span title={c.countryNameEn}>{c.flag}</span>)}
 </div>

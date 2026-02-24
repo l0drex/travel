@@ -52,14 +52,17 @@ const mainAuthor = authors[0].name;
     slot="background"
   />
 
-  <div class="flex min-h-full flex-col place-content-center items-center">
-    <h1
-      class="mx-5 mt-5 mb-4 text-center font-serif text-5xl font-extrabold text-primary font-stretch-condensed sm:text-6xl"
-    >
-      Discover my Adventures!
-    </h1>
-    <Flags countries={Array.from(countries)} />
+  <h1
+    class="mx-5 mt-12 mb-6 text-center font-serif text-5xl font-extrabold text-primary font-stretch-condensed sm:text-6xl"
+    lang="en"
+  >
+    Discover my Adventures!
+  </h1>
+  <Flags countries={Array.from(countries)} />
 
+  <div
+    class="mb-10 flex flex-col place-content-center items-center overflow-y-auto"
+  >
     <ul id="blogs" class="flex w-max flex-col gap-3">
       {posts.map((p) => <TravelEntry journey={p} />)}
     </ul>
