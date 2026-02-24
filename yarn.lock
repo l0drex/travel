@@ -12620,6 +12620,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"three-subdivide@npm:^1.1.5":
+  version: 1.1.5
+  resolution: "three-subdivide@npm:1.1.5"
+  peerDependencies:
+    three: ">= 0.125.0"
+  checksum: 10c0/46ae9645d83a4afb8e4d0adeb0706d248371c052f039ed3e506d08e9dfa3e6dbf018095907b2ee751a76fff60a26821c4e66291264644e9a46b220525010967e
+  languageName: node
+  linkType: hard
+
 "three@npm:^0.170.0":
   version: 0.170.0
   resolution: "three@npm:0.170.0"
@@ -12785,6 +12794,7 @@ __metadata:
     tailwind: "npm:^4.0.0"
     tailwindcss: "npm:^4.1.18"
     three: "npm:^0.182.0"
+    three-subdivide: "npm:^1.1.5"
     tweakpane: "npm:^4.0.5"
     typescript: "npm:^5.9.3"
     typescript-eslint: "npm:^8.54.0"

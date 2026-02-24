@@ -36,6 +36,7 @@ const prefersDark = usePreferredDark();
 
 const bgColor = getColorProperty(prefersDark.value ? "bg-dark" : "bg");
 const bg2Color = getColorProperty(prefersDark.value ? "bg-2-dark" : "bg-2");
+const bg3Color = getColorProperty(prefersDark.value ? "bg-3-dark" : "bg-3");
 
 const bgColorLinear = computed(() => {
   const c = new Color();
@@ -137,7 +138,9 @@ lightPos.setFromSphericalCoords(
 
 const earthRef = shallowRef<TresInstance | null>(null);
 
-onBeforeRender(({ delta, elapsed }) => {
+onBeforeRender(({ delta, elapsed, renderer }) => {
+  console.debug("Triangle count:", renderer.info.render.triangles);
+
   if (earthRef.value == null) {
     return;
   }
@@ -175,6 +178,11 @@ onBeforeRender(({ delta, elapsed }) => {
     light.value?.position.copy(lightPos);
   }
 });
+
+const debugCountries = countryCodes
+  .all()
+  .filter((c) => !["Antarctica"].includes(c.countryNameEn));
+const visitedCountries = Array.from(countries);
 </script>
 
 <template>
@@ -193,6 +201,13 @@ onBeforeRender(({ delta, elapsed }) => {
 
     <JourneyPoint v-for="j in journeys" v-bind="j" />
 
-    <CountryShapes :countries="countries" />
+    <TresGroup v-if="true">
+      <CountryShape
+        :country="country"
+        :color="`#${bg3Color.getHexString()}`"
+        v-for="[i, country] in visitedCountries.entries()"
+        :key="`${country.countryNameEn}`"
+      />
+    </TresGroup>
   </TresGroup>
 </template>

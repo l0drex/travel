@@ -18,6 +18,10 @@ export default {
             DEFAULT: colors.orange["100"],
             dark: colors.stone["900"],
           },
+          3: {
+            DEFAULT: colors.orange["200"],
+            dark: colors.stone["800"],
+          },
         },
         // foreground (text)
         fg: {
