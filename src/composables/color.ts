@@ -55,7 +55,7 @@ export function getColorProperty(name: string) {
 export function getColorPropertyString(name: string): ComputedRef<string> {
   const color = getColorProperty(name);
 
-  return computed(() => color.value.toString());
+  return computed(() => `#${color.value.getHexString()}`);
 }
 
 export function getColorPropertyArray(name: string) {

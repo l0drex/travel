@@ -129,6 +129,9 @@ const options = computed<ChartOptions<"line">>(() => {
     ticks: {
       color: labelColor,
     },
+    border: {
+      color: lineColor,
+    },
   };
 
   return {
