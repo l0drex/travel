@@ -196,12 +196,12 @@ const visitedCountries = Array.from(countries);
 
   <TresGroup ref="earthRef">
     <TresMesh :material="earthMaterial">
-      <TresSphereGeometry :args="[earthRadius - 0.014, 16, 16]" />
+      <TresSphereGeometry :args="[earthRadius, 32, 32]" />
     </TresMesh>
 
     <JourneyPoint v-for="j in journeys" v-bind="j" />
 
-    <TresGroup v-if="true">
+    <TresGroup v-if="false">
       <CountryShape
         :country="country"
         :color="`#${bg3Color.getHexString()}`"
