@@ -68,7 +68,7 @@ const ogImage = await getImage({
 type StatsType = Partial<Record<StatId, number>>;
 
 let stats: StatsType = {
-  [StatId.days]: headings.length,
+  [StatId.days]: Math.max(headings.length, 1),
   ...entry.data.stats,
 };
 
