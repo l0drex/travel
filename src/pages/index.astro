@@ -21,8 +21,12 @@ const countries = new Set<CountryData>();
 for (let p of posts) {
   const entry = await getEntry(p.data.gpx);
   const geoJson = entry.data;
-  const points = simplify(lineString(coordAll(geoJson)), { tolerance: 0.2 })
-    .geometry.coordinates;
+
+  let points = coordAll(geoJson);
+  if (points.length > 1) {
+    points = simplify(lineString(coordAll(geoJson)), { tolerance: 0.2 })
+      .geometry.coordinates;
+  }
 
   function fromPoint(p: number[]): [number, number] {
     return [p[1], p[0]];

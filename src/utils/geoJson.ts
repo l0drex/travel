@@ -145,8 +145,7 @@ export function getVisitedCountries(track: GeoJSON) {
   ) as Record<string, FeatureCollection>;
 
   // make sure we have a single feature.
-  // todo assumes track is a line.
-  const simpleTrack = simplify(lineString(coordAll(track)), {
+  const simpleTrack = simplify(track, {
     tolerance: 0.1,
   });
 
@@ -159,7 +158,7 @@ export function getVisitedCountries(track: GeoJSON) {
     });
 
     if (countryModule == null) {
-      console.warn(`No data for country ${country.countryNameEn}`);
+      //console.warn(`No data for country ${country.countryNameEn}`);
       return false;
     }
     let geoData = countryModule[1];
@@ -173,13 +172,29 @@ export function getVisitedCountries(track: GeoJSON) {
           return;
         }
 
-        if (booleanIntersects(f, simpleTrack)) {
-          visitsCountry = true;
+        if (simpleTrack.type === "FeatureCollection") {
+          featureEach(simpleTrack, (featureTrack) => {
+            if (booleanIntersects(f, featureTrack)) {
+              visitsCountry = true;
+            }
+          });
+        } else {
+          if (booleanIntersects(f, simpleTrack)) {
+            visitsCountry = true;
+          }
         }
       });
     } catch (e) {
-      console.error(`Error while checking for ${country.countryNameEn}`);
-      console.error(e);
+      if (e instanceof Error) {
+        console.error(
+          `Error while checking for ${country.countryNameEn}: ${e.message}`,
+        );
+      } else {
+        console.error(
+          `Error while checking for ${country.countryNameEn}: ${e}`,
+        );
+      }
+
       return false;
     }
 
