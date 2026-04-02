@@ -46,6 +46,7 @@ export enum StatId {
   timePerDay = "timePerDay",
   averageSpeed = "averageSpeed",
   topSpeed = "topSpeed",
+  weight = "weight",
 }
 
 export const statsPrototypes: Record<StatId, Stat> = {
@@ -102,5 +103,11 @@ export const statsPrototypes: Record<StatId, Stat> = {
     name: "Höchstgeschwindigkeit",
     value: "",
     unit: "km/h",
+  },
+  [StatId.weight]: {
+    icon: "material-symbols:weight",
+    name: "Gepäck",
+    value: "",
+    unit: "kg",
   },
 };
