@@ -106,23 +106,25 @@ const mapOptions: L.MapOptions = {
 </script>
 
 <template>
-  <div class="rounded-lg border-2 border-line dark:border-fg-dark">
-    <leaflet-map :options="mapOptions" :height="`${height}px`" :map-key="key">
-      <tile-layer
-        :options="tileOptions"
-        :url-template="styles.default"
-        :map-key="key"
-      />
-      <geo-json-layer
-        :geo-json="geoJson"
-        :options="inactiveGeoJsonOptions"
-        :map-key="key"
-      />
-      <geo-json-layer
-        :geo-json="currentFeature"
-        :options="activeGeoJsonOptions"
-        :map-key="key"
-      />
-    </leaflet-map>
+  <div class="border-2 border-line p-1 dark:border-fg-dark">
+    <div class="rounded-lg">
+      <leaflet-map :options="mapOptions" :height="`${height}px`" :map-key="key">
+        <tile-layer
+          :options="tileOptions"
+          :url-template="styles.default"
+          :map-key="key"
+        />
+        <geo-json-layer
+          :geo-json="geoJson"
+          :options="inactiveGeoJsonOptions"
+          :map-key="key"
+        />
+        <geo-json-layer
+          :geo-json="currentFeature"
+          :options="activeGeoJsonOptions"
+          :map-key="key"
+        />
+      </leaflet-map>
+    </div>
   </div>
 </template>
