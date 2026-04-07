@@ -32,20 +32,18 @@ function subheaders(heading: MarkdownHeading) {
 {
   headings.length > 0 && (
     <ol
-      class={
+      class:list={[
         depth === 1
           ? "ml-8 list-decimal text-lg font-bold"
-          : "text-base font-normal"
-      }
+          : "text-base font-normal",
+        "font-serif",
+      ]}
     >
       {headings
         .filter((h) => h.depth === depth)
         .map((heading) => (
           <li class={depth === 1 ? "not-last:mb-2" : "not-last:mb-1"}>
-            <a
-              href={"#" + heading.slug}
-              class="hover:text-primary focus:bg-primary focus:text-bg focus:outline-none"
-            >
+            <a href={"#" + heading.slug} class="hover:underline">
               {heading.text}
             </a>
 
