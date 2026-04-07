@@ -4,6 +4,7 @@ import { Icon } from "astro-icon/components";
 import JourneyIcon from "@components/TypeIcon.astro";
 import { Image } from "astro:assets";
 import { type CollectionEntry } from "astro:content";
+import authors from "src/authors.json";
 
 interface Props {
   journey: CollectionEntry<"posts">;
@@ -12,6 +13,7 @@ interface Props {
 const { journey } = Astro.props;
 const idParts = journey.id.split("/");
 const journeyId = idParts[idParts.length - 1];
+const author = authors.find((a) => a.id === journey.data.author);
 ---
 
 <li>
@@ -20,25 +22,36 @@ const journeyId = idParts[idParts.length - 1];
       `${import.meta.env.BASE_URL}/journey/${journeyId}`,
       Astro.url,
     )}
-    class="group decoration-none dark:hover:border-bg-3-dark flex items-center gap-4 rounded-2xl border-2 border-bg-2 border-line bg-bg/50 px-4 py-3 backdrop-blur-md backdrop-filter transition-colors duration-300 select-none visited:text-fg-inactive hover:border-primary hover:bg-bg-2 focus:border-line focus:outline-none active:border-primary active:bg-primary active:text-bg dark:border-line-dark dark:bg-bg-dark/50 dark:visited:text-fg-inactive-dark dark:hover:bg-bg-2-dark"
+    class="group decoration-none block w-70 border-2 border-line bg-bg/50 p-2 backdrop-blur-md backdrop-filter transition-colors duration-300 select-none visited:text-fg-inactive hover:border-primary hover:bg-bg-2 focus:border-line focus:outline-none active:border-primary active:bg-primary active:text-bg dark:border-line-dark dark:bg-bg-dark/50 dark:visited:text-fg-inactive-dark dark:hover:border-bg-3-dark dark:hover:bg-bg-2-dark"
   >
-    <Image
-      src={journey.data.image}
-      alt={journey.data.alt}
-      width={64}
-      height={64}
-      class="h-16 w-16 rounded-xl object-cover sepia transition-all group-hover:sepia-0"
-      loading="eager"
-    />
-    <div>
-      <h2 class="mr-2 inline-flex items-center font-serif text-xl font-bold">
-        {journey.data.title}
-        <Icon name="material-symbols:chevron-right-rounded" />
-      </h2>
-      <div class="flex gap-2">
+    <h2
+      class="mr-2 text-center font-serif text-2xl font-bold tracking-tight uppercase font-stretch-ultra-condensed group-hover:underline"
+    >
+      {journey.data.title}
+    </h2>
+    <div class="mx-auto my-2 size-max border-2 border-line p-1">
+      <Image
+        src={journey.data.image}
+        alt={journey.data.alt}
+        width={256}
+        height={256}
+        class="h-40 w-60 rounded-sm object-cover sepia transition-all group-hover:sepia-0"
+        loading="eager"
+      />
+    </div>
+    <div class="text-center font-serif">
+      <div class="flex justify-center gap-2">
         <JourneyIcon typeId={journey.data.type} />
-        <div>·</div>
+        <span>·</span>
         {dateFormatter(journey.data.date, Astro.currentLocale)}
+      </div>
+      <div>
+        {author?.name}
+        {
+          journey.data.travelers > 1
+            ? `+ ${journey.data.travelers - 1} weitere(r)`
+            : ""
+        }
       </div>
     </div>
   </a>
