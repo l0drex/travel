@@ -25,6 +25,8 @@ const blogCollection = defineCollection({
       // key to the author of the post
       // sync with authors.json
       author: z.literal("lorenz"),
+      // number of people participating on this journey
+      travelers: z.number().int().gte(1).default(1),
       // short description of the tour
       description: z.string(),
       // statistics. every key here is optional, and you can omit the whole thing
