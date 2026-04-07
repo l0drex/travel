@@ -18,9 +18,8 @@ import { JourneyTypeId, journeyTypes, StatId } from "@utils/types";
 import JourneyType from "@components/TypeIcon.astro";
 import { dateFormatter } from "@utils/general";
 import { getImage } from "astro:assets";
-import JourneyContent from "@components/MarkdownContent.astro";
+import MarkdownContent from "@components/MarkdownContent.astro";
 import Button from "@components/Button.astro";
-import { Icon } from "astro-icon/components";
 import TitleNav from "@components/TitlesNav.astro";
 import twconfig from "tailwind.config.mjs";
 import TrackStats from "@components/track/TrackStats.astro";
@@ -152,9 +151,9 @@ const countries = getVisitedCountries(geoJson.data);
     </div>
   </section>
 
-  <JourneyContent>
+  <MarkdownContent>
     <Content />
-  </JourneyContent>
+  </MarkdownContent>
 
   <nav
     slot="aside"
