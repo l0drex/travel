@@ -49,7 +49,7 @@ async function updateFile(filePath: string, context: LoaderContext) {
 
     const parsedData = await context.parseData({
       id: fileName,
-      data: (await parseGpx(data)).data,
+      data: { geoJson: (await parseGpx(data)).data, raw: data },
       filePath: relativePath,
     });
     const digest = context.generateDigest(parsedData);
