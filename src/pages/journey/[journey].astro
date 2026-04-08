@@ -25,6 +25,7 @@ import twconfig from "tailwind.config.mjs";
 import TrackStats from "@components/track/TrackStats.astro";
 import { addCalculatedStats, getVisitedCountries } from "@utils/geoJson";
 import Flags from "@components/Flags.astro";
+import { Icon } from "astro-icon/components";
 
 export const getStaticPaths = (async () => {
   const posts: CollectionEntry<"posts">[] = await getCollection("posts");
@@ -110,14 +111,14 @@ const countries = getVisitedCountries(geoJson.data);
     <meta property="og:image:alt" content={entry.data.alt} />
   </Fragment>
 
-  <section class="w-fill m-auto bg-bg-2 pt-10 pb-4 dark:bg-bg-2-dark">
+  <section class="w-fill m-auto pt-10 pb-4">
     <h1
       class="mt-8 mb-4 text-center font-serif text-4xl font-bold tracking-tight font-stretch-condensed sm:text-5xl md:mt-0"
     >
       {entry.data.title}
     </h1>
     <div
-      class="mb-4 flex justify-center gap-2 text-center align-baseline text-2xl"
+      class="mb-4 flex justify-center gap-2 text-center align-baseline font-serif text-2xl"
     >
       {(<JourneyType typeId={entry.data.type} />)}
       <span>·</span>
@@ -151,13 +152,15 @@ const countries = getVisitedCountries(geoJson.data);
     </div>
   </section>
 
+  <hr class="mx-auto w-xs border-1 border-line" />
+
   <MarkdownContent>
     <Content />
   </MarkdownContent>
 
   <nav
     slot="aside"
-    class="sticky top-0 hidden h-screen w-max max-w-full flex-col items-center justify-between overflow-y-auto px-5 py-10 md:flex dark:bg-bg-2-dark"
+    class="sticky top-0 hidden h-screen w-max max-w-full flex-col items-center justify-between overflow-y-auto border-r-2 border-line px-5 py-10 md:flex dark:border-line-dark dark:bg-bg-2-dark"
   >
     <Button href={import.meta.env.BASE_URL}>
       <Icon name="material-symbols:chevron-left-rounded" slot="icon" />
