@@ -13,15 +13,15 @@ export interface JourneyType {
 export const journeyTypes: Record<JourneyTypeId, JourneyType> = {
   [JourneyTypeId.bike]: {
     name: "Fahrrad",
-    icon: "material-symbols:directions-bike-rounded",
+    icon: "material-symbols:directions-bike",
   },
   [JourneyTypeId.hiking]: {
     name: "Wandern",
-    icon: "material-symbols:hiking-rounded",
+    icon: "material-symbols:hiking",
   },
   [JourneyTypeId.roadtrip]: {
     name: "Roadtrip",
-    icon: "material-symbols:directions-car-rounded",
+    icon: "material-symbols:directions-car",
   },
 } as const;
 
