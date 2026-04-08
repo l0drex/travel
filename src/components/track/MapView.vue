@@ -128,3 +128,9 @@ const mapOptions: L.MapOptions = {
     </div>
   </div>
 </template>
+
+<style>
+.leaflet-map img {
+  filter: sepia(15%);
+}
+</style>
