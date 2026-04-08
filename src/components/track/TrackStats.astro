@@ -43,13 +43,12 @@ stats.sort((a, b) => statsNames.indexOf(a.name) - statsNames.indexOf(b.name));
 >
   {
     stats.map((stat) => (
-      <div class="flex w-40 shrink-0 grow-0 flex-col items-center gap-2 rounded-lg border border-2 border-line p-2 dark:border-line-dark">
+      <div class="flex w-40 shrink-0 grow-0 flex-col items-center gap-2 border-2 border-line p-2 dark:border-line-dark">
         <div class="grow font-serif font-bold">
           <span class="text-2xl">{stat.value}</span>
           <span class="">{stat.unit}</span>
         </div>
-
-        <span class="inline-flex gap-1 align-middle text-xs">
+        <span class="inline-flex gap-1 align-middle font-serif text-xs">
           <Icon name={stat.icon} size={20} />
           <span>{stat.name}</span>
         </span>
