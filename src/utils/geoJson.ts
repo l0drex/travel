@@ -74,9 +74,7 @@ export function positionAtCoordinate(
 type StatsType = Partial<Record<StatId, number>>;
 export function addCalculatedStats(stats: StatsType, geoJson: GeoJSON) {
   // trip length
-  if (!(StatId.totalDistance in stats)) {
-    stats[StatId.totalDistance] = length(geoJson as any);
-  }
+  stats[StatId.totalDistance] ??= length(geoJson as any);
 
   // calculate elevation gained and lost
   // this is the height in meters above sea level,
