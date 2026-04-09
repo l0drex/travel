@@ -10,7 +10,6 @@ import {
   featureEach,
   flatten,
   length,
-  lineString,
   simplify,
 } from "@turf/turf";
 import { StatId } from "@utils/types.ts";

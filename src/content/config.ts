@@ -1,6 +1,6 @@
 import { defineCollection, reference, z } from "astro:content";
 import type { GeoJSON } from "geojson";
-import { gpxLoader, parseGpx } from "@utils/gpxLoader.ts";
+import { gpxLoader } from "@utils/gpxLoader.ts";
 import { JourneyTypeId, StatId } from "@utils/types.ts";
 import { nextcloudLoader, parseMarkdown } from "@utils/nextcloudLoader.ts";
 
