@@ -16,7 +16,7 @@ const journeyId = idParts[idParts.length - 1];
 const author = authors.find((a) => a.id === journey.data.author);
 ---
 
-<li>
+<li class={journey.data.type}>
   <a
     href={new URL(
       `${import.meta.env.BASE_URL}/journey/${journeyId}`,

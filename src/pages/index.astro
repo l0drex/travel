@@ -10,6 +10,7 @@ import authors from "src/authors.json";
 import { type CountryData } from "country-codes-list";
 import { getVisitedCountries } from "../utils/geoJson";
 import Flags from "@components/Flags.astro";
+import Button from "@components/Button.astro";
 
 const posts: CollectionEntry<"posts">[] = (await getCollection("posts")).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
@@ -46,6 +47,9 @@ for (let p of posts) {
 }
 
 const mainAuthor = authors[0].name;
+
+const existingJourneyTypes = new Set<JourneyTypeId>();
+posts.forEach((p) => existingJourneyTypes.add(p.data.type));
 ---
 
 <Layout title={`Reiseblog von ${mainAuthor}`}>
@@ -64,6 +68,24 @@ const mainAuthor = authors[0].name;
   </h1>
   <Flags countries={Array.from(countries)} />
 
+  {
+    /* If there is more than 1 type of journeys, show buttons to filter them */
+    existingJourneyTypes.size > 1 && (
+      <div class="mx-auto my-4 flex w-min justify-center gap-2">
+        <Button href="?">Alles</Button>
+        {existingJourneyTypes.has(JourneyTypeId.bike) && (
+          <Button href={`?type=${JourneyTypeId.bike}`}>Radtouren</Button>
+        )}
+        {existingJourneyTypes.has(JourneyTypeId.roadtrip) && (
+          <Button href={`?type=${JourneyTypeId.roadtrip}`}>Roadtrips</Button>
+        )}
+        {existingJourneyTypes.has(JourneyTypeId.hiking) && (
+          <Button href={`?type=${JourneyTypeId.hiking}`}>Wanderungen</Button>
+        )}
+      </div>
+    )
+  }
+
   <div
     class="mb-10 flex flex-col place-content-center items-center overflow-y-auto"
   >
@@ -75,3 +97,27 @@ const mainAuthor = authors[0].name;
     </ul>
   </div>
 </Layout>
+
+<script>
+  function filterElements() {
+    const selectedType =
+      new URL(document.URL).searchParams.get("type") ?? "all";
+
+    const showAll = selectedType == "all";
+    document.querySelectorAll<HTMLUListElement>("#blogs li").forEach((li) => {
+      li.hidden = !showAll;
+    });
+
+    if (showAll) {
+      return;
+    }
+
+    document
+      .querySelectorAll<HTMLUListElement>(`#blogs li.${selectedType}`)
+      .forEach((li) => {
+        li.hidden = false;
+      });
+  }
+
+  filterElements();
+</script>
