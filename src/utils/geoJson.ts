@@ -1,6 +1,8 @@
 import { MathUtils, Vector3 } from "three";
 import type { Feature, FeatureCollection, GeoJSON, Position } from "geojson";
 import {
+  bbox,
+  bboxPolygon,
   booleanIntersects,
   coordAll,
   coordEach,
@@ -148,6 +150,7 @@ export function getVisitedCountries(track: GeoJSON) {
   const simpleTrack = simplify(track, {
     tolerance: 0.1,
   });
+  const trackBbox = bboxPolygon(bbox(simpleTrack));
 
   const countries = countryCodes.all().filter((country) => {
     // get country data
@@ -161,19 +164,35 @@ export function getVisitedCountries(track: GeoJSON) {
       //console.warn(`No data for country ${country.countryNameEn}`);
       return false;
     }
-    let geoData = countryModule[1];
+    let countryGeoData = countryModule[1];
 
     // check if track passes through the country
 
+    // check bounding boxes first to speed up the process
+    const countryBbox = bboxPolygon(bbox(countryGeoData));
+    if (!booleanIntersects(countryBbox, trackBbox)) {
+      return false;
+    }
+
     let visitsCountry = false;
     try {
-      featureEach(geoData, (f) => {
+      featureEach(countryGeoData, (f) => {
         if (visitsCountry) {
+          return;
+        }
+
+        const featureBbox = bboxPolygon(bbox(f));
+        if (!booleanIntersects(featureBbox, trackBbox)) {
           return;
         }
 
         if (simpleTrack.type === "FeatureCollection") {
           featureEach(simpleTrack, (featureTrack) => {
+            const trackFeatureBbox = bboxPolygon(bbox(featureTrack));
+            if (!booleanIntersects(featureBbox, trackFeatureBbox)) {
+              return;
+            }
+
             if (booleanIntersects(f, featureTrack)) {
               visitsCountry = true;
             }
