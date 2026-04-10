@@ -3,6 +3,7 @@
 @config "../../tailwind.config.mts";
 @plugin "@tailwindcss/typography";
 
+/*noinspection CssUnresolvedCustomProperty*/
 @theme inline {
   --font-sans: var(--font-noto-sans);
   --font-serif: var(--font-noto-serif);

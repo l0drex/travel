@@ -1,5 +1,4 @@
 import colors from "tailwindcss/colors";
-import defaultTheme from "tailwindcss/defaultTheme";
 
 // this is still here for reliable access to variables outside of css
 
