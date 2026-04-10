@@ -51,7 +51,10 @@ const gpxCollection = defineCollection({
   }),
   // NOTE: remove the loader defined above if you want to use this local loader
   //loader: gpxLoader({ url: "./posts" }),
-  schema: z.custom<GeoJSON>(),
+  schema: z.object({
+    geoJson: z.custom<GeoJSON>(),
+    raw: z.string(),
+  }),
 });
 
 export const collections = {
