@@ -3,7 +3,7 @@ import { gpx as gpxToJson } from "@tmcw/togeojson";
 import type { Loader, LoaderContext } from "astro/loaders";
 import fs from "node:fs";
 import { fileURLToPath } from "node:url";
-import { z } from "astro:content";
+import { z } from "astro/zod";
 import path from "node:path";
 import type { GeoJSON } from "geojson";
 
@@ -91,8 +91,6 @@ export function gpxLoader(options: { url: string }): Loader {
 
     // Optionally, define the schema of an entry.
     // It will be overridden by user-defined schema.
-    schema: async () => {
-      return z.custom<GeoJSON>();
-    },
+    schema: z.custom<GeoJSON>(),
   };
 }

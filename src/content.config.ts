@@ -1,8 +1,10 @@
-import { defineCollection, reference, z } from "astro:content";
+import { defineCollection, reference } from "astro:content";
+import { z } from "astro/zod";
 import type { GeoJSON } from "geojson";
 import { gpxLoader } from "@utils/gpxLoader.ts";
 import { JourneyTypeId, StatId } from "@utils/types.ts";
 import { nextcloudLoader, parseMarkdown } from "@utils/nextcloudLoader.ts";
+import { glob } from "astro/loaders";
 
 const blogCollection = defineCollection({
   loader: nextcloudLoader({
@@ -16,7 +18,7 @@ const blogCollection = defineCollection({
       title: z.string(),
       date: z.date(),
       // sync with utils/types/journeyTypes
-      type: z.nativeEnum(JourneyTypeId),
+      type: z.enum(JourneyTypeId),
       // preview image used for open graph previews and the list on the home page
       image: image(),
       alt: z.string(),

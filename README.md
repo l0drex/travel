@@ -26,7 +26,7 @@ There are two options readily available in this repo:
 
 ### Local files
 
-For the first option, go to `src/content/config.ts` and
+For the first option, go to `src/content/content.config.ts` and
 change the loaders to the local loader defined below by uncommenting it and commenting the other one above out.
 Then place a markdown file in `src/content/posts` with the following data:
 
@@ -45,7 +45,7 @@ description: Short description of your awesome adventure.
 # Your content starts here
 
 Every heading (no matter what depth) is a day.
-The data above is explained in the type definition in `src/content/config.ts`.
+The data above is explained in the type definition in `src/content/content.config.ts`.
 ```
 
 Now create a gpx file for your posts. Each post references a gpx file through the `gpx` key in the frontmatter.
