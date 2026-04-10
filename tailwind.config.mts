@@ -43,10 +43,6 @@ export default {
           dark: colors.stone["500"],
         },
       },
-      fontFamily: {
-        sans: ["Noto Sans", ...defaultTheme.fontFamily.sans],
-        serif: ["Noto Serif", ...defaultTheme.fontFamily.serif],
-      },
     },
   },
   plugins: [],

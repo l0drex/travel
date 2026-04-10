@@ -2,6 +2,7 @@
 import "@styles/global.css";
 import twconfig from "tailwind.config.mjs";
 import { Icon } from "astro-icon/components";
+import { Font } from "astro:assets";
 
 interface Props {
   title: string;
@@ -51,6 +52,8 @@ const links: Link[] = [
     <meta charset="UTF-8" />
     <meta property="og:locale" content="de_DE" />
     <meta name="viewport" content="width=device-width" />
+    <Font cssVariable="--font-noto-serif" />
+    <Font cssVariable="--font-noto-sans" />
     <link rel="icon" type="image/svg+xml" href="/travel/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <meta

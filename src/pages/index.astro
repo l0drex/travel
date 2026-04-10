@@ -21,7 +21,7 @@ const countries = new Set<CountryData>();
 
 for (let p of posts) {
   const entry = await getEntry(p.data.gpx);
-  const geoJson = entry.data.geoJson;
+  const geoJson = entry!.data.geoJson;
 
   let points = coordAll(geoJson);
   if (points.length > 1) {
