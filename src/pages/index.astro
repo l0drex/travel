@@ -106,6 +106,8 @@ posts.forEach((p) => existingJourneyTypes.add(p.data.type));
 </Layout>
 
 <script>
+  import TailwindConfig from "../../tailwind.config.mts";
+
   function filterElements() {
     const selectedType =
       new URL(document.URL).searchParams.get("type") ?? "all";
@@ -114,6 +116,14 @@ posts.forEach((p) => existingJourneyTypes.add(p.data.type));
     document.querySelectorAll<HTMLUListElement>("#blogs li").forEach((li) => {
       li.hidden = !showAll;
     });
+
+    // highlight active button
+    const hrefString = showAll ? "?" : `?type=${selectedType}`;
+    const activeButton = document.querySelector<HTMLLinkElement>(
+      `a[href='${hrefString}']`,
+    )!;
+    activeButton.style!.borderColor =
+      TailwindConfig.theme.extend.colors.primary;
 
     if (showAll) {
       return;
