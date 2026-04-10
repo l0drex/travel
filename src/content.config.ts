@@ -4,6 +4,7 @@ import type { GeoJSON } from "geojson";
 import { gpxLoader } from "@utils/gpxLoader.ts";
 import { JourneyTypeId, StatId } from "@utils/types.ts";
 import { nextcloudLoader, parseMarkdown } from "@utils/nextcloudLoader.ts";
+import { parseGpx } from "@utils/gpxLoader.ts";
 import { glob } from "astro/loaders";
 
 const blogCollection = defineCollection({
