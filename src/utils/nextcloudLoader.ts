@@ -42,15 +42,13 @@ export function nextcloudLoader(options: WebDavOptions): Loader {
 
       // check if data is already stored and update if necessary
 
-      const dirStat = (await client.stat(ncPath).catch((reason) => {
-        throw reason;
-      })) as FileStat;
+      const dirStat = (await client.stat(ncPath)) as FileStat;
       const lastChanged = new Date(dirStat.lastmod);
       const currentChangeStr = context.meta.get(lastModifiedKey);
 
       if (!forceRerender && currentChangeStr != undefined) {
         const currentChange = new Date(currentChangeStr);
-        if (currentChange.valueOf() <= lastChanged.valueOf()) {
+        if (currentChange.valueOf() >= lastChanged.valueOf()) {
           context.logger.info("No changes detected...");
           return;
         }
@@ -63,9 +61,6 @@ export function nextcloudLoader(options: WebDavOptions): Loader {
 
       const files = await client
         .getDirectoryContents(ncPath, { deep: true })
-        .catch((reason) => {
-          throw reason;
-        })
         .then((files) =>
           (files as FileStat[]).filter(
             (f) => f.type === "file" && f.basename.endsWith(options.fileType),
@@ -78,9 +73,7 @@ export function nextcloudLoader(options: WebDavOptions): Loader {
 
         let text: string | undefined;
 
-        const lastChange = (await client.stat(f.filename).catch((reason) => {
-          throw reason;
-        })) as FileStat;
+        const lastChange = (await client.stat(f.filename)) as FileStat;
         if (lastChange.lastmod === context.store.get(id)?.digest) {
           // file did not change
           if (forceRerender) {
@@ -90,28 +83,22 @@ export function nextcloudLoader(options: WebDavOptions): Loader {
           }
         }
 
-        context.logger.info(`File ${id} was changed, updating...`);
+        context.logger.info(`File ${f.basename} was changed, updating...`);
 
-        text ??= (await client
-          .getFileContents(f.filename, { format: "text" })
-          .catch((reason) => {
-            throw reason;
-          })) as string;
+        text ??= (await client.getFileContents(f.filename, {
+          format: "text",
+        })) as string;
 
-        const { rendered, data } = await options
-          .parser(text, f.filename, context)
-          .catch((reason) => {
-            throw reason;
-          });
+        const { rendered, data } = await options.parser(
+          text,
+          f.filename,
+          context,
+        );
 
-        const parsedData = await context
-          .parseData({
-            id,
-            data,
-          })
-          .catch((reason) => {
-            throw reason;
-          });
+        const parsedData = await context.parseData({
+          id,
+          data,
+        });
 
         context.store.set({
           id,
@@ -124,9 +111,7 @@ export function nextcloudLoader(options: WebDavOptions): Loader {
         });
       });
 
-      await Promise.all(promises).catch((reason) => {
-        throw reason;
-      });
+      await Promise.all(promises);
     },
   };
 }
@@ -151,12 +136,6 @@ export async function parseMarkdown(
 
   const absolutePath = `${NC_HOST}${directory}/`;
 
-  // copy context because this is async
-  const c = { ...context };
-
-  // add remark plugin to change relative urls in markdown
-  c.config.markdown.remarkPlugins.push([imgLinks, { absolutePath }]);
-
   // parse frontmatter (custom metadata)
   const data = parseFrontmatter(code, {
     frontmatter: "empty-with-spaces",
@@ -168,7 +147,9 @@ export async function parseMarkdown(
   }
 
   // render markdown content
-  const render = await renderMarkdown(data.content, c.config);
+  const render = await renderMarkdown(data.content, context.config, [
+    [imgLinks, { absolutePath }],
+  ]);
   // this does not work, as the config in the context is not used by the md renderer in the same context object
   // await c.renderMarkdown(data.content);
 
@@ -185,10 +166,12 @@ export async function parseMarkdown(
 async function renderMarkdown(
   code: string,
   opts: AstroConfig,
+  extraPlugins: any[] = [],
 ): Promise<RenderedContent> {
   const processor = await createMarkdownProcessor({
     image: opts.image,
     ...opts.markdown,
+    remarkPlugins: [...(opts.markdown.remarkPlugins ?? []), ...extraPlugins],
   });
 
   const render = await processor.render(code, {

@@ -11,55 +11,47 @@ export async function parseGpx(code: string) {
   const xml = new DOMParser().parseFromString(code, "text/xml");
   const geoJson = gpxToJson(xml);
 
-  return { data: geoJson };
+  return { data: { geoJson, raw: code } };
 }
 
 async function loadGpxFiles(directory: string, context: LoaderContext) {
-  fs.readdir(directory, { withFileTypes: true }, (err, files) => {
-    if (err) throw err;
-
-    files.forEach((f) => {
+  const files = await fs.promises.readdir(directory, { withFileTypes: true });
+  await Promise.all(
+    files.map(async (f) => {
       if (!f.isFile()) {
-        if (f.isDirectory()) {
-          loadGpxFiles(directory + "/" + f.name, context);
-        }
+        if (f.isDirectory())
+          await loadGpxFiles(path.join(directory, f.name), context);
         return;
       }
-
-      if (!f.name.endsWith(".gpx")) {
-        return;
-      }
-
-      const path = f.parentPath + "/" + f.name;
-      context.logger.info("Found file " + path);
-
-      updateFile(path, context);
-    });
-  });
+      if (!f.name.endsWith(".gpx")) return;
+      const p = path.join(f.parentPath, f.name);
+      context.logger.info("Found file " + p);
+      await updateFile(p, context);
+    }),
+  );
 }
 
 async function updateFile(filePath: string, context: LoaderContext) {
   // name of file without extension
-  const fileName = path.basename(filePath).replace(/\.gpx$/, "");
-  // path to file relative to project root
+  const fileName = path.basename(filePath).replace(/\.gpx$/, ""); // path to file relative to project root
   const relativePath = filePath.replace(fileURLToPath(context.config.root), "");
 
-  fs.readFile(filePath, { encoding: "utf-8" }, async (err, data) => {
-    if (err) throw err;
+  const fileContent = await fs.promises.readFile(filePath, {
+    encoding: "utf-8",
+  });
 
-    const parsedData = await context.parseData({
-      id: fileName,
-      data: { geoJson: (await parseGpx(data)).data, raw: data },
-      filePath: relativePath,
-    });
-    const digest = context.generateDigest(parsedData);
+  const data = await context.parseData({
+    id: fileName,
+    data: (await parseGpx(fileContent)).data,
+    filePath: relativePath,
+  });
+  const digest = context.generateDigest(data);
 
-    context.store.set({
-      id: fileName,
-      data: parsedData,
-      digest,
-      filePath: relativePath,
-    });
+  context.store.set({
+    id: fileName,
+    data,
+    digest,
+    filePath: relativePath,
   });
 }
 
@@ -91,6 +83,6 @@ export function gpxLoader(options: { url: string }): Loader {
 
     // Optionally, define the schema of an entry.
     // It will be overridden by user-defined schema.
-    schema: z.custom<GeoJSON>(),
+    schema: z.object({ geoJson: z.custom<GeoJSON>(), raw: z.string }),
   };
 }
