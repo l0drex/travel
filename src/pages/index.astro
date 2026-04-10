@@ -11,6 +11,7 @@ import { type CountryData } from "country-codes-list";
 import { getVisitedCountries } from "../utils/geoJson";
 import Flags from "@components/Flags.astro";
 import Button from "@components/Button.astro";
+import TypeIcon from "@components/TypeIcon.astro";
 
 const posts: CollectionEntry<"posts">[] = (await getCollection("posts")).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
@@ -72,15 +73,21 @@ posts.forEach((p) => existingJourneyTypes.add(p.data.type));
     /* If there is more than 1 type of journeys, show buttons to filter them */
     existingJourneyTypes.size > 1 && (
       <div class="mx-auto my-4 flex w-min justify-center gap-2">
-        <Button href="?">Alles</Button>
+        <Button href="?">Alle Reisen</Button>
         {existingJourneyTypes.has(JourneyTypeId.bike) && (
-          <Button href={`?type=${JourneyTypeId.bike}`}>Radtouren</Button>
+          <Button href={`?type=${JourneyTypeId.bike}`}>
+            <TypeIcon typeId={JourneyTypeId.bike} />
+          </Button>
         )}
         {existingJourneyTypes.has(JourneyTypeId.roadtrip) && (
-          <Button href={`?type=${JourneyTypeId.roadtrip}`}>Roadtrips</Button>
+          <Button href={`?type=${JourneyTypeId.roadtrip}`}>
+            <TypeIcon typeId={JourneyTypeId.roadtrip} />
+          </Button>
         )}
         {existingJourneyTypes.has(JourneyTypeId.hiking) && (
-          <Button href={`?type=${JourneyTypeId.hiking}`}>Wanderungen</Button>
+          <Button href={`?type=${JourneyTypeId.hiking}`}>
+            <TypeIcon typeId={JourneyTypeId.hiking} />
+          </Button>
         )}
       </div>
     )
