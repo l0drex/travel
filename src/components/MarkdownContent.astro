@@ -1,9 +1,36 @@
 ---
-import "@styles/markdown.css";
+
 ---
 
 <article
-  class="mx-2 prose mt-8 max-w-3xl prose-stone lg:mx-auto dark:prose-invert prose-h1:text-center prose-h1:tracking-tight prose-h1:font-stretch-condensed"
+  class="mx-2 prose mt-8 max-w-3xl prose-stone lg:mx-auto dark:prose-invert"
 >
   <slot />
 </article>
+
+<style is:global>
+  @reference "@styles/global.css";
+
+  article.prose {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @apply text-center font-serif tracking-tight font-stretch-condensed;
+    }
+
+    blockquote {
+      @apply prose-lg border-line;
+
+      p {
+        @apply py-2 font-serif;
+      }
+    }
+
+    img {
+      @apply mx-auto max-w-xl border-2 border-line p-1;
+    }
+  }
+</style>
