@@ -131,6 +131,9 @@ posts.forEach((p) => existingJourneyTypes.add(p.data.type));
     `a[href='${hrefString}']`,
   )!;
   activeButton.style!.borderColor = TailwindConfig.theme.extend.colors.primary;
+  activeButton.style!.backgroundColor =
+    TailwindConfig.theme.extend.colors.primary;
+  activeButton.style!.color = TailwindConfig.theme.extend.colors.fg.dark;
 
   const blogEntries = document.getElementById("blogs");
 
