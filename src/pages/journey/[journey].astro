@@ -125,52 +125,52 @@ const countries = getVisitedCountries(geoJson.data.geoJson).map(
     <meta property="og:image:alt" content={entry.data.alt} />
   </Fragment>
 
-  <section class="w-fill m-auto pt-10 pb-4">
-    <h1
-      class="mt-8 mb-4 text-center font-serif text-4xl font-bold tracking-tight font-stretch-condensed sm:text-5xl md:mt-0"
-    >
-      {entry.data.title}
-    </h1>
-    <div
-      class="mb-4 flex justify-center gap-2 text-center align-baseline font-serif text-2xl"
-    >
-      {(<JourneyType typeId={entry.data.type} />)}
-      <span>·</span>
-      <time datetime={jsDate.toISOString()}>{humanDate}</time>
-    </div>
-    <Flags countries={countries} />
+  <div class="pt-8"></div>
 
-    <div class="mx-auto mt-8 max-w-5xl">
-      {
-        // we wrap vue components in a static div with a fixed height to prevent layout shifts.
-        // collections only show the elevation graph occasionally,
-        // therefore we cannot prevent the layout shift
-      }
-      <div class="mr-4 mb-2 ml-auto w-max">
-        <Button href={`../gpx/${entry.data.gpx.id}.gpx`}>
-          <Icon name="material-symbols:download" slot="icon" />
-          GPX Datei
-        </Button>
-      </div>
+  <h1
+    class="mb-4 text-center font-serif text-4xl font-bold tracking-tight font-stretch-condensed sm:text-5xl md:mt-0"
+  >
+    {entry.data.title}
+  </h1>
+  <div
+    class="mb-4 flex justify-center gap-2 text-center align-baseline font-serif text-2xl"
+  >
+    {(<JourneyType typeId={entry.data.type} />)}
+    <span>·</span>
+    <time datetime={jsDate.toISOString()}>{humanDate}</time>
+  </div>
+  <Flags countries={countries} />
 
-      <div class="min-h-101">
-        <MapView
-          client:only="vue"
-          geoJson={geoJson.data.geoJson}
-          height={400}
-          isBig={true}
-          mapKey="BigMapIntro"
-        />
-      </div>
-      <div class={isCollection ? "" : "min-h-37.5"}>
-        <ElevationGraph
-          client:only="vue"
-          geoJson={geoJson.data.geoJson}
-          isCollection={isCollection}
-        />
-      </div>
-      <TrackStats stats={stats} />
+  <section class="mx-auto my-8 max-w-5xl px-4">
+    {
+      // we wrap vue components in a static div with a fixed height to prevent layout shifts.
+      // collections only show the elevation graph occasionally,
+      // therefore we cannot prevent the layout shift
+    }
+    <div class="mb-2 ml-auto w-max">
+      <Button href={`../gpx/${entry.data.gpx.id}.gpx`}>
+        <Icon name="material-symbols:download" slot="icon" />
+        GPX Datei
+      </Button>
     </div>
+
+    <div class="min-h-101">
+      <MapView
+        client:only="vue"
+        geoJson={geoJson.data.geoJson}
+        height={400}
+        isBig={true}
+        mapKey="BigMapIntro"
+      />
+    </div>
+    <div class={isCollection ? "" : "min-h-37.5"}>
+      <ElevationGraph
+        client:only="vue"
+        geoJson={geoJson.data.geoJson}
+        isCollection={isCollection}
+      />
+    </div>
+    <TrackStats stats={stats} />
   </section>
 
   <hr class="mx-auto w-xs border border-line" />

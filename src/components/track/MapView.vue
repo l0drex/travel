@@ -106,7 +106,7 @@ const mapOptions: L.MapOptions = {
 </script>
 
 <template>
-  <div class="mx-4 border-2 border-line p-1 dark:border-line-dark">
+  <div class="border-2 border-line p-1 dark:border-line-dark">
     <div class="rounded-lg">
       <leaflet-map :options="mapOptions" :height="`${height}px`" :map-key="key">
         <tile-layer
