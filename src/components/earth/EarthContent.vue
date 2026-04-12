@@ -13,12 +13,20 @@ import {
 import { type TresInstance, useLoop, useTres } from "@tresjs/core";
 import waterMap from "@assets/earth/2k_earth_bw.jpg";
 import JourneyPoint from "./JourneyPoint.vue";
-import { useMouse, usePreferredDark, useWindowSize } from "@vueuse/core";
+import {
+  useMouse,
+  usePreferredDark,
+  useUrlSearchParams,
+  useWindowSize,
+} from "@vueuse/core";
 import { toRadians } from "chart.js/helpers";
-import type { Journey } from "@utils/types.ts";
+import {
+  type Journey,
+  JourneyTypeId,
+  type VisitedCountry,
+} from "@utils/types.ts";
 import { getColorProperty } from "@utils/color.ts";
 import * as countryCodes from "country-codes-list";
-import type { CountryData } from "country-codes-list";
 import CountryShape from "@components/earth/CountryShape.vue";
 
 // option for devs: moves light source with cursor
@@ -27,8 +35,10 @@ const overwriteShader = true;
 
 const { journeys, countries } = defineProps<{
   journeys: Journey[];
-  countries: Set<CountryData>;
+  countries: VisitedCountry[];
 }>();
+
+const params = useUrlSearchParams<{ type?: JourneyTypeId }>();
 
 const { onBeforeRender } = useLoop();
 const { scene } = useTres();
@@ -199,14 +209,19 @@ const visitedCountries = Array.from(countries);
       <TresSphereGeometry :args="[earthRadius, 32, 32]" />
     </TresMesh>
 
-    <JourneyPoint v-for="j in journeys" v-bind="j" />
+    <template v-for="j in journeys">
+      <JourneyPoint
+        v-bind="j"
+        v-if="params.type === j.type || params.type === undefined"
+      />
+    </template>
 
     <TresGroup v-if="false">
       <CountryShape
-        :country="country"
+        :country="country.country"
         :color="`#${bg3Color.getHexString()}`"
         v-for="[i, country] in visitedCountries.entries()"
-        :key="`${country.countryNameEn}`"
+        :key="`${country.country.countryNameEn}`"
       />
     </TresGroup>
   </TresGroup>

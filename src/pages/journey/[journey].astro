@@ -14,7 +14,12 @@ import Layout from "@layouts/BaseLayout.astro";
 import MapView from "@components/track/MapView.vue";
 import ElevationGraph from "@components/track/ElevationGraph.vue";
 import authors from "src/authors.json";
-import { JourneyTypeId, journeyTypes, StatId } from "@utils/types";
+import {
+  JourneyTypeId,
+  journeyTypes,
+  StatId,
+  type VisitedCountry,
+} from "@utils/types";
 import JourneyType from "@components/TypeIcon.astro";
 import { dateFormatter } from "@utils/general";
 import { getImage } from "astro:assets";
@@ -79,7 +84,16 @@ if (entry.data.type !== JourneyTypeId.roadtrip) {
 
 const isCollection = entry.data.type === JourneyTypeId.roadtrip;
 
-const countries = getVisitedCountries(geoJson.data.geoJson);
+const typeSet = new Set<JourneyTypeId>();
+typeSet.add(entry.data.type);
+
+const countries = getVisitedCountries(geoJson.data.geoJson).map(
+  (c) =>
+    ({
+      country: c,
+      type: typeSet,
+    }) as VisitedCountry,
+);
 ---
 
 <Layout
@@ -139,7 +153,7 @@ const countries = getVisitedCountries(geoJson.data.geoJson);
         </Button>
       </div>
 
-      <div class="min-h-[404px]">
+      <div class="min-h-101">
         <MapView
           client:only="vue"
           geoJson={geoJson.data.geoJson}
@@ -148,7 +162,7 @@ const countries = getVisitedCountries(geoJson.data.geoJson);
           mapKey="BigMapIntro"
         />
       </div>
-      <div class={isCollection ? "" : "min-h-[150px]"}>
+      <div class={isCollection ? "" : "min-h-37.5"}>
         <ElevationGraph
           client:only="vue"
           geoJson={geoJson.data.geoJson}

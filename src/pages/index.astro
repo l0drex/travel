@@ -4,7 +4,7 @@ import type { CollectionEntry } from "astro:content";
 import Layout from "@layouts/BaseLayout.astro";
 import EarthOverview from "@components/earth/EarthOverview.vue";
 import TravelEntry from "@components/TravelEntry.astro";
-import { type Journey, JourneyTypeId } from "@utils/types";
+import { type Journey, JourneyTypeId, type VisitedCountry } from "@utils/types";
 import { coordAll, lineString, simplify } from "@turf/turf";
 import authors from "src/authors.json";
 import { type CountryData } from "country-codes-list";
@@ -18,7 +18,7 @@ const posts: CollectionEntry<"posts">[] = (await getCollection("posts")).sort(
 );
 
 const journeys: Journey[] = [];
-const countries = new Set<CountryData>();
+const countries = new Array<VisitedCountry>();
 
 for (let p of posts) {
   const entry = await getEntry(p.data.gpx);
@@ -37,14 +37,28 @@ for (let p of posts) {
   if (p.data.type === JourneyTypeId.roadtrip) {
     journeys.push({
       points: [fromPoint(points[0])],
+      type: p.data.type,
     });
   } else {
     journeys.push({
       points: points.map(fromPoint),
+      type: p.data.type,
     });
   }
 
-  getVisitedCountries(geoJson).forEach((c) => countries.add(c));
+  getVisitedCountries(geoJson).forEach((c) => {
+    let existing = countries.find((c1) => c1.country === c);
+    if (!existing) {
+      const type = new Set<JourneyTypeId>();
+      type.add(p.data.type);
+      countries.push({
+        country: c,
+        type,
+      });
+      return;
+    }
+    existing.type.add(p.data.type);
+  });
 }
 
 const mainAuthor = authors[0].name;
@@ -106,35 +120,23 @@ posts.forEach((p) => existingJourneyTypes.add(p.data.type));
 </Layout>
 
 <script>
+  import { filterElements, getSelectedType } from "@utils/filterByType.ts";
   import TailwindConfig from "../../tailwind.config.mts";
 
-  function filterElements() {
-    const selectedType =
-      new URL(document.URL).searchParams.get("type") ?? "all";
+  // highlight active button
+  const selectedType = getSelectedType();
+  const showAll = selectedType == "all";
+  const hrefString = showAll ? "?" : `?type=${selectedType}`;
+  const activeButton = document.querySelector<HTMLLinkElement>(
+    `a[href='${hrefString}']`,
+  )!;
+  activeButton.style!.borderColor = TailwindConfig.theme.extend.colors.primary;
 
-    const showAll = selectedType == "all";
-    document.querySelectorAll<HTMLUListElement>("#blogs li").forEach((li) => {
-      li.hidden = !showAll;
-    });
+  const blogEntries = document.getElementById("blogs");
 
-    // highlight active button
-    const hrefString = showAll ? "?" : `?type=${selectedType}`;
-    const activeButton = document.querySelector<HTMLLinkElement>(
-      `a[href='${hrefString}']`,
-    )!;
-    activeButton.style!.borderColor =
-      TailwindConfig.theme.extend.colors.primary;
-
-    if (showAll) {
-      return;
-    }
-
-    document
-      .querySelectorAll<HTMLUListElement>(`#blogs li.${selectedType}`)
-      .forEach((li) => {
-        li.hidden = false;
-      });
+  if (blogEntries == null) {
+    throw new Error("Blogs container was not found");
   }
 
-  filterElements();
+  filterElements(blogEntries);
 </script>

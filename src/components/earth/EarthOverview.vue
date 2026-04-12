@@ -1,10 +1,9 @@
 <script lang="ts" setup>
 import WebGL from "three/examples/jsm/capabilities/WebGL";
-import type { Journey } from "@utils/types.ts";
+import type { Journey, VisitedCountry } from "@utils/types.ts";
 import { usePreferredReducedMotion } from "@vueuse/core";
 import { defineAsyncComponent } from "vue";
 import EarthFallback from "@components/earth/EarthFallback.vue";
-import type { CountryData } from "country-codes-list";
 import { NoToneMapping } from "three";
 
 const TresCanvas = defineAsyncComponent(() =>
@@ -18,7 +17,7 @@ const enableAnimatedEarth: boolean =
 
 const { journeys, countries } = defineProps<{
   journeys: Journey[];
-  countries: Set<CountryData>;
+  countries: VisitedCountry[];
 }>();
 </script>
 

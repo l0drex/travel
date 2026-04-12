@@ -1,16 +1,29 @@
 ---
-import type { CountryData } from "country-codes-list";
+import type { VisitedCountry } from "@utils/types.ts";
 
 interface Props {
-  countries: CountryData[];
+  countries: VisitedCountry[];
 }
 
 const { countries } = Astro.props;
 ---
 
 <div
+  id="country-flags"
   class="mx-auto mb-10 flex w-min justify-center gap-2 border-t-2 border-b-2 border-neutral-600 px-2 text-xl"
   lang="en"
 >
-  {countries.map((c) => <span title={c.countryNameEn}>{c.flag}</span>)}
+  {
+    countries.map((c) => (
+      <span title={c.country.countryNameEn} class:list={Array.from(c.type)}>
+        {c.country.flag}
+      </span>
+    ))
+  }
 </div>
+
+<script>
+  import { filterElements } from "@utils/filterByType.ts";
+
+  filterElements(document.getElementById("country-flags")!);
+</script>

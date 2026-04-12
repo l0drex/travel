@@ -1,3 +1,5 @@
+import type { CountryData } from "country-codes-list";
+
 export enum JourneyTypeId {
   bike = "bike",
   hiking = "hiking",
@@ -27,6 +29,7 @@ export const journeyTypes: Record<JourneyTypeId, JourneyType> = {
 
 export interface Journey {
   points: [number, number][];
+  type: JourneyTypeId;
 }
 
 export interface Stat {
@@ -111,3 +114,8 @@ export const statsPrototypes: Record<StatId, Stat> = {
     unit: "kg",
   },
 };
+
+export interface VisitedCountry {
+  type: Set<JourneyTypeId>;
+  country: CountryData;
+}
