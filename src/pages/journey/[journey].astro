@@ -147,7 +147,8 @@ const countries = getVisitedCountries(geoJson.data.geoJson).map(
       // collections only show the elevation graph occasionally,
       // therefore we cannot prevent the layout shift
     }
-    <div class="mb-2 ml-auto w-max">
+    <div class="mb-2 flex w-full justify-between align-baseline">
+      <h2 class="py-1 font-serif text-xl font-bold">Tourdetails</h2>
       <Button href={`../gpx/${entry.data.gpx.id}.gpx`}>
         <Icon name="material-symbols:download" slot="icon" />
         GPX Datei
