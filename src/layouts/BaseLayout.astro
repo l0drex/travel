@@ -17,7 +17,7 @@ const themeColor = {
   dark: Astro.props.dark ?? twconfig.theme.extend.colors.bg.dark,
 };
 
-const rssLink = new URL(`${import.meta.env.BASE_URL}/rss.xml`, Astro.site);
+const rssLink = new URL(`${import.meta.env.BASE_URL}/rss.xml`, Astro.url);
 
 interface Link {
   href: URL;
