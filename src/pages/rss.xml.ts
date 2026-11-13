@@ -16,7 +16,7 @@ export const GET: APIRoute = (context) => {
       title: p.data.title,
       pubDate: p.data.date,
       description: p.data.description,
-      link: `${import.meta.env.BASE_URL}/${p.id}`,
+      link: `${import.meta.env.BASE_URL}/journey/${p.id}`,
       categories: [p.data.type],
     })),
     customData: "<language>de-de</language>",
