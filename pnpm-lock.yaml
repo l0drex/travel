@@ -39,8 +39,8 @@ importers:
         specifier: ^7.4.0
         version: 7.4.0
       '@vueuse/core':
-        specifier: ^14.4.0
-        version: 14.4.0(vue@3.5.45(typescript@6.0.3))
+        specifier: ^15.0.0
+        version: 15.0.0(vue@3.5.45(typescript@6.0.3))
       '@xmldom/xmldom':
         specifier: ^0.9.12
         version: 0.9.12
@@ -1914,28 +1914,15 @@ packages:
   '@vue/shared@3.5.45':
     resolution: {integrity: sha512-ue9fgHmVNPlP7iW3+cxoBX/Cnlw53dHlVSw0JKGY6z1lObg8pHoj928M2nzG4/yVsMZ3NaRZ2s2z61uC16NDwQ==}
 
-  '@vueuse/core@14.4.0':
-    resolution: {integrity: sha512-X4WHz1HlCzCBoYXesUkifzzWBAcZgXG8Fi5iNPQg/epdzOB3gu8Fawj3hvuwYR1nGcXGnvxwYYcUC/71++svtQ==}
-    peerDependencies:
-      vue: ^3.5.0
-
   '@vueuse/core@15.0.0':
     resolution: {integrity: sha512-Zv67h5mrk7YHDJsRObx+DXaCBz6RKBUpxqLesJ+3xZNPG6yuQs7ja7kg3veFrrouYLWAqydQ7CwGEbLVxB43Ng==}
     engines: {node: '>=22'}
     peerDependencies:
       vue: ^3.5.0
 
-  '@vueuse/metadata@14.4.0':
-    resolution: {integrity: sha512-swx/255R6JyHZFJhx845iz5CRWDZdCfvkZOpACWc5+c5WHcG24mv8gUT1WIdFQaHt6dq79rvILd9QnCWiyVm9g==}
-
   '@vueuse/metadata@15.0.0':
     resolution: {integrity: sha512-sfWE5LADAKJ0KnjtGliMdSN8Ij/L7uP6rXIZlgPloAI4zvvefbw6H5Lt7KJA6RqQOYgVqWF5Guj50HHMIzygBg==}
     engines: {node: '>=22'}
-
-  '@vueuse/shared@14.4.0':
-    resolution: {integrity: sha512-JRgY90Sz8DDtPMsaDflvPMp9xYk69JZAmbuDvAquUVXKr2gEjqtzGNTTthLfckH0BzBqvnu31gb4a8TGLRe79g==}
-    peerDependencies:
-      vue: ^3.5.0
 
   '@vueuse/shared@15.0.0':
     resolution: {integrity: sha512-vbNXhGrbV53xPOMSyOzMHQRvhMgZf7oNDw2RChUetVxwTIEkInQ1joZ9JbT0G3z2n2AJNjvmCWeM9ySYrnvogA==}
@@ -2502,8 +2489,8 @@ packages:
   emoji-regex@10.6.0:
     resolution: {integrity: sha512-toUI84YS5YmxW219erniWD0CIVOo46xGKColeNQRgOzDorgBi1v4D71/OFzgD9GO2UGKIv1C3Sp8DAn0+j5w7A==}
 
-  encodeurl@1.0.3:
-    resolution: {integrity: sha512-+fJBWq727Q95HcN9heYd69iKTsWPAz4ASPbawvphyHhtDZoO+q+eYNBHCk0hW1b9/+z7w6HMrw70pFsfC3XjSg==}
+  encodeurl@1.0.4:
+    resolution: {integrity: sha512-ImAQpWtQZKdkUxvj9CMNzB8M4IGg0DkRTZzmOHqgVFrf71JDmUacbt+iKljfIpD2yHcxI+HR76d8bwvdvtSvGA==}
     engines: {node: '>= 0.8'}
 
   enhanced-resolve@5.26.2:
@@ -7616,13 +7603,6 @@ snapshots:
 
   '@vue/shared@3.5.45': {}
 
-  '@vueuse/core@14.4.0(vue@3.5.45(typescript@6.0.3))':
-    dependencies:
-      '@types/web-bluetooth': 0.0.21
-      '@vueuse/metadata': 14.4.0
-      '@vueuse/shared': 14.4.0(vue@3.5.45(typescript@6.0.3))
-      vue: 3.5.45(typescript@6.0.3)
-
   '@vueuse/core@15.0.0(vue@3.5.45(typescript@6.0.3))':
     dependencies:
       '@types/web-bluetooth': 0.0.21
@@ -7630,13 +7610,7 @@ snapshots:
       '@vueuse/shared': 15.0.0(vue@3.5.45(typescript@6.0.3))
       vue: 3.5.45(typescript@6.0.3)
 
-  '@vueuse/metadata@14.4.0': {}
-
   '@vueuse/metadata@15.0.0': {}
-
-  '@vueuse/shared@14.4.0(vue@3.5.45(typescript@6.0.3))':
-    dependencies:
-      vue: 3.5.45(typescript@6.0.3)
 
   '@vueuse/shared@15.0.0(vue@3.5.45(typescript@6.0.3))':
     dependencies:
@@ -8270,7 +8244,7 @@ snapshots:
 
   emoji-regex@10.6.0: {}
 
-  encodeurl@1.0.3: {}
+  encodeurl@1.0.4: {}
 
   enhanced-resolve@5.26.2:
     dependencies:
@@ -8549,7 +8523,7 @@ snapshots:
       cookie-signature: 1.0.6
       debug: 2.6.9(supports-color@5.5.0)
       depd: 1.1.2
-      encodeurl: 1.0.3
+      encodeurl: 1.0.4
       escape-html: 1.0.3
       etag: 1.8.1
       finalhandler: 1.1.1(supports-color@5.5.0)
@@ -8629,7 +8603,7 @@ snapshots:
   finalhandler@1.1.1(supports-color@5.5.0):
     dependencies:
       debug: 2.6.9(supports-color@5.5.0)
-      encodeurl: 1.0.3
+      encodeurl: 1.0.4
       escape-html: 1.0.3
       on-finished: 2.3.0
       parseurl: 1.3.3
@@ -10375,7 +10349,7 @@ snapshots:
       debug: 2.6.9(supports-color@5.5.0)
       depd: 1.1.2
       destroy: 1.0.4
-      encodeurl: 1.0.3
+      encodeurl: 1.0.4
       escape-html: 1.0.3
       etag: 1.8.1
       fresh: 0.5.2
@@ -10390,7 +10364,7 @@ snapshots:
 
   serve-static@1.13.2(supports-color@5.5.0):
     dependencies:
-      encodeurl: 1.0.3
+      encodeurl: 1.0.4
       escape-html: 1.0.3
       parseurl: 1.3.3
       send: 0.16.2(supports-color@5.5.0)

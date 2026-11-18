@@ -21,7 +21,7 @@
     "@tresjs/cientos": "^5.10.1",
     "@tresjs/core": "^5.10.1",
     "@turf/turf": "^7.4.0",
-    "@vueuse/core": "^14.4.0",
+    "@vueuse/core": "^15.0.0",
     "@xmldom/xmldom": "^0.9.12",
     "astro": "7.4.11",
     "astro-icon": "^1.2.0",
